@@ -28,7 +28,7 @@
 
     \begin{tabular}{l l l}
         Δασκαλόπουλος Αριστείδης & 10640 & \selectlanguage{english}\texttt{arisdask@ece.auth.gr}\selectlanguage{greek} \\
-        Λαβδάκης Γεώργιος & ΑΕΜ3 & \selectlanguage{english}\texttt{glavdakis@ece.auth.gr}\selectlanguage{greek} \\
+        Λαβδάκης Γεώργιος & 10672 & \selectlanguage{english}\texttt{glavdakis@ece.auth.gr}\selectlanguage{greek} \\
         Ρουσομάνης Γεώργιος & 10703 & \selectlanguage{english}\texttt{rousoman@ece.auth.gr}\selectlanguage{greek} \\
     \end{tabular}\\[3cm]
 
@@ -288,57 +288,239 @@
 
 \subsection{Πεδία Ορισμού}
 
-\begin{tabular}{l l}
-\textbf{Πεδίο Ορισμού} & \textbf{Τύπος} \\
-Αναγνωριστικό Πορτοφολιού & \selectlanguage{english}INT\selectlanguage{greek} \\
-Ποσό Συναλλαγής/Υπολοίπου & \selectlanguage{english}DOUBLE\selectlanguage{greek} \\
-Τύπος Συναλλαγής & \selectlanguage{english}VARCHAR(15)\selectlanguage{greek} \\
-Σύμβολο Κρυπτονομίσματος & \selectlanguage{english}CHAR(10)\selectlanguage{greek} \\
-Email Χρήστη & \selectlanguage{english}VARCHAR(50)\selectlanguage{greek} \\
-Όνομα Πορτοφολιού & \selectlanguage{english}VARCHAR(40)\selectlanguage{greek} \\
-Χρονική Σήμανση & \selectlanguage{english}DATETIME\selectlanguage{greek} \\
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{Πεδίο Ορισμού} & \textbf{Τύπος} \\ \hline
+
+Όνομα & \selectlanguage{english}VARCHAR(70) \\ \hline
+Απλό Αλφαριθμητικό & \selectlanguage{english}VARCHAR(150) \\ \hline
+Μικρό Αλφαριθμητικό & \selectlanguage{english}VARCHAR(50) \\ \hline
+Μεσαίο Αλφαριθμητικό & \selectlanguage{english}VARCHAR(20) \\ \hline
+Ακέραιος & \selectlanguage{english}INTEGER \\ \hline
+Αναγνωριστικό & \selectlanguage{english}SERIAL \\ \hline
+Κείμενο & \selectlanguage{english}TEXT \\ \hline
+Δεκαδικός & \selectlanguage{english}DECIMAL(18,2) \\ \hline
+Δεκαδικός Υψηλής Ακρίβειας & \selectlanguage{english}DECIMAL(18,8) \\ \hline
+Μεγάλος Δεκαδικός & \selectlanguage{english}DECIMAL(30,2) \\ \hline
+Ημερομηνία και Ώρα & \selectlanguage{english}DATETIME \\ \hline
+Λογική Τιμή & \selectlanguage{english}BOOLEAN \\ \hline
+
 \end{tabular}
+
+\newpage
 
 \subsection{Σχέσεις}
 
-\noindent
-Παράδειγμα:
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{Όνομα Σχέσης} & \selectlanguage{english}User \\ \hline
 
-\textbf{Όνομα Σχέσης:} \selectlanguage{english}Airport\selectlanguage{greek}
+\multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
+\selectlanguage{english}user\_id & Αναγνωριστικό \\ \hline
+\selectlanguage{english}name & Όνομα \\ \hline
+\selectlanguage{english}email & Απλό Αλφαριθμητικό \\ \hline
+\selectlanguage{english}registered\_at & Ημερομηνία και Ώρα \\ \hline
+\selectlanguage{english}phone & Μεσαίο Αλφαριθμητικό \\ \hline
+\selectlanguage{english}password\_hash & Κείμενο \\ \hline
+\selectlanguage{english}salt & Κείμενο \\ \hline
+\selectlanguage{english}last\_pw\_update & Ημερομηνία και Ώρα \\ \hline
+\selectlanguage{english}is\_verified & Λογική Τιμή \\ \hline
 
-\textbf{Γνωρίσματα:}
-\begin{itemize}
-    \item \selectlanguage{english}airport\_code\selectlanguage{greek}
-    \item \selectlanguage{english}name\selectlanguage{greek}
-    \item \selectlanguage{english}city\selectlanguage{greek}
-    \item \selectlanguage{english}country\selectlanguage{greek}
-\end{itemize}
+\multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
+Πρωτεύον Κλειδί & \selectlanguage{english}user\_id \\ \hline
+Ξένα Κλειδιά & - \\ \hline
+\end{tabular}
 
-\textbf{Περιορισμοί Ακεραιότητας:}
-\begin{itemize}
-    \item Πρωτεύον Κλειδί: \selectlanguage{english}airport\_code\selectlanguage{greek}
-\end{itemize}
+\newpage
+
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{Όνομα Σχέσης} & \selectlanguage{english}Wallet \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
+\selectlanguage{english}wallet\_id & Αναγνωριστικό \\ \hline
+\selectlanguage{english}name & Όνομα \\ \hline
+\selectlanguage{english}type & Μικρό Αλφαριθμητικό \\ \hline
+\selectlanguage{english}balance & Δεκαδικός \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
+Πρωτεύον Κλειδί & \selectlanguage{english}wallet\_id \\ \hline
+Ξένα Κλειδιά & - \\ \hline
+\end{tabular}
+
+\vspace{1cm}
+
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{Όνομα Σχέσης} & \selectlanguage{english}BankAccount \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
+\selectlanguage{english}account\_id & Αναγνωριστικό \\ \hline
+\selectlanguage{english}encrypted\_iban & Κείμενο \\ \hline
+\selectlanguage{english}holder\_name & Όνομα \\ \hline
+\selectlanguage{english}bank\_name & Απλό Αλφαριθμητικό \\ \hline
+\selectlanguage{english}account\_type & Απλό Αλφαριθμητικό \\ \hline
+\selectlanguage{english}provider\_token & Κείμενο \\ \hline
+\selectlanguage{english}verified\_at & Ημερομηνία και Ώρα \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
+Πρωτεύον Κλειδί & \selectlanguage{english}account\_id \\ \hline
+Ξένα Κλειδιά & - \\ \hline
+\end{tabular}
+
+\vspace{1cm}
+
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{Όνομα Σχέσης} &\selectlanguage{english} WalletBankTransfer \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
+\selectlanguage{english}transfer\_id & Αναγνωριστικό \\ \hline
+\selectlanguage{english}amount & Δεκαδικός \\ \hline
+\selectlanguage{english}direction & Μικρό Αλφαριθμητικό \\ \hline
+\selectlanguage{english}timestamp & Ημερομηνία και Ώρα \\ \hline
+\selectlanguage{english}user\_id & Ακέραιος \\ \hline
+\selectlanguage{english}account\_id & Ακέραιος \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
+Πρωτεύον Κλειδί & \selectlanguage{english}transfer\_id \\ \hline
+Ξένα Κλειδιά & \{\selectlanguage{english}user\_id, \selectlanguage{english}account\_id\} \\ \hline
+\end{tabular}
+
+\vspace{1cm}
+
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{Όνομα Σχέσης} & \selectlanguage{english}Transaction \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
+\selectlanguage{english}transaction\_id & Αναγνωριστικό \\ \hline
+\selectlanguage{english}wallet\_id & Ακέραιος \\ \hline
+\selectlanguage{english}cryptocurrency\_symbol & Μικρό Αλφαριθμητικό \\ \hline
+\selectlanguage{english}amount & Δεκαδικός \\ \hline
+\selectlanguage{english}transaction\_type & Μικρό Αλφαριθμητικό \\ \hline
+\selectlanguage{english}timestamp & Ημερομηνία και Ώρα \\ \hline
+\selectlanguage{english}price\_at\_timestamp & Δεκαδικός Υψηλής Ακρίβειας \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
+Πρωτεύον Κλειδί & \selectlanguage{english}transaction\_id \\ \hline
+Ξένα Κλειδιά & \{\selectlanguage{english}wallet\_id,
+
+\selectlanguage{english}cryptocurrency\_symbol\} \\ \hline
+\end{tabular}
+
+\vspace{1cm}
+
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{Όνομα Σχέσης} & \selectlanguage{english}Invitation \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
+\selectlanguage{english}invitation\_id & Αναγνωριστικό \\ \hline
+\selectlanguage{english}inviter\_id & Ακέραιος \\ \hline
+\selectlanguage{english}status & Μικρό Αλφαριθμητικό \\ \hline
+\selectlanguage{english}created\_at & Ημερομηνία και Ώρα \\ \hline
+\selectlanguage{english}expires\_at & Ημερομηνία και Ώρα \\ \hline
+\selectlanguage{english}invitee\_role & Μικρό Αλφαριθμητικό \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
+Πρωτεύον Κλειδί & \selectlanguage{english}invitation\_id \\ \hline
+Ξένα Κλειδιά & \selectlanguage{english}inviter\_id \\ \hline
+\end{tabular}
+
+\vspace{1cm}
+
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{Όνομα Σχέσης} & \selectlanguage{english}Alert \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
+\selectlanguage{english}alert\_id & Αναγνωριστικό \\ \hline
+\selectlanguage{english}user\_id & Ακέραιος \\ \hline
+\selectlanguage{english}cryptocurrency\_symbol & Μικρό Αλφαριθμητικό \\ \hline
+\selectlanguage{english}threshold\_price & Δεκαδικός Υψηλής Ακρίβειας \\ \hline
+\selectlanguage{english}threshold\_direction & Μικρό Αλφαριθμητικό \\ \hline
+\selectlanguage{english}description & Κείμενο \\ \hline
+\selectlanguage{english}is\_send & Λογική Τιμή \\ \hline
+\selectlanguage{english}triggered\_at & Ημερομηνία και Ώρα \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
+Πρωτεύον Κλειδί & \selectlanguage{english}alert\_id \\ \hline
+Ξένα Κλειδιά & \{\selectlanguage{english}user\_id, 
+
+\selectlanguage{english}cryptocurrency\_symbol\} \\ \hline
+\end{tabular}
+
+\vspace{1cm}
+
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{Όνομα Σχέσης} & \selectlanguage{english}Cryptocurrency \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
+\selectlanguage{english}ticker\_symbol & Μικρό Αλφαριθμητικό \\ \hline
+\selectlanguage{english}name & Όνομα \\ \hline
+\selectlanguage{english}price & Δεκαδικός Υψηλής Ακρίβειας \\ \hline
+\selectlanguage{english}circulating\_supply & Μεγάλος Δεκαδικός \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
+Πρωτεύον Κλειδί & \selectlanguage{english}ticker\_symbol \\ \hline
+Ξένα Κλειδιά & - \\ \hline
+\end{tabular}
+
+\vspace{1cm}
+
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{Όνομα Σχέσης} & \selectlanguage{english}Candlestick \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
+\selectlanguage{english}candle\_id & Αναγνωριστικό \\ \hline
+\selectlanguage{english}cryptocurrency\_symbol & Μικρό Αλφαριθμητικό \\ \hline
+\selectlanguage{english}low\_price & Δεκαδικός Υψηλής Ακρίβειας \\ \hline
+\selectlanguage{english}high\_price & Δεκαδικός Υψηλής Ακρίβειας \\ \hline
+\selectlanguage{english}open\_price & Δεκαδικός Υψηλής Ακρίβειας \\ \hline
+\selectlanguage{english}close\_price & Δεκαδικός Υψηλής Ακρίβειας \\ \hline
+\selectlanguage{english}volume & Μεγάλος Δεκαδικός \\ \hline
+\selectlanguage{english}interval & Μικρό Αλφαριθμητικό \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
+Πρωτεύον Κλειδί & \selectlanguage{english}candle\_id \\ \hline
+Ξένα Κλειδιά & \selectlanguage{english}cryptocurrency\_symbol \\ \hline
+\end{tabular}
+
+\newpage
 
 \subsection{Σχεσιακό Σχήμα}
 
-\noindent
-\{Τοποθετήστε το σχεσιακό διάγραμμα\}
+
+
+
+
 
 \subsection{Όψεις}
 
-\noindent
-\{Ορίστε χρήσιμες όψεις με σχεσιακή άλγεβρα\}
+1) 
 
-Παράδειγμα:
 
-\selectlanguage{english}
-\[
-\rho_{AIRLINES}(\pi_{airline, plane\_name}(
-\pi_{airline, plane\_id}(FLIGHT) 
-\bowtie 
-\pi_{plane\_id, plane\_name}(AIRPLANE)
-))
-\]
+
+
+2)
+
+
+
+
+3)
+
+
+
+
+
+
+
+
+
+
 \selectlanguage{greek}
 
 \newpage
