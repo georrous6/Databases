@@ -365,6 +365,7 @@
 \selectlanguage{english}account\_type & Απλό Αλφαριθμητικό \\ \hline
 \selectlanguage{english}provider\_token & Κείμενο \\ \hline
 \selectlanguage{english}verified\_at & Ημερομηνία και Ώρα \\ \hline
+\selectlanguage{english}user\_id & Αναγνωριστικό \\ \hline
 
 \multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
 Πρωτεύον Κλειδί & \selectlanguage{english}account\_id \\ \hline
@@ -553,7 +554,7 @@ wallet\_id Wallet to Invitation\} \\ \hline
 \subsection{Όψεις}
 
 \begin{flushleft}
-1) Όψη για τον αριθμό \selectlanguage{english}crypto\selectlanguage{greek} των χρηστών
+1) Όψη για τον αριθμό \selectlanguage{english}crypto\selectlanguage{greek} των χρηστών \selectlanguage{english}UserCryptoCount 
 
 \[
 \pi_{user\_id,\; crypto\_count}
@@ -565,6 +566,7 @@ wallet\_id Wallet to Invitation\} \\ \hline
 
 \begin{flushleft}
 2) Όψη για τις συναλλαγές \selectlanguage{english}crypto\selectlanguage{greek} των χρηστών
+\selectlanguage{english}UserCryptoTransactions 
 
 \[
 \pi_{user\_id,\; transaction\_id,\; ticker\_symbol,\ amount,\; timestamp,\; transaction\_type}
@@ -581,14 +583,13 @@ wallet\_id Wallet to Invitation\} \\ \hline
 
 
 \begin{flushleft}
-3) Όψη για τα \selectlanguage{english}candlestick \selectlanguage{greek}των \selectlanguage{english}crypto
+3) Όψη για τα \selectlanguage{english}candlestick \selectlanguage{greek}των \selectlanguage{english}crypto CryptoCandlesticks 
 
 \[ 
 \pi_{ticker\_symbol,\;candle\_id,\; open\_price, \; close\_price,\; high\_price,\;  low\_price,\; volume,\;interval}
 \Big(
     \pi_{crypto\_id,\; ticker\_symbol}\\ (\text{\selectlanguage{english}Cryptocurrency})
-    \;\bowtie\;
-    \pi_{crypto\_id,\; candle\_id,\; open\_price,\; close\_price,\;
+    \;\bowtie\; \pi_{crypto\_id,\; candle\_id,\; open\_price,\; close\_price,\;
        high\_price,\; low\_price,\; volume,\; interval}(Candlestick)
 \Big)
 \]
