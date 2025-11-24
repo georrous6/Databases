@@ -68,11 +68,7 @@
     \item διαχειρίζεται την πρόσβαση άλλων χρηστών στο πορτοφόλι του μέσω προσκλήσεων.
 \end{itemize}
 
-Το σύστημα υποστηρίζει πλήρη ιχνηλασιμότητα των κινήσεων του χρήστη, διατηρώντας ιστορικά
-δεδομένα συναλλαγών, υπολοίπων και τιμών κρυπτονομισμάτων.
-
-\subsection{Απαιτήσεις Εφαρμογής σε Δεδομένα}
-Η εφαρμογή απαιτεί την αποθήκευση και ορθή δόμηση δεδομένων που σχετίζονται με:
+Η εφαρμογή απαιτεί την αποθήκευση δεδομένων που σχετίζονται με:
 
 \begin{itemize}
     \item διαπιστευτήρια χρηστών και στοιχεία ταυτοποίησης,
@@ -83,7 +79,46 @@
     \item ειδοποιήσεις τιμών και το αντίστοιχο καθεστώς ενεργοποίησης.
 \end{itemize}
 
-Τα παραπάνω πρέπει να διατηρούνται με τρόπο που εξασφαλίζει συνέπεια, ακεραιότητα και επεκτασιμότητα.
+\subsection{Απαιτήσεις Εφαρμογής σε Δεδομένα}
+
+\begin{itemize}
+
+  \item \textbf{Χρήστες:} 
+  Αναμένεται ότι το σύστημα θα εξυπηρετεί από 1.000 έως 10.000 εγγεγραμμένους χρήστες 
+  στην αρχική φάση λειτουργίας.
+
+  \item \textbf{Πορτοφόλια ανά χρήστη:} 
+  Κατά μέσο όρο 2--3 πορτοφόλια ανά χρήστη. 
+  Συνολικά: 2.000 -- 30.000 εγγραφές.
+
+  \item \textbf{\selectlanguage{english}Crypto balances\selectlanguage{greek}:} 
+  Κατά μέσο όρο 5 διαφορετικά κρυπτονομίσματα ανά πορτοφόλι.  
+  Συνεπώς αναμένονται 10.000 -- 150.000 εγγραφές.
+
+  \item \textbf{Ιστορικό τιμών (\selectlanguage{english}CryptoHistory\selectlanguage{greek}):}  
+  Για κάθε κρυπτονόμισμα αποθηκεύονται περίπου:
+  \begin{itemize}
+    \item 1.440 εγγραφές την ημέρα (ένα λεπτό ανά μέτρηση)
+    \item Για 50 κρυπτονομίσματα: περίπου 72.000 εγγραφές/ημέρα
+    \item Σε ετήσια βάση: πάνω από 26 εκατομμύρια εγγραφές
+  \end{itemize}
+
+  \item \textbf{\selectlanguage{english}Candlesticks\selectlanguage{greek}:}  
+  Με \selectlanguage{english}interval\selectlanguage{greek} 1 ώρας για 50 νομίσματα: 
+  50 \(\times\) 24 = 1200 εγγραφές/ημέρα
+
+  \item \textbf{Συναλλαγές Κρυπτονομισμάτων:}  
+  Σε εφαρμογές \selectlanguage{english}crypto-wallet\selectlanguage{greek} καταγράφονται τυπικά:
+  \begin{itemize}
+    \item 5--20 συναλλαγές ανά ενεργό χρήστη την ημέρα
+    \item Για 2.000 ενεργούς χρήστες: 10.000 -- 40.000 εγγραφές/ημέρα
+  \end{itemize}
+
+  \item \textbf{Τραπεζικές Συναλλαγές:}  
+  ~1--2 μεταφορές ανά χρήστη την εβδομάδα.
+  Συνολικά: περίπου 10.000--20.000 εγγραφές/έτος.
+
+\end{itemize}
 
 \newpage
 
@@ -172,8 +207,6 @@
 & \selectlanguage{english}email\selectlanguage{greek}\\
 \cline{2-2}
 & \selectlanguage{english}name\selectlanguage{greek}\\
-\cline{2-2}
-& \selectlanguage{english}role\selectlanguage{greek}\\
 \cline{2-2}
 & \selectlanguage{english}registered\_at\selectlanguage{greek}\\
 \cline{2-2}
