@@ -13,6 +13,14 @@
 \usepackage[hidelinks]{hyperref}
 
 \usepackage{geometry}
+\usepackage{multirow} 
+% % Set margins
+% \geometry{
+%     top=2cm,
+%     bottom=2cm,
+%     left=2cm,
+%     right=2cm
+% }
 
 \begin{document}
 \selectlanguage{greek}
@@ -20,7 +28,7 @@
 \begin{center}
     {\Large ΕΡΓΑΣΙΑ ΣΤΟ ΜΑΘΗΜΑ ΒΑΣΕΙΣ ΔΕΔΟΜΕΝΩΝ}\\[3cm]
 
-    {\Large \selectlanguage{english}\textbf{CryptfolioDB}\selectlanguage{greek}}\\[0.5cm]
+    {\Large \selectlanguage{english}\textbf{CryptofolioDB}\selectlanguage{greek}}\\[0.5cm]
 
     {\large Μία προσωπική εφαρμογή επενδύσεων και παρακολούθησης κρυπτονομισμάτων }\\[3cm]
 
@@ -30,11 +38,11 @@
 
     \begin{tabular}{l l l}
         Δασκαλόπουλος Αριστείδης & 10640 & \selectlanguage{english}\texttt{arisdask@ece.auth.gr}\selectlanguage{greek} \\
-        Λαβδάκης Γεώργιος & ΑΕΜ3 & \selectlanguage{english}\texttt{glavdakis@ece.auth.gr}\selectlanguage{greek} \\
+        Λαβδάκης Γεώργιος & 10672 & \selectlanguage{english}\texttt{glavdakis@ece.auth.gr}\selectlanguage{greek} \\
         Ρουσομάνης Γεώργιος & 10703 & \selectlanguage{english}\texttt{rousoman@ece.auth.gr}\selectlanguage{greek} \\
     \end{tabular}\\[3cm]
 
-    {\large 19/11/2025}
+    {\large 24/11/2025}
 \end{center}
 
 \newpage
@@ -43,320 +51,14 @@
 
 \newpage
 
-\section{Εισαγωγή}
-
-\subsection{Σκοπός Εφαρμογής}
-
-Ο σκοπός της εφαρμογής \selectlanguage{english}CryptfolioDB\selectlanguage{greek} 
-είναι η αποθήκευση, οργάνωση και παρακολούθηση των επενδύσεων ενός χρήστη 
-σε κρυπτονομίσματα. Η βάση δεδομένων επιτρέπει την καταγραφή πορτοφολιών, 
-υπολοίπων και συναλλαγών, προσφέροντας μια συγκεντρωτική εικόνα του χαρτοφυλακίου.
-
-\subsection{Περιγραφή Εφαρμογής}
-
-Η εφαρμογή επιτρέπει στον χρήστη να δημιουργεί και να διαχειρίζεται 
-πολλαπλά ψηφιακά πορτοφόλια, να αποθηκεύει τα υπόλοιπα κάθε κρυπτονομίσματος, 
-να καταχωρεί συναλλαγές και να παρακολουθεί τις διακυμάνσεις των τιμών 
-μέσω των ιδιοτήτων των κρυπτονομισμάτων. 
-Οι χρήστες έχουν πρόσβαση στο ιστορικό των συναλλαγών τους, 
-στο προσωποποιημένο χαρτοφυλάκιό τους και σε στατιστικά στοιχεία.
-
-\subsection{Απαιτήσεις Εφαρμογής σε Δεδομένα}
-
-Η βάση αναμένεται να αποθηκεύει δεδομένα για όλους τους χρήστες της εφαρμογής, 
-τα πορτοφόλια τους και τις αντίστοιχες συναλλαγές. 
-Εκτιμάται ότι κάθε χρήστης θα διατηρεί από 1 έως 5 πορτοφόλια, 
-με 20–200 συναλλαγές ανά πορτοφόλι. 
-Η βάση υποστηρίζει επίσης δεδομένα για δεκάδες έως εκατοντάδες κρυπτονομίσματα, 
-μαζί με τις μεταβαλλόμενες τιμές και τεχνικές πληροφορίες τους.
-
-\newpage
-
-\section{Κατηγορίες Χρηστών και Απαιτήσεις τους}
-
-\subsection*{Τελικός Χρήστης}
-Ο χρήστης της εφαρμογής έχει τις ακόλουθες δυνατότητες:
-
-\begin{itemize}
-    \item Δημιουργία και επεξεργασία ψηφιακών πορτοφολιών.
-    \item Προσθήκη/επεξεργασία υπολοίπων κρυπτονομισμάτων.
-    \item Καταγραφή συναλλαγών αγοράς, πώλησης ή μεταφοράς.
-    \item Προβολή συνολικής αξίας χαρτοφυλακίου.
-    \item Παρακολούθηση τιμών κρυπτονομισμάτων.
-\end{itemize}
-
-\newpage
-
-\section{Μοντέλο Οντοτήτων/Συσχετίσεων}
-
-\subsection{Γενική Περιγραφή}
-
-Το σύστημα αποτελείται από τις οντότητες 
-\selectlanguage{english}User, Wallet, WalletBalance, Cryptocurrency, Transaction\selectlanguage{greek}. 
-Κάθε χρήστης μπορεί να διαθέτει πολλά πορτοφόλια, ενώ κάθε πορτοφόλι μπορεί να 
-περιέχει υπόλοιπα για πολλά κρυπτονομίσματα. 
-Οι συναλλαγές πραγματοποιούνται σε επίπεδο πορτοφολιού και 
-σχετίζονται με συγκεκριμένα κρυπτονομίσματα. 
-
-\subsubsection*{Υποθέσεις}
-\begin{itemize}
-    \item Το σύμβολο του κάθε κρυπτονομίσματος είναι μοναδικό 
-\end{itemize}
-
-\subsection{Καθορισμός Οντοτήτων}
-
-% =============================
-% USER
-% =============================
-
-\begin{tabular}{|p{4cm}|p{10cm}|}
-\hline
-\textbf{Όνομα Οντότητας} & \selectlanguage{english}User\selectlanguage{greek} \\ \hline
-
-\textbf{Περιγραφή} & Αντιπροσωπεύει έναν εγγεγραμμένο χρήστη του συστήματος. \\ \hline
-
-\textbf{Ιδιότητες Οντότητας} & Ισχυρή οντότητα \selectlanguage{english}(Strong Entity)\selectlanguage{greek}. 
-Διαθέτει πρωτεύον κλειδί. \\ \hline
-
-\textbf{Γνωρίσματα} &
-\begin{itemize}
-    \item \selectlanguage{english}email (PK)\selectlanguage{greek}: Η μοναδική διεύθυνση \selectlanguage{english}
-    email\selectlanguage{greek}.
-    \item \selectlanguage{english}name\selectlanguage{greek}: Το όνομα χρήστη.
-\end{itemize}
-\\ \hline
-\end{tabular}
-
-\vspace{1cm}
-
-% =============================
-% WALLET
-% =============================
-
-\begin{tabular}{|p{4cm}|p{10cm}|}
-\hline
-\textbf{Όνομα Οντότητας} & \selectlanguage{english}Wallet\selectlanguage{greek} \\ \hline
-
-\textbf{Περιγραφή} & Ψηφιακό πορτοφόλι που ανήκει σε έναν χρήστη. \\ \hline
-
-\textbf{Ιδιότητες Οντότητας} & Ισχυρή οντότητα \selectlanguage{english}(Strong Entity)\selectlanguage{greek}. 
-Συνδέεται με χρήστη ως εξαρτώμενη αλλά όχι ασθενής. \\ \hline
-
-\textbf{Γνωρίσματα} &
-\begin{itemize}
-    \item \selectlanguage{english}walletID (PK)\selectlanguage{greek}: Μοναδικό αναγνωριστικό πορτοφολιού.
-    \item \selectlanguage{english}walletName\selectlanguage{greek}: Όνομα του πορτοφολιού.
-    \item \selectlanguage{english}walletType\selectlanguage{greek}: Τύπος (π.χ. \selectlanguage{english}Spot, 
-    Futures\selectlanguage{greek}).
-\end{itemize}
-\\ \hline
-\end{tabular}
-
-\vspace{1cm}
-
-% =============================
-% WALLET BALANCE
-% =============================
-
-\begin{tabular}{|p{4cm}|p{10cm}|}
-\hline
-\textbf{Όνομα Οντότητας} & \selectlanguage{english}WalletBalance\selectlanguage{greek} \\ \hline
-
-\textbf{Περιγραφή} & Καταγράφει το διαθέσιμο υπόλοιπο κάθε κρυπτονομίσματος σε κάθε πορτοφόλι. \\ \hline
-
-\textbf{Ιδιότητες Οντότητας} & Ασθενής οντότητα \selectlanguage{english}(Weak Entity)\selectlanguage{greek}. 
-Εξαρτάται από τα \selectlanguage{english}Wallet\selectlanguage{greek} και \selectlanguage{english}Cryptocurrency
-\selectlanguage{greek}. \\ \hline
-
-\textbf{Γνωρίσματα} &
-\begin{itemize}
-    \item \selectlanguage{english}amount\selectlanguage{greek}: Υπόλοιπο.
-    \item \selectlanguage{english}lastUpdated\selectlanguage{greek}: Τελευταία ενημέρωση.
-\end{itemize}
-\\ \hline
-\end{tabular}
-
-\vspace{1cm}
-
-% =============================
-% CRYPTOCURRENCY
-% =============================
-
-\begin{tabular}{|p{4cm}|p{10cm}|}
-\hline
-\textbf{Όνομα Οντότητας} & \selectlanguage{english}Cryptocurrency\selectlanguage{greek} \\ \hline
-
-\textbf{Περιγραφή} & Πληροφορίες για κάθε υποστηριζόμενο κρυπτονόμισμα. \\ \hline
-
-\textbf{Ιδιότητες Οντότητας} & Ισχυρή οντότητα \selectlanguage{english}(Strong Entity)\selectlanguage{greek}. 
-Το \selectlanguage{english}symbol\selectlanguage{greek} αποτελεί φυσικό πρωτεύον κλειδί. \\ \hline
-
-\textbf{Γνωρίσματα} &
-\begin{itemize}
-    \item \selectlanguage{english}symbol (PK)\selectlanguage{greek}: Π.χ. \selectlanguage{english}BTC, 
-    ETH\selectlanguage{greek}.
-    \item \selectlanguage{english}marketCap\selectlanguage{greek}: 
-    Η αξία του κρυπτονομίσματος στην αγορά.
-    \item \selectlanguage{english}circulatingSupply\selectlanguage{greek}: 
-    Ο αριθμός νομισμάτων που κυκλοφορούν.
-
-\end{itemize}
-\\ \hline
-\end{tabular}
-
-\vspace{1cm}
-
-% =============================
-% TRANSACTION
-% =============================
-
-\begin{tabular}{|p{4cm}|p{10cm}|}
-\hline
-\textbf{Όνομα Οντότητας} & \selectlanguage{english}Transaction\selectlanguage{greek} \\ \hline
-
-\textbf{Περιγραφή} & Μια συναλλαγή που πραγματοποιείται σε συγκεκριμένο πορτοφόλι. \\ \hline
-
-\textbf{Ιδιότητες Οντότητας} & Ισχυρή οντότητα \selectlanguage{english}(Strong Entity)\selectlanguage{greek}
-με δικό της πρωτεύον κλειδί. \\ \hline
-
-\textbf{Γνωρίσματα} &
-\begin{itemize}
-    \item \selectlanguage{english}transactionID (PK)\selectlanguage{greek}: Αναγνωριστικό συναλλαγής.
-    \item \selectlanguage{english}amount\selectlanguage{greek}: Ποσό συναλλαγής.
-    \item \selectlanguage{english}transactionType\selectlanguage{greek}: Τύπος \selectlanguage{english}
-    (Deposit, Withdrawal, Trade)\selectlanguage{greek}.
-    \item \selectlanguage{english}timestamp\selectlanguage{greek}: Χρονική σήμανση.
-    \item \selectlanguage{english}priceAtTimestamp\selectlanguage{greek}: Η τιμή του κρυπτονομίσματος κατά την 
-    συναλλαγή
-\end{itemize}
-\\ \hline
-\end{tabular}
-
-
-\textbf{Συσχέτιση 1:} \selectlanguage{english}User\_Owns\_Wallet\selectlanguage{greek}
-
-\textbf{Περιγραφή:} Κάθε χρήστης διαθέτει ένα ή περισσότερα πορτοφόλια.
-
-\textbf{Ιδιότητες:} Συσχέτιση τύπου 1:N.
-
-\textbf{Πληθικότητα:} 
-\selectlanguage{english}User (1) -- (N) Wallet\selectlanguage{greek}.
-
-\bigskip
-
-\textbf{Συσχέτιση 2:} \selectlanguage{english}Wallet\_Has\_Balance\selectlanguage{greek}
-
-\textbf{Περιγραφή:} Κάθε πορτοφόλι μπορεί να περιέχει υπόλοιπα πολλών κρυπτονομισμάτων.
-
-\textbf{Ιδιότητες:} Συσχέτιση τύπου N:N μέσω της ασθενούς οντότητας 
-\selectlanguage{english}WalletBalance\selectlanguage{greek}.
-
-\textbf{Πληθικότητα:} 
-\selectlanguage{english}Wallet (1) -- (N) WalletBalance (N) -- (1) Cryptocurrency\selectlanguage{greek}.
-
-\bigskip
-
-\textbf{Συσχέτιση 3:} \selectlanguage{english}Wallet\_Has\_Transaction\selectlanguage{greek}
-
-\textbf{Περιγραφή:} Κάθε συναλλαγή ανήκει σε ένα συγκεκριμένο πορτοφόλι.
-
-\textbf{Ιδιότητες:} Συσχέτιση 1:N.
-
-\textbf{Πληθικότητα:} 
-\selectlanguage{english}Wallet (1) -- (N) Transaction\selectlanguage{greek}.
-
-\bigskip
-
-\textbf{Συσχέτιση 4:} \selectlanguage{english}Transaction\_Involves\_Cryptocurrency\selectlanguage{greek}
-
-\textbf{Περιγραφή:} Κάθε συναλλαγή αφορά ένα και μόνο ένα κρυπτονόμισμα.
-
-\textbf{Ιδιότητες:} Συσχέτιση 1:N.
-
-\textbf{Πληθικότητα:} 
-\selectlanguage{english}Cryptocurrency (1) -- (N) Transaction\selectlanguage{greek}.
-
-
-\subsection{Διάγραμμα Οντοτήτων/Συσχετίσεων}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=1\linewidth]{db_deliverable_1.png}
-    \label{fig:ER}
-\end{figure}
-\newpage
-
-\section{Σχεσιακό Μοντέλο}
-
-\subsection{Πεδία Ορισμού}
-
-\begin{tabular}{l l}
-\textbf{Πεδίο Ορισμού} & \textbf{Τύπος} \\
-Αναγνωριστικό Πορτοφολιού & \selectlanguage{english}INT\selectlanguage{greek} \\
-Ποσό Συναλλαγής/Υπολοίπου & \selectlanguage{english}DOUBLE\selectlanguage{greek} \\
-Τύπος Συναλλαγής & \selectlanguage{english}VARCHAR(15)\selectlanguage{greek} \\
-Σύμβολο Κρυπτονομίσματος & \selectlanguage{english}CHAR(10)\selectlanguage{greek} \\
-Email Χρήστη & \selectlanguage{english}VARCHAR(50)\selectlanguage{greek} \\
-Όνομα Πορτοφολιού & \selectlanguage{english}VARCHAR(40)\selectlanguage{greek} \\
-Χρονική Σήμανση & \selectlanguage{english}DATETIME\selectlanguage{greek} \\
-\end{tabular}
-
-\subsection{Σχέσεις}
-
-\noindent
-Παράδειγμα:
-
-\textbf{Όνομα Σχέσης:} \selectlanguage{english}Airport\selectlanguage{greek}
-
-\textbf{Γνωρίσματα:}
-\begin{itemize}
-    \item \selectlanguage{english}airport\_code\selectlanguage{greek}
-    \item \selectlanguage{english}name\selectlanguage{greek}
-    \item \selectlanguage{english}city\selectlanguage{greek}
-    \item \selectlanguage{english}country\selectlanguage{greek}
-\end{itemize}
-
-\textbf{Περιορισμοί Ακεραιότητας:}
-\begin{itemize}
-    \item Πρωτεύον Κλειδί: \selectlanguage{english}airport\_code\selectlanguage{greek}
-\end{itemize}
-
-\subsection{Σχεσιακό Σχήμα}
-
-\noindent
-\{Τοποθετήστε το σχεσιακό διάγραμμα\}
-
-\subsection{Όψεις}
-
-\noindent
-\{Ορίστε χρήσιμες όψεις με σχεσιακή άλγεβρα\}
-
-Παράδειγμα:
-
-\selectlanguage{english}
-\[
-\rho_{AIRLINES}(\pi_{airline, plane\_name}(
-\pi_{airline, plane\_id}(FLIGHT) 
-\bowtie 
-\pi_{plane\_id, plane\_name}(AIRPLANE)
-))
-\]
-\selectlanguage{greek}
-
-\newpage
 \newgeometry{
     top=2cm,
     bottom=2cm,
-    left=1cm,
-    right=1cm
+    left=2cm,
+    right=2cm
 }
 
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    Examples    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \section{Παραδείγματα}
-
 
 \subsection{Παραδείγματα Πινάκων}
 
@@ -592,19 +294,17 @@ Email Χρήστη & \selectlanguage{english}VARCHAR(50)\selectlanguage{greek} \
     \hline
     \textbf{candle\_id} & \textbf{ticker\_symbol} & \textbf{open\_price} & \textbf{high\_price} & \textbf{low\_price} & \textbf{close\_price} & \textbf{volume} & \textbf{interval} \\
     \hline
-    CAND001 & BTC & 45000.00 & 45500.50 & 44800.75 & 45200.25 & 1250.50000000 & 1h \\
+    1 & BTC & 45000.00 & 45500.50 & 44800.75 & 45200.25 & 1250.500 & 2 \\
     \hline
-    CAND002 & ETH & 3200.00 & 3250.75 & 3180.25 & 3225.50 & 8500.25000000 & 1h \\
+    2 & ETH & 3200.00 & 3250.75 & 3180.25 & 3225.50 & 8500.250 & 2 \\
     \hline
-    CAND003 & ADA & 0.45 & 0.48 & 0.44 & 0.46 & 500000.00000000 & 4h \\
-    \hline
-    CAND004 & SOL & 150.00 & 155.75 & 148.50 & 152.25 & 25000.75000000 & 1d \\
+    3 & USDT & 0.45 & 0.48 & 0.44 & 0.46 & 500000.000 & 4 \\
     \hline
 \end{tabular}
 
 \selectlanguage{greek}
 \begin{flushright}
-\textit{Εκτίμηση για τον αριθμό των εγγραφών}: $\sim10B$
+\textit{Εκτίμηση για τον αριθμό των εγγραφών}: $\sim7.5B$
 \end{flushright}
 
 
@@ -617,19 +317,23 @@ Email Χρήστη & \selectlanguage{english}VARCHAR(50)\selectlanguage{greek} \
     \hline
     \textbf{id} & \textbf{ticker\_symbol} & \textbf{current\_price} & \textbf{circulating\_supply} & \textbf{timestamp} \\
     \hline
-    CH001 & BTC & 45200.25 & 19400000 & 2024-05-20 10:30:00 \\
+    1 & BTC & 45200.25 & 19400000 & 2024-05-20 10:30:00 \\
     \hline
-    CH002 & ETH & 3225.50 & 120000000 & 2024-05-20 10:30:00 \\
+    2 & BTC & 45201.25 & 19000000 & 2024-05-20 11:30:00 \\
     \hline
-    CH003 & ADA & 0.46 & 45000000000 & 2024-05-20 11:00:00 \\
+    3 & BTC & 45205.25 & 19200000 & 2024-05-20 12:30:00 \\
     \hline
-    CH004 & SOL & 152.25 & 573000000 & 2024-05-20 11:00:00 \\
+    4 & ETH & 3225.50 & 120000000 & 2024-05-20 10:40:00 \\
+    \hline
+    5 & ETH & 3200.50 & 120010000 & 2024-05-20 11:40:00 \\
+    \hline
+    6 & BTC & 45230.25 & 18900000 & 2024-05-20 13:30:00 \\
     \hline
 \end{tabular}
 
 \selectlanguage{greek}
 \begin{flushright}
-\textit{Εκτίμηση για τον αριθμό των εγγραφών}: $\sim10B$
+\textit{Εκτίμηση για τον αριθμό των εγγραφών}: $\sim40B$
 \end{flushright}
 
 \bigskip
@@ -639,21 +343,21 @@ Email Χρήστη & \selectlanguage{english}VARCHAR(50)\selectlanguage{greek} \
 \noindent 
 \begin{tabular}{|l|l|l|l|l|l|l|l|}
     \hline
-    \textbf{alert\_id} & \textbf{user\_id} & \textbf{ticker\_symbol} & \textbf{threshold\_price} & \textbf{threshold\_direction} & \textbf{description} & \textbf{is\_active} & \textbf{triggered\_at} \\
+    \textbf{\shortstack{alert\\ \_id}} & \textbf{User.email} & \textbf{\shortstack{ticker\\ \_symbol}} & \textbf{\shortstack{threshold\\ \_price}} & \textbf{\shortstack{threshold \\ \_direction}} & \textbf{description} & \textbf{\shortstack{is\_ \\ active}} & \textbf{\shortstack{triggered \\ \_at}} \\
     \hline
-    ALERT001 & 101 & BTC & 50000.00 & ABOVE & Price above 50k & 1 & NULL \\
+    1 & \shortstack{name1@ \\ mail.com} & BTC & 50000.00 & ABOVE & `SELL' & 1 & NULL \\
     \hline
-    ALERT002 & 102 & ETH & 3000.00 & BELOW & Price below 3k & 1 & 2024-05-19 14:30:00 \\
+    2 & \shortstack{name2@ \\ mail.com} & ETH & 3000.00 & BELOW & `BUY' & 1 & \shortstack{2024-05-19 \\ 14:30:00} \\
     \hline
-    ALERT003 & 103 & ADA & 0.50 & ABOVE & ADA reaches 0.50 & 1 & NULL \\
+    3 & \shortstack{name3@ \\ mail.com} & DOGE & 0.50 & ABOVE & `BUY' reaches 0.50 & 0 & \shortstack{2023-05-19 \\ 14:30:00} \\
     \hline
-    ALERT004 & 101 & SOL & 200.00 & ABOVE & SOL bullish target & 0 & NULL \\
+    4 & \shortstack{name4@ \\ mail.com} & BTC & 200.00 & ABOVE & `SELL' & 0 & NULL \\
     \hline
 \end{tabular}
 
 \selectlanguage{greek}
 \begin{flushright}
-\textit{Εκτίμηση για τον αριθμό των εγγραφών}: $\sim10B$
+\textit{Εκτίμηση για τον αριθμό των εγγραφών}: $\sim15M$
 \end{flushright}
 
 
@@ -662,15 +366,43 @@ Email Χρήστη & \selectlanguage{english}VARCHAR(50)\selectlanguage{greek} \
 
 \subsection{Παραδείγματα Ερωτημάτων}
 
-Παράδειγμα σχεσιακού ερωτήματος:
+\begin{flushleft}
 
-\selectlanguage{english}
-\[
-\pi_{ticket\_no, seat\_no, cust\_id}(\sigma_{flight\_id=AA101}(RESERVATION))
-\bowtie
-\pi_{cust\_id, firstname, lastname}(CUSTOMER)
-\]
-\selectlanguage{greek}
+1) \selectlanguage{english}Verified bank accounts \selectlanguage{greek}ενός χρήστη με \selectlanguage{english}user\_id = 2
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\linewidth]{query1.png}
+    \label{fig:placeholder}
+\end{figure}
+
+
+2) \selectlanguage{greek}Όλες οι αγοραπωλησίες ενός χρήστη με \selectlanguage{english}user\_id = 1
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\linewidth]{query2.png}
+    \label{fig:placeholder}
+\end{figure}
+
+3) \selectlanguage{greek}Όλα τα \selectlanguage{english}pending invitations \selectlanguage{greek}για συγκεκριμένο χρήστη με \selectlanguage{english}invitee\_id = 3
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\linewidth]{query3.png}
+    \label{fig:placeholder}
+\end{figure}
+
+4) Crypto portfolio \selectlanguage{greek}ενός \selectlanguage{english}wallet \selectlanguage{greek}με \selectlanguage{english}wallet\_id = 1
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\linewidth]{query4.png}
+    \label{fig:placeholder}
+\end{figure}
+
+
+\end{flushleft}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    ENDOF Examples    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
