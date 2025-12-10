@@ -472,7 +472,7 @@
 
 \begin{tabular}{|p{4cm}|p{10cm}|}
 \hline
-\textbf{Όνομα Συσχέτισης} & \selectlanguage{english}User gets alert from Cryptocurrency \\ \hline
+\textbf{Όνομα Συσχέτισης} & \selectlanguage{english}User gets\_alert\_from Cryptocurrency \\ \hline
 \textbf{Περιγραφή} & Ένας χρήστης μπορεί να δέχεται  \selectlanguage{english}alerts\selectlanguage{greek} από πολλα 
 
 \selectlanguage{english}Cryptocurrencys. \\ \hline
@@ -481,7 +481,9 @@
 \multirow{2}{4cm}{\textbf{Συμμετοχή}}
 & Ολική συμμετοχή του \selectlanguage{english}Alert\selectlanguage{greek} \\ \cline{2-2}
 & Ολική συμμετοχή του \selectlanguage{english}User\selectlanguage{greek} \\ \hline
-\textbf{Γνωρίσματα} & - \\ \hline
+\textbf{Γνωρίσματα} & \selectlanguage{english}threshold\_direction, threshold\_price, is\_active, 
+
+triggered\_at, description \\ \hline
 \end{tabular}
 
 \vspace{1cm}
@@ -497,21 +499,38 @@
 \cline{2-2}
 & Ολική συμμετοχή του \selectlanguage{english}CryptoBlance\selectlanguage{greek} \\
 \hline
-\textbf{Γνωρίσματα} & - \\ \hline
+\textbf{Γνωρίσματα} & \selectlanguage{english}amount, price\_at\_timestamp, timestamp, 
+
+transaction\_type, transaction\_hash \\ \hline
 \end{tabular}
 
 \vspace{1cm}
 
 \begin{tabular}{|p{4cm}|p{10cm}|}
 \hline
-\textbf{Όνομα Συσχέτισης} & \selectlanguage{english}Cryptocurrency has Candlestick\selectlanguage{greek} \\ \hline
-\textbf{Περιγραφή} & Κάθε κρυπτονόμισμα έχει πολλά \selectlanguage{english}candlesticks\selectlanguage{greek}. 
-Κάθε \selectlanguage{english}candlestick\selectlanguage{greek} αντιστοιχεί σε ένα μόνο κρυπτονόμισμα. \\ \hline
+\textbf{Όνομα Συσχέτισης} & \selectlanguage{english}BankAccount transfers\_to Wallet\selectlanguage{greek} \\ \hline
+\textbf{Περιγραφή} & Κάθε τραπεζικός λογαριασμός μεταφέρει χρήματα σε κάποιο πορτοφόλι. Κάθε πορτοφόλι δέχεται μεταφορές από κάποιον τραπεζικό λογαριασμό.\\ \hline
 \textbf{Ιδιότητες} & \selectlanguage{english}Has-A\selectlanguage{greek}, Προσδιορίζουσα \\ \hline
-\textbf{Λόγος Πληθικότητας} & 1:N \\ \hline
+\textbf{Λόγος Πληθικότητας} & N:M \\ \hline
 \multirow{2}{4cm}{\textbf{Συμμετοχή}}
 & Ολική συμμετοχή του \selectlanguage{english}Candlestick\selectlanguage{greek} \\ \cline{2-2}
-& Μερική συμμετοχή του \selectlanguage{english}Cryptocurrency\selectlanguage{greek} \\ \hline
+& Ολική συμμετοχή του \selectlanguage{english}Cryptocurrency\selectlanguage{greek} \\ \hline
+\textbf{Γνωρίσματα} & \selectlanguage{english}amount, timestamp, direction \\ \hline
+\end{tabular}
+
+\vspace{1cm}
+
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Όνομα Συσχέτισης} & \selectlanguage{english}Invitation refers\_to Wallet\selectlanguage{greek} \\ \hline
+\textbf{Περιγραφή} & Κάθε πρόσκληση αφορά ένα συγκεκριμένο πορτοφόλι. Ένα πορτοφόλι μπορεί να αποτελεί αντικείμενο πολλών προσκλήσεων. \\ \hline
+\textbf{Ιδιότητες} & \selectlanguage{english}Has-A\selectlanguage{greek} \\ \hline
+\textbf{Λόγος Πληθικότητας} & Ν:1 \\ \hline
+\multirow{2}{4cm}{\textbf{Συμμετοχή}} 
+& Ολική συμμετοχή του \selectlanguage{english}Invitation\selectlanguage{greek} \\
+\cline{2-2}
+& Μερική συμμετοχή του \selectlanguage{english}Wallet\selectlanguage{greek} \\
+\hline
 \textbf{Γνωρίσματα} & - \\ \hline
 \end{tabular}
 
@@ -528,38 +547,6 @@
 & Ολική συμμετοχή του \selectlanguage{english}CryptoBalance\selectlanguage{greek} \\
 \cline{2-2}
 & Μερική συμμετοχή του \selectlanguage{english}Wallet\selectlanguage{greek} \\
-\hline
-\textbf{Γνωρίσματα} & - \\ \hline
-\end{tabular}
-
-\vspace{1cm}
-
-\begin{tabular}{|p{4cm}|p{10cm}|}
-\hline
-\textbf{Όνομα Συσχέτισης} & \selectlanguage{english}Cryptocurrency has CryptoHistory\selectlanguage{greek} \\ \hline
-\textbf{Περιγραφή} & Ένα κρυπτονόμισμα έχει πολλά ιστορικά σημεία τιμών. Κάθε ιστορικό σημείο αντιστοιχεί σε ένα κρυπτονόμισμα. \\ \hline
-\textbf{Ιδιότητες} & \selectlanguage{english}Has-A\selectlanguage{greek} \\ \hline
-\textbf{Λόγος Πληθικότητας} & 1:Ν \\ \hline
-\multirow{2}{4cm}{\textbf{Συμμετοχή}} 
-& Ολική συμμετοχή του \selectlanguage{english}CryptoHistory\selectlanguage{greek} \\
-\cline{2-2}
-& Μερική συμμετοχή του \selectlanguage{english}Cryptocurrency\selectlanguage{greek} \\
-\hline
-\textbf{Γνωρίσματα} & - \\ \hline
-\end{tabular}
-
-\vspace{1cm}
-
-\begin{tabular}{|p{4cm}|p{10cm}|}
-\hline
-\textbf{Όνομα Συσχέτισης} & \selectlanguage{english}Transaction involves Cryptocurrency\selectlanguage{greek} \\ \hline
-\textbf{Περιγραφή} & Κάθε συναλλαγή σχετίζεται με ένα κρυπτονόμισμα. Ένα κρυπτονόμισμα μπορεί να εμφανίζεται σε πολλές συναλλαγές. \\ \hline
-\textbf{Ιδιότητες} & \selectlanguage{english}Has-A\selectlanguage{greek} \\ \hline
-\textbf{Λόγος Πληθικότητας} & Ν:1 \\ \hline
-\multirow{2}{4cm}{\textbf{Συμμετοχή}} 
-& Ολική συμμετοχή του \selectlanguage{english}Transaction\selectlanguage{greek} \\
-\cline{2-2}
-& Μερική συμμετοχή του \selectlanguage{english}Cryptocurrency\selectlanguage{greek} \\
 \hline
 \textbf{Γνωρίσματα} & - \\ \hline
 \end{tabular}
@@ -586,15 +573,14 @@
 
 \begin{tabular}{|p{4cm}|p{10cm}|}
 \hline
-\textbf{Όνομα Συσχέτισης} & \selectlanguage{english}WalletBankTransfer involves Wallet\selectlanguage{greek} \\ \hline
-\textbf{Περιγραφή} & Κάθε μεταφορά προς/από τράπεζα συνδέεται με ένα πορτοφόλι. Ένα πορτοφόλι μπορεί να έχει πολλές μεταφορές. \\ \hline
-\textbf{Ιδιότητες} & \selectlanguage{english}Has-A\selectlanguage{greek} \\ \hline
-\textbf{Λόγος Πληθικότητας} & Ν:1 \\ \hline
-\multirow{2}{4cm}{\textbf{Συμμετοχή}} 
-& Ολική συμμετοχή του \selectlanguage{english}WalletBankTransfer\selectlanguage{greek} \\
-\cline{2-2}
-& Μερική συμμετοχή του \selectlanguage{english}Wallet\selectlanguage{greek} \\
-\hline
+\textbf{Όνομα Συσχέτισης} & \selectlanguage{english}Cryptocurrency has Candlestick\selectlanguage{greek} \\ \hline
+\textbf{Περιγραφή} & Κάθε κρυπτονόμισμα έχει πολλά \selectlanguage{english}candlesticks\selectlanguage{greek}. 
+Κάθε \selectlanguage{english}candlestick\selectlanguage{greek} αντιστοιχεί σε ένα μόνο κρυπτονόμισμα. \\ \hline
+\textbf{Ιδιότητες} & \selectlanguage{english}Has-A\selectlanguage{greek}, Προσδιορίζουσα \\ \hline
+\textbf{Λόγος Πληθικότητας} & 1:N \\ \hline
+\multirow{2}{4cm}{\textbf{Συμμετοχή}}
+& Ολική συμμετοχή του \selectlanguage{english}Candlestick\selectlanguage{greek} \\ \cline{2-2}
+& Μερική συμμετοχή του \selectlanguage{english}Cryptocurrency\selectlanguage{greek} \\ \hline
 \textbf{Γνωρίσματα} & - \\ \hline
 \end{tabular}
 
@@ -602,66 +588,17 @@
 
 \begin{tabular}{|p{4cm}|p{10cm}|}
 \hline
-\textbf{Όνομα Συσχέτισης} & \selectlanguage{english}WalletBankTransfer involves BankAccount\selectlanguage{greek} \\ \hline
-\textbf{Περιγραφή} & Κάθε μεταφορά αφορά έναν τραπεζικό λογαριασμό. Ένας λογαριασμός μπορεί να έχει πολλές μεταφορές. \\ \hline
+\textbf{Όνομα Συσχέτισης} & \selectlanguage{english}Cryptocurrency has CryptoHistory\selectlanguage{greek} \\ \hline
+\textbf{Περιγραφή} & Ένα κρυπτονόμισμα έχει πολλά ιστορικά σημεία τιμών. Κάθε ιστορικό σημείο αντιστοιχεί σε ένα κρυπτονόμισμα. \\ \hline
 \textbf{Ιδιότητες} & \selectlanguage{english}Has-A\selectlanguage{greek} \\ \hline
-\textbf{Λόγος Πληθικότητας} & Ν:1 \\ \hline
+\textbf{Λόγος Πληθικότητας} & 1:Ν \\ \hline
 \multirow{2}{4cm}{\textbf{Συμμετοχή}} 
-& Ολική συμμετοχή του \selectlanguage{english}WalletBankTransfer\selectlanguage{greek} \\
-\cline{2-2}
-& Μερική συμμετοχή του \selectlanguage{english}BankAccount\selectlanguage{greek} \\
-\hline
-\textbf{Γνωρίσματα} & - \\ \hline
-\end{tabular}
-
-\vspace{1cm}
-
-\begin{tabular}{|p{4cm}|p{10cm}|}
-\hline
-\textbf{Όνομα Συσχέτισης} & \selectlanguage{english}Invitation refers to Wallet\selectlanguage{greek} \\ \hline
-\textbf{Περιγραφή} & Κάθε πρόσκληση αφορά ένα συγκεκριμένο πορτοφόλι. Ένα πορτοφόλι μπορεί να αποτελεί αντικείμενο πολλών προσκλήσεων. \\ \hline
-\textbf{Ιδιότητες} & \selectlanguage{english}Has-A\selectlanguage{greek} \\ \hline
-\textbf{Λόγος Πληθικότητας} & Ν:1 \\ \hline
-\multirow{2}{4cm}{\textbf{Συμμετοχή}} 
-& Ολική συμμετοχή του \selectlanguage{english}Invitation\selectlanguage{greek} \\
-\cline{2-2}
-& Μερική συμμετοχή του \selectlanguage{english}Wallet\selectlanguage{greek} \\
-\hline
-\textbf{Γνωρίσματα} & - \\ \hline
-\end{tabular}
-
-\vspace{1cm}
-
-\begin{tabular}{|p{4cm}|p{10cm}|}
-\hline
-\textbf{Όνομα Συσχέτισης} & \selectlanguage{english}Alert refers to Cryptocurrency\selectlanguage{greek} \\ \hline
-\textbf{Περιγραφή} & Κάθε ειδοποίηση αφορά ένα συγκεκριμένο κρυπτονόμισμα. Ένα κρυπτονόμισμα μπορεί να έχει πολλές ειδοποιήσεις. \\ \hline
-\textbf{Ιδιότητες} & \selectlanguage{english}Has-A\selectlanguage{greek} \\ \hline
-\textbf{Λόγος Πληθικότητας} & Ν:1 \\ \hline
-\multirow{2}{4cm}{\textbf{Συμμετοχή}} 
-& Ολική συμμετοχή του \selectlanguage{english}Alert\selectlanguage{greek} \\
+& Ολική συμμετοχή του \selectlanguage{english}CryptoHistory\selectlanguage{greek} \\
 \cline{2-2}
 & Μερική συμμετοχή του \selectlanguage{english}Cryptocurrency\selectlanguage{greek} \\
 \hline
 \textbf{Γνωρίσματα} & - \\ \hline
 \end{tabular}
-
-\vspace{1cm}
-
-\begin{tabular}{|p{4cm}|p{10cm}|}
-\hline
-\textbf{Όνομα Συσχέτισης} & \selectlanguage{english}CryptoBalance involves Transaction\selectlanguage{greek} \\ \hline
-\textbf{Περιγραφή} & Μία εγγραφή υπολοίπου κρυπτονομίσματος μπορεί να συμμετέχει σε πολλές συναλλαγές. Κάθε συναλλαγή συνδέεται με ένα συγκεκριμένο υπόλοιπο κρυπτονομίσματος. \\ \hline
-\textbf{Ιδιότητες} & \selectlanguage{english}Has-A\selectlanguage{greek} \\ \hline
-\textbf{Λόγος Πληθικότητας} & 1:Ν \\ \hline
-\multirow{2}{4cm}{\textbf{Συμμετοχή}} 
-& Ολική συμμετοχή του \selectlanguage{english}Transaction\selectlanguage{greek} \\
-\cline{2-2}
-& Μερική συμμετοχή του \selectlanguage{english}CryptoBalance\selectlanguage{greek} \\
-\hline
-\textbf{Γνωρίσματα} & - \\ \hline
-\end{tabular}
-
 
 \newpage
 % % !!!!!!!!!!!!!  The ER diagram is in the second .tex file  !!!!!!!!!!!!!
