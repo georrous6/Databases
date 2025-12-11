@@ -238,6 +238,40 @@ wallet\_id Wallet to Invitation\} \\ \hline
 Ξένα Κλειδιά & \selectlanguage{english}ticker\_symbol Cryptocurrency to CryptoHistory\\ \hline
 \end{tabular}
 
+\vspace{1cm}
+
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{Όνομα Σχέσης} & \selectlanguage{english}User has Wallet\\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
+\selectlanguage{english}user\_id & Αναγνωριστικό \\ \hline
+\selectlanguage{english}wallet\_id & Αναγνωριστικό \\ \hline
+\selectlanguage{english}role & Κατάσταση \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
+Πρωτεύον Κλειδί & \selectlanguage{english}\{user\_id, wallet\_id\} \\ \hline
+Ξένα Κλειδιά & - \\ \hline
+\end{tabular}
+
+\vspace{1cm}
+
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{Όνομα Σχέσης} & \selectlanguage{english}BankAccount transfers\_to Wallet \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
+\selectlanguage{english}account\_id & Αναγνωριστικό \\ \hline
+\selectlanguage{english}wallet\_id & Αναγνωριστικό \\ \hline
+\selectlanguage{english}amount & Δεκαδικός \\ \hline
+\selectlanguage{english}timestamp & Ημερομηνία και Ώρα \\ \hline
+\selectlanguage{english}direction & Μικρό Αλφαριθμητικό \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
+Πρωτεύον Κλειδί & \selectlanguage{english}\{account\_id, wallet\_id\} \\ \hline
+Ξένα Κλειδιά & - \\ \hline
+\end{tabular}
+
 \newpage
 % % Set margins
 \newgeometry{
