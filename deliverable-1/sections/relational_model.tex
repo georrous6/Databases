@@ -250,50 +250,50 @@ wallet\_id Wallet to Invitation\} \\ \hline
 \subsection{Όψεις}
 
 1) Όψη για τον αριθμό \selectlanguage{english}crypto\selectlanguage{greek} των χρηστών
+\selectlanguage{english}
 
 \[
-\textbf{\selectlanguage{english}UserCryptoCount} =
-\pi_{\text{\selectlanguage{english}user\_id, name, ticker\_symbol, crypto\_amount}}
+\textbf{UserCryptoCount} =
+\pi_{\text{user\_id, name, ticker\_symbol, crypto\_amount}}
 \Bigl(
    \bigl(
-      \text{\selectlanguage{english}User} 
-      
-      \bowtie_{\text{\selectlanguage{english}(user\_id)}} \text{\selectlanguage{english}owns} \bowtie_{\text{\selectlanguage{english}(wallet\_id)}} \text{\selectlanguage{english}Wallet}
+      \text{User} 
+      \bowtie_{\text{(user\_id)}} \text{owns} \bowtie_{\text{(wallet\_id)}} \text{Wallet}
    \bigr)
-   \bowtie_{\text{\selectlanguage{english}(wallet\_id)}} \text{\selectlanguage{english}has}
-   \bowtie_{\text{\selectlanguage{english}(balance\_id)}} \text{\selectlanguage{english}CryptoBalance}
-   \bowtie_{\text{\selectlanguage{english}(crypto\_id)}} \text{\selectlanguage{english}Cryptocurrency}
+   \bowtie_{\text{(wallet\_id)}} \text{has}
+   \bowtie_{\text{(balance\_id)}} \text{CryptoBalance}
+   \bowtie_{\text{(crypto\_id)}} \text{Cryptocurrency}
 \Bigr)
 \]
 
 \vspace{1cm}
 
+\selectlanguage{greek}
 2) Όψη για τις συναλλαγές \selectlanguage{english}crypto\selectlanguage{greek} των χρηστών
+\selectlanguage{english}
 
 \[
-\textbf{\selectlanguage{english}UserCryptoTransactions} =
-\pi_{\text{\selectlanguage{english}user\_id, name, wallet\_id, transaction\_hash, transaction\_type, amount, timestamp, ticker\_symbol}}
-
+\textbf{UserCryptoTransactions} =
+\pi_{\text{user\_id, name, wallet\_id, transaction\_hash, transaction\_type, amount, timestamp, ticker\_symbol}}
 \Bigl(
    \bigl(
-      \text{\selectlanguage{english}User} \bowtie_{\text{\selectlanguage{english}(user\_id)}}
-      \text{\selectlanguage{english}owns} \bowtie_{\text{\selectlanguage{english}(wallet\_id)}} \text{\selectlanguage{english}Wallet}
+      \text{User} \bowtie_{\text{(user\_id)}}
+      \text{owns} \bowtie_{\text{(wallet\_id)}} \text{Wallet}
    \bigr)
-   \bowtie_{\text{\selectlanguage{english}(wallet\_id)}} \text{\selectlanguage{english}transacts}
-   \bowtie_{\text{\selectlanguage{english}(crypto\_id)}} \text{\selectlanguage{english}Cryptocurrency}
+   \bowtie_{\text{(wallet\_id)}} \text{transacts}
+   \bowtie_{\text{(crypto\_id)}} \text{Cryptocurrency}
 \Bigr)
 \]
 
 
 \vspace{1cm}
-
+\selectlanguage{greek}
 3) Όψη για τα \selectlanguage{english}candlestick \selectlanguage{greek}των \selectlanguage{english}crypto 
 
 \[
 \textbf{CryptoCandlestick} =
 \pi_{\text{ticker\_symbol, name, candle\_id, interval, open\_price,
 high\_price, low\_price, close\_price, volume}}
-
 \Bigl(
    \text{Cryptocurrency}
    \bowtie_{\text{(crypto\_id)}}
