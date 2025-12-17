@@ -249,56 +249,44 @@ wallet\_id Wallet to Invitation\} \\ \hline
 
 \subsection{Όψεις}
 
-1) Όψη για τον αριθμό \selectlanguage{english}crypto\selectlanguage{greek} των χρηστών
-\selectlanguage{english}
+\begin{enumerate}
 
+\item Όψη για τα υπόλοιπα κρυπτονομισμάτων των χρηστών
 \[
-\textbf{UserCryptoCount} =
-\pi_{\text{user\_id, name, ticker\_symbol, crypto\_amount}}
-\Bigl(
-   \bigl(
-      \text{User} 
-      \bowtie_{\text{(user\_id)}} \text{owns} \bowtie_{\text{(wallet\_id)}} \text{Wallet}
-   \bigr)
-   \bowtie_{\text{(wallet\_id)}} \text{has}
-   \bowtie_{\text{(balance\_id)}} \text{CryptoBalance}
-   \bowtie_{\text{(crypto\_id)}} \text{Cryptocurrency}
-\Bigr)
+\begin{aligned}
+&\text{A} \leftarrow \text{User\_has\_Wallet}
+\bowtie_{\text{wallet\_id}} \text{CryptoBalance}
+\bowtie_{\text{ticker\_symbol}} \text{Cryptocurrency}
+\\
+&\textbf{UserCryptoBalances} =
+\pi_{\text{user\_id, name, ticker\_symbol, crypto\_amount}} \bigl(A\bigr)
+\end{aligned}
 \]
 
-\vspace{1cm}
-
-\selectlanguage{greek}
-2) Όψη για τις συναλλαγές \selectlanguage{english}crypto\selectlanguage{greek} των χρηστών
-\selectlanguage{english}
-
+\item Όψη για τις τραπεζικές συναλλαγές των χρηστών
 \[
-\textbf{UserCryptoTransactions} =
-\pi_{\text{user\_id, name, wallet\_id, transaction\_hash, transaction\_type, amount, timestamp, ticker\_symbol}}
-\Bigl(
-   \bigl(
-      \text{User} \bowtie_{\text{(user\_id)}}
-      \text{owns} \bowtie_{\text{(wallet\_id)}} \text{Wallet}
-   \bigr)
-   \bowtie_{\text{(wallet\_id)}} \text{transacts}
-   \bowtie_{\text{(crypto\_id)}} \text{Cryptocurrency}
-\Bigr)
+\begin{aligned}
+&A \leftarrow 
+\bigl(
+  \text{User} \bowtie_{\text{user\_id}}
+  \text{BankAccount} \bowtie_{\text{account\_id}}
+  \text{transfers\_to}
+\bigr) \\
+&\textbf{UserBankTransactions} = \\
+&\pi_{\text{user\_id, name, account\_id, bank\_name, holder\_name, 
+encrypted\_iban, wallet\_id, direction, timestamp, amount}}\bigl(A\bigr) \\
+\end{aligned}
 \]
 
-
-\vspace{1cm}
-\selectlanguage{greek}
-3) Όψη για τα \selectlanguage{english}candlestick \selectlanguage{greek}των \selectlanguage{english}crypto 
-
+\item Όψη για τα candlesticks των κρυπτονομισμάτων
 \[
-\textbf{CryptoCandlestick} =
-\pi_{\text{ticker\_symbol, name, candle\_id, interval, open\_price,
+\begin{aligned}
+& A \leftarrow \text{Cryptocurrency} \bowtie_{\text{ticker\_symbol}} \text{Candlestick} \\
+& \textbf{CryptoCandlestick} = \\
+& \pi_{\text{ticker\_symbol, name, candle\_id, interval, open\_price,
 high\_price, low\_price, close\_price, volume}}
-\Bigl(
-   \text{Cryptocurrency}
-   \bowtie_{\text{(crypto\_id)}}
-   \text{has}
-   \bowtie_{\text{(candle\_id)}}
-   \text{Candlestick}
-\Bigr)
+\bigl(A\bigr)
+\end{aligned}
 \]
+
+\end{enumerate}

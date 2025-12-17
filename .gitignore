@@ -18,6 +18,7 @@ Lecture - Assignment.pdf
 *.nav
 *.snm
 *.vrb
+*.xdv
 
 # Intermediate DVI / PS
 *.dvi

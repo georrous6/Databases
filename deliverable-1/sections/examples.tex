@@ -256,28 +256,55 @@
 
 \newpage
 
-
-
 \subsection{Παραδείγματα Ερωτημάτων}
 
-\begin{flushleft}
+\begin{enumerate}
 
-1) \selectlanguage{english}Verified bank accounts \selectlanguage{greek}ενός χρήστη με \selectlanguage{english}user\_id = 2
+\item Συνολικός αριθμός BTC κρυπτονομισμάτων χρήστη με user\_id = 2
+\[
+\begin{aligned}
+&A \leftarrow \text{User\_has\_Wallet}
+\bowtie_{\text{wallet\_id}} \text{CryptoBalance}
+\bowtie_{\text{ticker\_symbol}} \text{Cryptocurrency}
+\\
+&B \leftarrow
+{}_{\text{user\_id, asset\_id}}\mathcal{G}_{\text{sum(balance) as assetCount}}
+\Bigl(\pi_{\text{user\_id, name, ticker\_symbol, crypto\_amount}} \bigl(A\bigr)\Bigr) \\
+&C \leftarrow \sigma_{\text{user\_id=1} \land \text{ticker\_symbol=BTC}}\bigl(B\bigr)
+\end{aligned}
+\]
+
+\item Όλα τα πορτοφόλια του χρήστη με user\_id = 1 που έχουν λάβει μέρος σε τραπεζικές συναλλαγές
+\[
+\begin{aligned}
+&A \leftarrow 
+\bigl(
+  \text{User} \bowtie_{\text{user\_id}}
+  \text{BankAccount} \bowtie_{\text{account\_id}}
+  \text{transfers\_to}
+\bigr) \\
+&\sigma_{\text{user\_id=1}} \Bigl(\pi_{\text{user\_id, wallet\_id}}\bigl(A\bigr)\Bigr) \\
+\end{aligned}
+\]
+
+\item Όλα τα invitations με παραλήπτη ή αποστολέα που δεν είναι ο χρήστης με user\_id = 1
+\[
+\text{Invitation} - \sigma_{\text{inviter\_id=1} \lor \text{invitee\_id=1}}\bigl(\text{Invitation}\bigr)
+\]
+
+\item Συναλλαγές BTC κρυπτονομισμάτων του χρήστη με user\_id = 1 που πραγματοποιήθηκαν μετά τις
+2025-12-17T16:05:42Z
+\[
+\begin{aligned}
+&A \leftarrow 
+\text{User} \bowtie_{\text{user\_id}}
+\text{transacts} \bowtie_{\text{balance\_id}}
+\text{CryptoBalance} \bowtie_{\text{ticker\_symbol}}
+\text{Cryptocurency} \\
+&B \leftarrow \sigma_{\text{user\_id} = 1 \land \text{ticker\_symbol = BTC} \land 
+\text{timestamp > 2025-12-17T16:05:42Z}} \Big(\pi_{\text{user\_id, timestamp, ticker\_symbol}}\bigl(A\bigr)\Bigr)
+\end{aligned}
+\]
 
 
-
-
-2) \selectlanguage{greek}Όλες οι αγοραπωλησίες ενός χρήστη με \selectlanguage{english}user\_id = 1
-
-
-
-3) \selectlanguage{greek}Όλα τα \selectlanguage{english}pending invitations \selectlanguage{greek}για συγκεκριμένο χρήστη με \selectlanguage{english}invitee\_id = 3
-
-
-
-4) Crypto portfolio \selectlanguage{greek}ενός \selectlanguage{english}wallet \selectlanguage{greek}με \selectlanguage{english}wallet\_id = 1
-
-
-
-
-\end{flushleft}
+\end{enumerate}

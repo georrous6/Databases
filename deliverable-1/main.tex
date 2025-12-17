@@ -1,29 +1,36 @@
 \documentclass[a4paper,12pt]{article}
 
 % Add geometry to set page margins for the whole PDF
-\usepackage[a4paper,left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[a4paper,left=1cm,right=1cm,top=2cm,bottom=2cm]{geometry}
 
 \usepackage{graphicx}
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{tikz}
-\usepackage{pgf}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usetikzlibrary{arrows.meta}
-\usepackage[utf8]{inputenc}
-\usepackage[english,greek]{babel}
 \usepackage[hidelinks]{hyperref}
 \usepackage{multirow}
 \usepackage[normalem]{ulem}
 
+\usepackage{polyglossia}
+\usepackage{fontspec}
+
+\setmainlanguage{greek}
+\setotherlanguage{english}
+
+\setmainfont{Noto Serif}
+\setsansfont{Noto Sans}
+\setmonofont{Noto Mono}
+\newfontfamily\greekfonttt{Noto Sans Mono}
+
 \begin{document}
-\selectlanguage{greek}
 
 \begin{center}
     {\Large ΕΡΓΑΣΙΑ ΣΤΟ ΜΑΘΗΜΑ ΒΑΣΕΙΣ ΔΕΔΟΜΕΝΩΝ}\\[3cm]
 
-    {\Large \selectlanguage{english}\textbf{CryptofolioDB}\selectlanguage{greek}}\\[0.5cm]
+    {\Large \textbf{CryptofolioDB}}\\[0.5cm]
 
     {\large Μία προσωπική εφαρμογή επενδύσεων και παρακολούθησης κρυπτονομισμάτων }\\[3cm]
 
@@ -32,9 +39,9 @@
     {\large Ομάδα 39}\\[1cm]
 
     \begin{tabular}{l l l}
-        Δασκαλόπουλος Αριστείδης & 10640 & \selectlanguage{english}\texttt{arisdask@ece.auth.gr}\selectlanguage{greek} \\
-        Λαβδάκης Γεώργιος & 10672 & \selectlanguage{english}\texttt{glavdakis@ece.auth.gr}\selectlanguage{greek} \\
-        Ρουσομάνης Γεώργιος & 10703 & \selectlanguage{english}\texttt{rousoman@ece.auth.gr}\selectlanguage{greek} \\
+        Δασκαλόπουλος Αριστείδης & 10640 & \texttt{arisdask@ece.auth.gr} \\
+        Λαβδάκης Γεώργιος & 10672 & \texttt{glavdakis@ece.auth.gr} \\
+        Ρουσομάνης Γεώργιος & 10703 & \texttt{rousoman@ece.auth.gr} \\
     \end{tabular}\\[3cm]
 
     {\large 19/11/2025}
