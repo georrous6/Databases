@@ -77,10 +77,7 @@
 \selectlanguage{english}email & Απλό Αλφαριθμητικό \\ \hline
 \selectlanguage{english}registered\_at & Ημερομηνία και Ώρα \\ \hline
 \selectlanguage{english}phone & Μεσαίο Αλφαριθμητικό \\ \hline
-\selectlanguage{english}is\_verified & Λογική Τιμή \\ \hline
-\selectlanguage{english}last\_pw\_update & Ημερομηνία και Ώρα \\ \hline
 \selectlanguage{english}password\_hash & Κείμενο \\ \hline
-\selectlanguage{english}salt & Κείμενο \\ \hline
 
 \multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
 Πρωτεύον Κλειδί & \selectlanguage{english}user\_id, email \\ \hline
@@ -96,10 +93,8 @@
 \multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
 \selectlanguage{english}wallet\_id & Αναγνωριστικό \\ \hline
 \selectlanguage{english}cash\_balance & Δεκαδικός \\ \hline
-\selectlanguage{english}seed\_phrase & Κείμενο \\ \hline
 \selectlanguage{english}name & Όνομα \\ \hline
-\selectlanguage{english}type & Μικρό Αλφαριθμητικό \\ \hline
-
+    
 \multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
 Πρωτεύον Κλειδί & \selectlanguage{english}wallet\_id \\ \hline
 Ξένα Κλειδιά & - \\ \hline
@@ -116,9 +111,7 @@
 \selectlanguage{english}encrypted\_iban & Κρυπτογραφημένο \\ \hline
 \selectlanguage{english}holder\_name & Όνομα \\ \hline
 \selectlanguage{english}bank\_name & Απλό Αλφαριθμητικό \\ \hline
-\selectlanguage{english}account\_type & Απλό Αλφαριθμητικό \\ \hline
 \selectlanguage{english}provider\_token & Κείμενο \\ \hline
-\selectlanguage{english}verified\_at & Ημερομηνία και Ώρα \\ \hline
 \selectlanguage{english}user\_id & Αναγνωριστικό \\ \hline
 
 \multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
@@ -137,7 +130,6 @@
 \selectlanguage{english}status & Κατάσταση \\ \hline
 \selectlanguage{english}created\_at & Ημερομηνία και Ώρα \\ \hline
 \selectlanguage{english}expires\_at & Ημερομηνία και Ώρα \\ \hline
-\selectlanguage{english}invitee\_role & Μικρό Αλφαριθμητικό \\ \hline
 \selectlanguage{english}inviter\_id & Αναγνωριστικό \\ \hline
 \selectlanguage{english}invitee\_id & Αναγνωριστικό \\ \hline
 \selectlanguage{english}wallet\_id & Αναγνωριστικό \\ \hline
@@ -161,17 +153,10 @@ wallet\_id Wallet to Invitation\} \\ \hline
 \selectlanguage{english}ticker\_symbol & Μικρό Αλφαριθμητικό \\ \hline
 \selectlanguage{english}name & Όνομα \\ \hline
 \selectlanguage{english}logo\_image & Αρχείο Εικόνας \\ \hline
-\selectlanguage{english}user\_id & Αρχείο Εικόνας \\ \hline
-\selectlanguage{english}threshold\_direction & Μικρό Αλφαριθμητικό \\ \hline
-\selectlanguage{english}threshold\_price & Δεκαδικός Υψηλής Ακρίβειας \\ \hline
-\selectlanguage{english}description & Κείμενο \\ \hline
-\selectlanguage{english}triggred\_at & Ημερομηνία και΄Ωρα \\ \hline
-\selectlanguage{english}is\_active &  Λογική Τιμή \\ \hline
-\selectlanguage{english}user\_id & Αναγνωριστικό \\ \hline
 
 \multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
 Πρωτεύον Κλειδί & \selectlanguage{english}ticker\_symbol \\ \hline
-Ξένα Κλειδιά & \selectlanguage{english}user\_id User to Cryptocurrency \\ \hline
+Ξένα Κλειδιά & \selectlanguage{english} - \\ \hline
 \end{tabular}
 
 \vspace{1cm}
@@ -207,17 +192,10 @@ wallet\_id Wallet to Invitation\} \\ \hline
 \selectlanguage{english}crypto\_balance & Μεγάλος Δεκαδικός \\ \hline
 \selectlanguage{english}wallet\_id & Αναγνωριστικό \\ \hline
 \selectlanguage{english}ticker\_symbol & Μικρό Αλφαριθμητικό \\ \hline
-\selectlanguage{english}user\_id & Αναγνωριστικό \\ \hline
-\selectlanguage{english}amount & Δεκαδικός \\ \hline
-\selectlanguage{english}transaction\_type & Μικρό Αλφαριθμητικό \\ \hline
-\selectlanguage{english}timestamp & Ημερομηνία και Ώρα \\ \hline
-\selectlanguage{english}price\_at\_timestamp & Δεκαδικός Υψηλής Ακρίβειας \\ \hline
-\selectlanguage{english}transaction\_type & Κείμενο \\ \hline
-\selectlanguage{english}transaction\_hash & Κείμενο \\ \hline
 
 \multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
 Πρωτεύον Κλειδί & \{\selectlanguage{english}balance\_id, wallet\_id \}\\ \hline
-Ξένα Κλειδιά & \{\selectlanguage{english}ticker\_symbol Cryptocurrency to CryptoBalance, user\_id User to CryptoBalance\} \\ \hline
+Ξένα Κλειδιά & \{\selectlanguage{english}ticker\_symbol Cryptocurrency to CryptoBalance\} \\ \hline
 \end{tabular}
 
 \vspace{1cm}
@@ -227,15 +205,15 @@ wallet\_id Wallet to Invitation\} \\ \hline
 \textbf{Όνομα Σχέσης} & \selectlanguage{english}CryptoHistory \\ \hline
 
 \multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
-\selectlanguage{english}id & Αναγνωριστικό \\ \hline
+\selectlanguage{english}history\_id & Αναγνωριστικό \\ \hline
 \selectlanguage{english}current\_price & Μεγάλος Δεκαδικός \\ \hline
 \selectlanguage{english}circulating\_supply & Μεγάλος Δεκαδικός \\ \hline
 \selectlanguage{english}timestamp & Ημερομηνία και ΄Ωρα \\ \hline
 \selectlanguage{english}ticker\_symbol & Μικρό Αλφαριθμητικό \\ \hline
 
 \multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
-Πρωτεύον Κλειδί & \selectlanguage{english}id \\ \hline
-Ξένα Κλειδιά & \selectlanguage{english}ticker\_symbol Cryptocurrency to CryptoHistory\\ \hline
+Πρωτεύον Κλειδί & \selectlanguage{english}\{history\_id, ticker\_symbol\} \\ \hline
+Ξένα Κλειδιά & \selectlanguage{english} - \\ \hline
 \end{tabular}
 
 \vspace{1cm}
@@ -269,6 +247,45 @@ wallet\_id Wallet to Invitation\} \\ \hline
 
 \multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
 Πρωτεύον Κλειδί & \selectlanguage{english}\{account\_id, wallet\_id\} \\ \hline
+Ξένα Κλειδιά & - \\ \hline
+\end{tabular}
+
+\vspace{1cm}
+
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{Όνομα Σχέσης} & \selectlanguage{english}User gets\_alert\_from Cryptocurrency \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
+\selectlanguage{english}ticker\_symbol & Μικρό Αλφαριθμητικό \\ \hline
+\selectlanguage{english}user\_id & Αναγνωριστικό \\ \hline
+\selectlanguage{english}threshold\_direction & Μικρό Αλφαριθμητικό \\ \hline
+\selectlanguage{english}threshold\_price & Δεκαδικός Υψηλής Ακρίβειας \\ \hline
+\selectlanguage{english}triggred\_at & Ημερομηνία και΄Ωρα \\ \hline
+\selectlanguage{english}is\_active &  Λογική Τιμή \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
+Πρωτεύον Κλειδί & \selectlanguage{english}\{ticker\_symbol, user\_id\} \\ \hline
+Ξένα Κλειδιά & - \\ \hline
+\end{tabular}
+
+\vspace{1cm}
+
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{Όνομα Σχέσης} & \selectlanguage{english}User transacts CryptoBalance \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
+\selectlanguage{english}user\_id & Αναγνωριστικό \\ \hline
+\selectlanguage{english}balance\_id & Αναγνωριστικό \\ \hline
+\selectlanguage{english}amount & Δεκαδικός \\ \hline
+\selectlanguage{english}transaction\_type & Μικρό Αλφαριθμητικό \\ \hline
+\selectlanguage{english}timestamp & Ημερομηνία και Ώρα \\ \hline
+\selectlanguage{english}price\_at\_timestamp & Δεκαδικός Υψηλής Ακρίβειας \\ \hline
+\selectlanguage{english}transaction\_hash & Κείμενο \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
+Πρωτεύον Κλειδί & \selectlanguage{english}\{balance\_id, user\_id\} \\ \hline
 Ξένα Κλειδιά & - \\ \hline
 \end{tabular}
 
