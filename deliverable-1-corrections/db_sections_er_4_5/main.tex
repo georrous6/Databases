@@ -259,7 +259,7 @@ wallet\_id Wallet to Invitation\} \\ \hline
 \selectlanguage{english}is\_active &  Λογική Τιμή \\ \hline
 
 \multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
-Πρωτεύον Κλειδί & \selectlanguage{english}\{ticker\_symbol, user\_id\} \\ \hline
+Πρωτεύον Κλειδί & \selectlanguage{english} alert\_id \\ \hline
 Ξένα Κλειδιά & - \\ \hline
 \end{tabular}
 
@@ -267,12 +267,13 @@ wallet\_id Wallet to Invitation\} \\ \hline
 
 \begin{tabular}{|p{6cm}|p{6cm}|}
 \hline
-\textbf{Όνομα Σχέσης} & \selectlanguage{english}User transacts CryptoBalance \\ \hline
+\textbf{Όνομα Σχέσης} & \selectlanguage{english}User updates CryptoBalance \\ \hline
 
 \multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
 \selectlanguage{english}user\_id & Ακέραιος \\ \hline
 \selectlanguage{english}wallet\_id & Ακέραιος \\ \hline
 \selectlanguage{english}balance\_id & Ακέραιος \\ \hline
+\selectlanguage{english}update\_id & Ακέραιος \\ \hline
 \selectlanguage{english}amount & Δεκαδικός \\ \hline
 \selectlanguage{english}transaction\_type & Απλή Συμβολοσειρά \\ \hline
 \selectlanguage{english}timestamp & Ημερομηνία και Ώρα \\ \hline
@@ -280,7 +281,7 @@ wallet\_id Wallet to Invitation\} \\ \hline
 \selectlanguage{english}transaction\_hash & Μεγάλη Συμβολοσειρά \\ \hline
 
 \multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
-Πρωτεύον Κλειδί & \selectlanguage{english}\{balance\_id, user\_id, wallet\_id\} \\ \hline
+Πρωτεύον Κλειδί & \selectlanguage{english} update\_id \\ \hline
 Ξένα Κλειδιά & - \\ \hline
 \end{tabular}
 
