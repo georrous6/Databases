@@ -268,7 +268,7 @@
 \bowtie_{\text{ticker\_symbol}} \text{Cryptocurrency}
 \\
 &B \leftarrow
-{}_{\text{user\_id, asset\_id}}\mathcal{G}_{\text{sum(balance) as assetCount}}
+{}_{\text{user\_id, ticker\_symbol}}\mathcal{G}_{\text{sum(balance) as cryptoCount}}
 \Bigl(\pi_{\text{user\_id, name, ticker\_symbol, crypto\_amount}} \bigl(A\bigr)\Bigr) \\
 &C \leftarrow \sigma_{\text{user\_id=1} \land \text{ticker\_symbol=BTC}}\bigl(B\bigr)
 \end{aligned}
@@ -283,7 +283,7 @@
   \text{BankAccount} \bowtie_{\text{account\_id}}
   \text{transfers\_to}
 \bigr) \\
-&\sigma_{\text{user\_id=1}} \Bigl(\pi_{\text{user\_id, wallet\_id}}\bigl(A\bigr)\Bigr) \\
+&B \leftarrow \sigma_{\text{user\_id=1}} \Bigl(\pi_{\text{user\_id, wallet\_id}}\bigl(A\bigr)\Bigr) \\
 \end{aligned}
 \]
 
@@ -298,7 +298,7 @@
 \begin{aligned}
 &A \leftarrow 
 \text{User} \bowtie_{\text{user\_id}}
-\text{transacts} \bowtie_{\text{balance\_id}}
+\text{updates} \bowtie_{\text{balance\_id}}
 \text{CryptoBalance} \bowtie_{\text{ticker\_symbol}}
 \text{Cryptocurency} \\
 &B \leftarrow \sigma_{\text{user\_id} = 1 \land \text{ticker\_symbol = BTC} \land 
