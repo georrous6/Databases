@@ -251,15 +251,14 @@ wallet\_id Wallet to Invitation\} \\ \hline
 
 \begin{enumerate}
 
-\item Όψη για τα υπόλοιπα κρυπτονομισμάτων των χρηστών
+\item Όψη για τα υπόλοιπα κρυπτονομισμάτων των χρηστών σε κάθε πορτοφόλι του
 \[
 \begin{aligned}
 &\text{A} \leftarrow \text{User\_has\_Wallet}
-\bowtie_{\text{wallet\_id}} \text{CryptoBalance}
-\bowtie_{\text{ticker\_symbol}} \text{Cryptocurrency}
+\bowtie_{\text{wallet\_id}} \text{Wallet\_stores\_Cryptocurrency}
 \\
 &\textbf{UserCryptoBalances} =
-\pi_{\text{user\_id, name, ticker\_symbol, crypto\_amount}} \bigl(A\bigr)
+\pi_{\text{user\_id, wallet\_id, ticker\_symbol, crypto\_amount}} \bigl(A\bigr)
 \end{aligned}
 \]
 
@@ -273,8 +272,8 @@ wallet\_id Wallet to Invitation\} \\ \hline
   \text{transfers\_to}
 \bigr) \\
 &\textbf{UserBankTransactions} = \\
-&\pi_{\text{user\_id, name, account\_id, bank\_name, holder\_name, 
-encrypted\_iban, wallet\_id, direction, timestamp, amount}}\bigl(A\bigr) \\
+&\pi_{\text{user\_id, account\_id, encrypted\_iban, wallet\_id, direction, 
+timestamp, amount}}\bigl(A\bigr) \\
 \end{aligned}
 \]
 
