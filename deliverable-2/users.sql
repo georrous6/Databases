@@ -80,7 +80,7 @@ TO 'app_user'@'localhost';
 -- ------------------------------------------------------------
 -- BankAccount_transfers_to_Wallet
 -- ------------------------------------------------------------
--- Financial transfer ledger (append-only for integrity)
+-- Financial transfer ledger (append-only)
 
 GRANT SELECT, INSERT
 ON CryptofolioDB.BankAccount_transfers_to_Wallet
@@ -143,7 +143,7 @@ TO 'app_user'@'localhost';
 -- Wallet asset balances
 -- UPDATE for balance adjustments after transactions
 
-GRANT SELECT, INSERT, UPDATE, DELETE
+GRANT SELECT, INSERT, UPDATE
 ON CryptofolioDB.Wallet_stores_Cryptocurrency
 TO 'app_user'@'localhost';
 
@@ -151,7 +151,7 @@ TO 'app_user'@'localhost';
 -- ------------------------------------------------------------
 -- Transaction
 -- ------------------------------------------------------------
--- Financial transaction ledger (append-only for audit trail)
+-- Financial transaction ledger (append-only)
 
 GRANT SELECT, INSERT
 ON CryptofolioDB.Transaction
@@ -162,20 +162,14 @@ TO 'app_user'@'localhost';
 -- Views
 -- ------------------------------------------------------------
 
--- UserCryptoBalances View
--- Shows user's cryptocurrency holdings across wallets
 GRANT SELECT
 ON CryptofolioDB.UserCryptoBalances
 TO 'app_user'@'localhost';
 
--- UserBankTransactions View
--- Shows user's bank transfer history
 GRANT SELECT
 ON CryptofolioDB.UserBankTransactions
 TO 'app_user'@'localhost';
 
--- CryptoCandlestick View
--- Shows cryptocurrency candlestick chart data
 GRANT SELECT
 ON CryptofolioDB.CryptoCandlestick
 TO 'app_user'@'localhost';
