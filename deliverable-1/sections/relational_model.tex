@@ -1,0 +1,313 @@
+\section{Σχεσιακό Μοντέλο}
+
+\subsection{Πεδία Ορισμού}
+
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{Πεδίο Ορισμού} & \textbf{Τύπος} \\ \hline
+
+Απλή Συμβολοσειρά & VARCHAR(64) \\ \hline
+Μεγάλη Συμβολοσειρά & VARCHAR(256) \\ \hline
+Ακέραιος & INT \\ \hline
+Δεκαδικός & DECIMAL(20,8) \\ \hline
+Ημερομηνία και Ώρα & DATETIME \\ \hline
+Λογική Τιμή & TINYINT(1) \\ \hline
+Διαδρομή Αρχείου & VARCHAR(512) \\ \hline
+Κατάσταση & ENUM \\ \hline
+
+\end{tabular}
+
+\newpage
+
+\subsection{Σχέσεις}
+
+\noindent
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{Όνομα Σχέσης} & User \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
+user\_id & Ακέραιος \\ \hline
+name & Απλή Συμβολοσειρά \\ \hline
+email & Απλή Συμβολοσειρά \\ \hline
+registered\_at & Ημερομηνία και Ώρα \\ \hline
+phone & Απλή Συμβολοσειρά \\ \hline
+password\_hash & Μεγάλη Συμβολοσειρά \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
+Πρωτεύον Κλειδί & user\_id, email \\ \hline
+Ξένα Κλειδιά & - \\ \hline
+\end{tabular}
+
+\vspace{1cm}
+
+\noindent
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{Όνομα Σχέσης} & Wallet \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
+wallet\_id & Ακέραιος \\ \hline
+cash\_balance & Δεκαδικός \\ \hline
+name & Απλή Συμβολοσειρά \\ \hline
+    
+\multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
+Πρωτεύον Κλειδί & wallet\_id \\ \hline
+Ξένα Κλειδιά & - \\ \hline
+\end{tabular}
+
+\vspace{1cm}
+
+\noindent
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{Όνομα Σχέσης} & BankAccount \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
+iban & Απλή Συμβολοσειρά \\ \hline
+holder\_name & Απλή Συμβολοσειρά \\ \hline
+bank\_name & Απλή Συμβολοσειρά \\ \hline
+provider\_token & Μεγάλη Συμβολοσειρά \\ \hline
+user\_id & Ακέραιος \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
+Πρωτεύον Κλειδί & iban \\ \hline
+Ξένα Κλειδιά & user\_id User to BankAccount \\ \hline
+\end{tabular}
+
+\vspace{1cm}
+
+\noindent
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{Όνομα Σχέσης} & Invitation \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
+invitation\_id & Ακέραιος \\ \hline
+status & Κατάσταση \\ \hline
+created\_at & Ημερομηνία και Ώρα \\ \hline
+expires\_at & Ημερομηνία και Ώρα \\ \hline
+inviter\_id & Ακέραιος \\ \hline
+invitee\_id & Ακέραιος \\ \hline
+wallet\_id & Ακέραιος \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
+Πρωτεύον Κλειδί & invitation\_id \\ \hline
+Ξένα Κλειδιά & \{inviter\_id User to Invitation, 
+
+invitee\_id User to Invitation, 
+
+wallet\_id Wallet to Invitation\} \\ \hline
+\end{tabular}
+
+\vspace{1cm}
+
+\noindent
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{Όνομα Σχέσης} & Cryptocurrency \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
+ticker\_symbol & Απλή Συμβολοσειρά \\ \hline
+name & Απλή Συμβολοσειρά \\ \hline
+logo\_image & Διαδρομή Αρχείου \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
+Πρωτεύον Κλειδί & ticker\_symbol \\ \hline
+Ξένα Κλειδιά & - \\ \hline
+\end{tabular}
+
+\vspace{1cm}
+
+\noindent
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{Όνομα Σχέσης} & Candlestick \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
+candle\_id & Ακέραιος \\ \hline
+low\_price & Δεκαδικός  \\ \hline
+high\_price & Δεκαδικός  \\ \hline
+open\_price & Δεκαδικός \\ \hline
+close\_price & Δεκαδικός  \\ \hline
+volume & Δεκαδικός \\ \hline
+timestamp & Ημερομηνία και Ώρα \\ \hline
+ticker\_symbol & Απλή Συμβολοσειρά \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
+Πρωτεύον Κλειδί & \{candle\_id, ticker\_symbol\} \\ \hline
+Ξένα Κλειδιά & \{ticker\_symbol Cryptocurrency to Candlestick\} \\ \hline
+\end{tabular}
+
+\vspace{1cm}
+
+\noindent
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{Όνομα Σχέσης} & CryptoHistory \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
+history\_id & Ακέραιος \\ \hline
+current\_price & Δεκαδικός \\ \hline
+circulating\_supply & Δεκαδικός \\ \hline
+timestamp & Ημερομηνία και Ώρα \\ \hline
+ticker\_symbol & Απλή Συμβολοσειρά \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
+Πρωτεύον Κλειδί & \{history\_id, ticker\_symbol\} \\ \hline
+Ξένα Κλειδιά & \{ticker\_symbol Cryptocurrency 
+to CryptoHistory\} \\ \hline
+\end{tabular}
+
+
+\vspace{1cm}
+
+\noindent
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{Όνομα Σχέσης} & Transaction \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
+transaction\_id & Ακέραιος \\ \hline
+user\_id & Ακέραιος \\ \hline
+wallet\_id & Ακέραιος \\ \hline
+amount & Δεκαδικός \\ \hline
+transaction\_type & Απλή Συμβολοσειρά \\ \hline
+timestamp & Ημερομηνία και Ώρα \\ \hline
+price\_at\_timestamp & Δεκαδικός \\ \hline
+ticker\_symbol & Απλή Συμβολοσειρά \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
+Πρωτεύον Κλειδί & transaction\_id \\ \hline
+Ξένα Κλειδιά & \{user\_id User, wallet\_id Wallet\} \\ \hline
+\end{tabular}
+
+
+\vspace{1cm}
+
+\noindent
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{Όνομα Σχέσης} & Wallet stores Cryptocurrency\\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
+wallet\_id & Ακέραιος \\ \hline
+ticker\_symbol & Απλή Συμβολοσειρά \\ \hline
+crypto\_amount & Δεκαδικός \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
+Πρωτεύον Κλειδί & \{ticker\_symbol, wallet\_id \} \\ \hline
+Ξένα Κλειδιά & - \\ \hline
+\end{tabular}
+
+\vspace{1cm}
+
+\noindent
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{Όνομα Σχέσης} & User has Wallet\\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
+user\_id & Ακέραιος \\ \hline
+wallet\_id & Ακέραιος \\ \hline
+role & Κατάσταση \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
+Πρωτεύον Κλειδί & \{user\_id, wallet\_id\} \\ \hline
+Ξένα Κλειδιά & - \\ \hline
+\end{tabular}
+
+\vspace{1cm}
+
+\noindent
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{Όνομα Σχέσης} & BankAccount transfers\_to Wallet \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
+transfer\_id & Ακέραιος \\ \hline
+iban & Ακέραιος \\ \hline
+wallet\_id & Ακέραιος \\ \hline
+amount & Δεκαδικός \\ \hline
+timestamp & Ημερομηνία και Ώρα \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
+Πρωτεύον Κλειδί & transfer\_id \\ \hline
+Ξένα Κλειδιά & \{iban, wallet\_id\} \\ \hline
+\end{tabular}
+
+\vspace{1cm}
+
+\noindent
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{Όνομα Σχέσης} & User gets\_alert\_for Cryptocurrency \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
+alert\_id & Ακέραιος \\ \hline
+ticker\_symbol & Απλή Συμβολοσειρά \\ \hline
+user\_id & Ακέραιος \\ \hline
+threshold\_direction & Απλή Συμβολοσειρά \\ \hline
+threshold\_price & Δεκαδικός \\ \hline
+triggered\_at & Ημερομηνία και΄Ωρα \\ \hline
+is\_active &  Λογική Τιμή \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
+Πρωτεύον Κλειδί & alert\_id \\ \hline
+Ξένα Κλειδιά & ticker\_symbol, user\_id \\ \hline
+\end{tabular}
+
+\newpage
+
+\subsection{Σχεσιακό Σχήμα}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\linewidth]{figures/RS_diagram.png}
+    \label{fig:placeholder}
+\end{figure}
+
+\newpage
+
+\subsection{Όψεις}
+
+\begin{enumerate}
+
+\item Όψη για τα υπόλοιπα κρυπτονομισμάτων των χρηστών σε κάθε πορτοφόλι του
+\[
+\begin{aligned}
+&\text{A} \leftarrow \text{User\_has\_Wallet}
+\bowtie_{\text{wallet\_id}} \text{Wallet\_stores\_Cryptocurrency}
+\\
+&\textbf{UserCryptoBalances} =
+\pi_{\text{user\_id, wallet\_id, ticker\_symbol, crypto\_amount}} \bigl(A\bigr)
+\end{aligned}
+\]
+
+\item Όψη για τις τραπεζικές συναλλαγές των χρηστών
+\[
+\begin{aligned}
+&A \leftarrow 
+\bigl(
+  \text{User} \bowtie_{\text{user\_id}}
+  \text{BankAccount} \bowtie_{\text{iban}}
+  \text{BankAccount\_transfers\_to\_Wallet}
+\bigr) \\
+&\textbf{UserBankTransactions} = \\
+&\pi_{\text{user\_id, iban, wallet\_id, 
+timestamp, amount}}\bigl(A\bigr) \\
+\end{aligned}
+\]
+
+\item Όψη για τα candlesticks των κρυπτονομισμάτων
+\[
+\begin{aligned}
+& A \leftarrow \text{Cryptocurrency} \bowtie_{\text{ticker\_symbol}} \text{Candlestick} \\
+& \textbf{CryptoCandlestick} = \\
+& \pi_{\text{ticker\_symbol, name, candle\_id, timestamp, open\_price,
+high\_price, low\_price, close\_price, volume}}
+\bigl(A\bigr)
+\end{aligned}
+\]
+
+\end{enumerate}

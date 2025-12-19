@@ -1,0 +1,347 @@
+\selectlanguage{greek}
+
+\newpage
+\section{Παραδείγματα}
+
+\subsection{Παραδείγματα Πινάκων}
+
+\noindent $\circ$ Παράδειγμα για τον πίνακα \textbf{User} της CryptofolioDB
+
+\noindent
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\textbf{\shortstack{user\\ \_id}} & \textbf{name} & \textbf{email} & \textbf{\shortstack{registered\\ \_at}} & \textbf{phone} & \textbf{\shortstack{password\\ \_hash}} \\
+\hline
+1 & Nikos Ioan & nikos.ioan@example.com & \shortstack{2022-10-25\\ 09:30:00} & +306991... & \$2b\$12\$... \\
+\hline
+2 & Dimitris Pap & dimitris.pap@example.com & \shortstack{2023-11-25\\ 09:35:00} & +306992... & \$2b\$12\$... \\
+\hline
+3 & Kostas Alex & kostas.alex@example.com & \shortstack{2024-06-10\\ 08:30:00} & +306993... & \$2b\$12\$... \\
+\hline
+4 & Maria K & maria.k@example.com & \shortstack{2025-01-14\\ 12:10:00} & +306994... & \$2b\$12\$... \\
+\hline
+5 & Nikos P & nikos.p@example.com & \shortstack{2025-09-01\\ 18:45:00} & +306995... & \$2b\$12\$... \\
+\hline
+\end{tabular}
+
+\begin{flushright}
+\textit{Εκτίμηση για τον αριθμό των εγγραφών}: $\sim0.5M$
+\end{flushright}
+
+\bigskip
+\noindent $\circ$ Παράδειγμα για τον πίνακα \textbf{Wallet}
+
+\noindent
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{wallet\_id} & \textbf{cash\_balance} & \textbf{name} \\
+\hline
+1 & 2500.00 & Aris Main Wallet \\
+\hline
+2 & 1200.50 & Aris Trading Wallet \\
+\hline
+3 & 5400.75 & Shared Investment Wallet \\
+\hline
+4 & 800.00 & Maria Savings Wallet \\
+\hline
+5 & 150.25 & Nikos Starter Wallet \\
+\hline
+\end{tabular}
+
+\begin{flushright}
+\textit{Εκτίμηση για τον αριθμό των εγγραφών}: $\sim1.5M$
+\end{flushright}
+
+\bigskip
+\noindent $\circ$ Παράδειγμα για τον πίνακα \textbf{User \textit{has} Wallet}
+
+\noindent
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{user\_id} & \textbf{wallet\_id} & \textbf{role} \\
+\hline
+1 & 1 & owner \\
+\hline
+1 & 2 & owner \\
+\hline
+2 & 3 & owner \\
+\hline
+1 & 3 & member \\
+\hline
+4 & 4 & owner \\
+\hline
+5 & 5 & owner \\
+\hline
+\end{tabular}
+
+\begin{flushright}
+\textit{Εκτίμηση για τον αριθμό των εγγραφών}: $\sim2.5M$
+\end{flushright}
+
+\bigskip
+\noindent $\circ$ Παράδειγμα για τον πίνακα \textbf{BankAccount}
+
+\noindent
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{user\_id} & \textbf{iban} & \textbf{holder\_name} & \textbf{bank\_name} & \textbf{\shortstack{provider\\ \_token}} \\
+\hline
+1 & GR47123904586712039845678 & Nikos Ioannidis & Alpha Bank & tok\_1 \\
+\hline
+2 & GR22048765091234756019234 & Dimitris Papadopoulos & Eurobank & tok\_2 \\
+\hline
+2 & GR39105723846019284057612 & Dimitris Papadopoulos & Eurobank & tok\_3 \\
+\hline
+4 & GR56091827364509182736450 & Maria Kotsou & National Bank & tok\_4 \\
+\hline
+5 & GR10928374650192837465019 & Nikos Papas & Piraeus Bank & tok\_5 \\
+\hline
+\end{tabular}
+
+\begin{flushright}
+\textit{Εκτίμηση για τον αριθμό των εγγραφών}: $\sim0.75M$
+\end{flushright}
+
+\bigskip
+\noindent $\circ$ Παράδειγμα για τον πίνακα \textbf{BankAccount \textit{transfers\_to} Wallet}
+
+\noindent
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{transfer\_id} & \textbf{timestamp} & \textbf{amount} & \textbf{wallet\_id} & \textbf{iban} \\
+\hline
+1 & 2025-11-20 09:30:00 & 1500.00 & 1 & GR47123904586712039845678 \\
+\hline
+2 & 2025-11-22 14:15:00 & 2000.00 & 3 & GR22048765091234756019234 \\
+\hline
+3 & 2025-11-25 11:45:00 & -500.00 & 3 & GR39105723846019284057612 \\
+\hline
+4 & 2025-12-01 16:20:00 & 800.00 & 4 & GR56091827364509182736450 \\
+\hline
+5 & 2025-12-05 10:10:00 & 150.25 & 5 & GR10928374650192837465019 \\
+\hline
+\end{tabular}
+
+\begin{flushright}
+\textit{Εκτίμηση για τον αριθμό των εγγραφών}: $\sim1B$
+\end{flushright}
+
+\bigskip
+\noindent $\circ$ Παράδειγμα για τον πίνακα \textbf{Invitation}
+
+\noindent
+\begin{tabular}{|l|l|l|l|l|l|l|}
+\hline
+\textbf{\shortstack{invitation\\ \_id}} & \textbf{\shortstack{invitee\\ \_id}} & \textbf{\shortstack{inviter\\ \_id}} & \textbf{\shortstack{wallet\\ \_id}} & \textbf{status} & \textbf{expires\_at} & \textbf{created\_at} \\
+\hline
+1 & 1 & 2 & 3 & accepted & 2025-11-30 23:59:00 & 2025-11-20 10:30:00 \\
+\hline
+2 & 4 & 1 & 2 & pending & 2025-12-21 23:59:00 & 2025-12-01 14:15:00 \\
+\hline
+3 & 5 & 4 & 4 & rejected & 2025-12-08 23:59:00 & 2025-11-28 09:00:00 \\
+\hline
+4 & 3 & 2 & 3 & rejected & 2025-11-28 23:59:00 & 2025-11-18 18:40:00 \\
+\hline
+5 & 2 & 1 & 1 & pending & 2025-12-25 23:59:00 & 2025-12-05 12:00:00 \\
+\hline
+\end{tabular}
+
+\begin{flushright}
+\textit{Εκτίμηση για τον αριθμό των εγγραφών}: $\sim3M$
+\end{flushright}
+
+\bigskip
+\noindent $\circ$ Παράδειγμα για τον πίνακα \textbf{Cryptocurrency}
+
+\noindent
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{ticker\_symbol} & \textbf{name} & \textbf{logo\_image} \\
+\hline
+BTC & Bitcoin & public/logos/BTC.svg \\
+\hline
+ETH & Ethereum & public/logos/ETH.svg \\
+\hline
+USDT & Tether & public/logos/USDT.svg \\
+\hline
+DOGE & Dogecoin & public/logos/DOGE.svg \\
+\hline
+SOL & Solana & public/logos/SOL.svg \\
+\hline
+\end{tabular}
+
+\begin{flushright}
+\textit{Εκτίμηση για τον αριθμό των εγγραφών}: $\sim10M$
+\end{flushright}
+
+\bigskip
+\noindent $\circ$ Παράδειγμα για τον πίνακα \textbf{Candlestick}
+
+\noindent
+\begin{tabular}{|l|l|l|l|l|l|l|l|}
+\hline
+\textbf{\shortstack{candle\\ \_id}} & \textbf{\shortstack{ticker\\ \_symbol}} & \textbf{\shortstack{open\\ \_price}} & \textbf{\shortstack{close\\ \_price}} & \textbf{\shortstack{high\\ \_price}} & \textbf{\shortstack{low\\ \_price}} & \textbf{volume} & \textbf{timestamp} \\
+\hline
+1 & BTC & 48500 & 48950 & 49200 & 48050 & 1320.5 & \shortstack{2025-12-05\\ 09:00:00} \\
+\hline
+2 & BTC & 48950 & 49320 & 49500 & 48700 & 1410.2 & \shortstack{2025-12-05\\ 10:00:00} \\
+\hline
+1 & ETH & 2550 & 2590 & 2620 & 2525 & 8420.0 & \shortstack{2025-12-05\\ 09:00:00} \\
+\hline
+2 & ETH & 2590 & 2635 & 2650 & 2580 & 8010.3 & \shortstack{2025-12-05\\ 10:00:00} \\
+\hline
+1 & SOL & 98.5 & 100.4 & 102.0 & 97.8 & 15200.8 & \shortstack{2025-12-05\\ 09:00:00} \\
+\hline
+\end{tabular}
+
+\begin{flushright}
+\textit{Εκτίμηση για τον αριθμό των εγγραφών}: $\sim7.5B$
+\end{flushright}
+
+\bigskip
+\noindent $\circ$ Παράδειγμα για τον πίνακα \textbf{CryptoHistory}
+
+\noindent
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{ticker\_symbol} & \textbf{\shortstack{current\\ \_price}} & \textbf{\shortstack{circulating\\ \_supply}} & \textbf{timestamp} & \textbf{\shortstack{history\\ \_id}} \\
+\hline
+BTC & 49320 & 19500000 & 2025-12-05 09:00:00 & 1 \\
+\hline
+BTC & 49510 & 19500000 & 2025-12-05 10:00:00 & 2 \\
+\hline
+ETH & 2635 & 120500000 & 2025-12-05 10:30:00 & 1 \\
+\hline
+ETH & 2650 & 120500000 & 2025-12-05 11:30:00 & 2 \\
+\hline
+SOL & 100.4 & 585000000 & 2025-12-05 12:00:00 & 1 \\
+\hline
+\end{tabular}
+
+\begin{flushright}
+\textit{Εκτίμηση για τον αριθμό των εγγραφών}: $\sim40B$
+\end{flushright}
+
+\bigskip
+\noindent $\circ$ Παράδειγμα για τον πίνακα \textbf{User} \textbf{\textit{gets\_alert\_for}} \textbf{Cryptocurrency}
+
+\noindent
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\textbf{\shortstack{alert\\ \_id}} & \textbf{\shortstack{user\\ \_id}} & \textbf{\shortstack{ticker\\ \_symbol}} & \textbf{\shortstack{threshold\\ \_price}} & \textbf{\shortstack{threshold\\ \_direction}} & \textbf{triggered\_at} \\
+\hline
+1 & 1 & BTC & 52000 & above & NULL \\
+\hline
+2 & 3 & ETH & 2500 & below & 2025-11-30 18:20:00 \\
+\hline
+3 & 1 & BTC & 95 & below & NULL \\
+\hline
+4 & 4 & BTC & 48000 & below & 2025-11-28 09:10:00 \\
+\hline
+5 & 5 & DOGE & 0.12 & above & NULL \\
+\hline
+\end{tabular}
+
+\begin{flushright}
+\textit{Εκτίμηση για τον αριθμό των εγγραφών}: $\sim15M$
+\end{flushright}
+
+\bigskip
+\noindent $\circ$ Παράδειγμα για τον πίνακα \textbf{Wallet} \textbf{\textit{stores}} \textbf{Cryptocurrency}
+
+\noindent
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{wallet\_id} & \textbf{ticker\_symbol} & \textbf{crypto\_amount} \\
+\hline
+1 & BTC & 0.120000 \\
+\hline
+1 & ETH & 1.500000 \\
+\hline
+2 & ETH & 0.750000 \\
+\hline
+3 & BTC & 0.420000 \\
+\hline
+4 & SOL & 12.000000 \\
+\hline
+5 & USDT & 150.250000 \\
+\hline
+\end{tabular}
+
+\begin{flushright}
+\textit{Εκτίμηση για τον αριθμό των εγγραφών}: $\sim7.5M$
+\end{flushright}
+
+\bigskip
+\noindent $\circ$ Παράδειγμα για τον πίνακα \textbf{Transaction}
+
+\noindent
+\begin{tabular}{|l|l|l|l|l|l|l|l|}
+\hline
+\textbf{\shortstack{transaction\\ \_id}} & \textbf{\shortstack{user\\ \_id}} & \textbf{\shortstack{wallet\\ \_id}} & \textbf{\shortstack{ticker\\ \_symbol}} & \textbf{amount} & \textbf{\shortstack{price\\ \_at\\ \_timestamp}} & \textbf{timestamp} & \textbf{\shortstack{transaction\\ \_type}} \\
+\hline
+1 & 1 & 1 & BTC & 0.10 & 48000 & \shortstack{2025-11-28\\ 10:30:00} & buy \\
+\hline
+2 & 1 & 3 & ETH & 0.75 & 2500 & \shortstack{2025-11-29\\ 12:10:00} & sell \\
+\hline
+3 & 2 & 3 & BTC & 0.42 & 48500 & \shortstack{2025-12-01\\ 09:45:00} & buy \\
+\hline
+4 & 4 & 4 & SOL & 12.0 & 98.0 & \shortstack{2025-12-02\\ 16:00:00} & buy \\
+\hline
+5 & 5 & 5 & USDT & 150.25 & 1.00 & \shortstack{2025-12-05\\ 10:10:00} & buy \\
+\hline
+\end{tabular}
+
+\begin{flushright}
+\textit{Εκτίμηση για τον αριθμό των εγγραφών}: $\sim10B$
+\end{flushright}
+
+\newpage
+
+\subsection{Παραδείγματα Ερωτημάτων}
+
+\begin{enumerate}
+
+\item Συνολικός αριθμός BTC κρυπτονομισμάτων χρήστη με user\_id = 1
+\[
+\begin{aligned}
+&A \leftarrow \text{User\_has\_Wallet}
+\bowtie_{\text{wallet\_id}} \text{Wallet\_stores\_Cryptocurrency}
+\\
+&B \leftarrow
+{}_{\text{user\_id, ticker\_symbol}}\mathcal{G}_{\text{sum(crypto\_amount) as cryptoAmount}}
+\Bigl(\pi_{\text{user\_id, ticker\_symbol, crypto\_amount}} \bigl(A\bigr)\Bigr) \\
+&C \leftarrow \sigma_{\text{user\_id=1} \land \text{ticker\_symbol=BTC}}\bigl(B\bigr)
+\end{aligned}
+\]
+
+\item Όλα τα πορτοφόλια του χρήστη με user\_id = 1 (κάτοχος ή μέλος) που έχουν λάβει μέρος σε τραπεζικές συναλλαγές
+\[
+\begin{aligned}
+&A \leftarrow 
+\bigl(
+  \text{User\_has\_Wallet} \bowtie_{\text{wallet\_id}}
+  \text{Wallet} \bowtie_{\text{wallet\_id}}
+  \text{BankAccount\_transfers\_to\_Wallet}
+\bigr) \\
+&B \leftarrow \sigma_{\text{user\_id=1}} \Bigl(\pi_{\text{user\_id, wallet\_id, Wallet.name}}
+\bigl(A\bigr)\Bigr) \\
+\end{aligned}
+\]
+
+\item Όλες οι προσκλήσεις με παραλήπτη ή αποστολέα που δεν είναι ο χρήστης με user\_id = 1
+\[
+\text{Invitation} - \sigma_{\text{inviter\_id=1} \lor \text{invitee\_id=1}}\bigl(\text{Invitation}\bigr)
+\]
+
+\item Συναλλαγές BTC κρυπτονομισμάτων του χρήστη με user\_id = 1 που πραγματοποιήθηκαν μετά τις
+2025-12-17T16:05:42Z
+\[
+\begin{aligned}
+\sigma_{\text{user\_id} = 1 \land \text{ticker\_symbol = BTC} \land 
+\text{timestamp > 2025-12-17T16:05:42Z}} \bigl(\text{Transaction}\bigr)
+\end{aligned}
+\]
+
+
+\end{enumerate}

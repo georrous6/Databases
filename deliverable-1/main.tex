@@ -1,0 +1,62 @@
+\documentclass[a4paper,12pt]{article}
+
+% Add geometry to set page margins for the whole PDF
+\usepackage[a4paper,left=1cm,right=1cm,top=2cm,bottom=2cm]{geometry}
+
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usetikzlibrary{arrows.meta}
+\usepackage[hidelinks]{hyperref}
+\usepackage{multirow}
+\usepackage[normalem]{ulem}
+
+\usepackage{polyglossia}
+\usepackage{fontspec}
+
+\setmainlanguage{greek}
+\setotherlanguage{english}
+
+\setmainfont{Noto Serif}
+\setsansfont{Noto Sans}
+\setmonofont{Noto Mono}
+\newfontfamily\greekfonttt{Noto Sans Mono}
+
+\begin{document}
+
+\begin{center}
+    {\Large ΕΡΓΑΣΙΑ ΣΤΟ ΜΑΘΗΜΑ ΒΑΣΕΙΣ ΔΕΔΟΜΕΝΩΝ}\\[3cm]
+
+    {\Large \textbf{CryptofolioDB}}\\[0.5cm]
+
+    {\large Μία προσωπική εφαρμογή επενδύσεων και παρακολούθησης κρυπτονομισμάτων }\\[3cm]
+
+    {\Large Πρώτο Παραδοτέο}\\[3cm]
+
+    {\large Ομάδα 39}\\[1cm]
+
+    \begin{tabular}{l l l}
+        Δασκαλόπουλος Αριστείδης & 10640 & \texttt{arisdask@ece.auth.gr} \\
+        Λαβδάκης Γεώργιος & 10672 & \texttt{glavdakis@ece.auth.gr} \\
+        Ρουσομάνης Γεώργιος & 10703 & \texttt{rousoman@ece.auth.gr} \\
+    \end{tabular}\\[3cm]
+
+    {\large 19/11/2025}
+\end{center}
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\input{sections/intro}
+\input{sections/users}
+\input{sections/er_model}
+\input{sections/relational_model}
+\input{sections/examples}
+
+\end{document}

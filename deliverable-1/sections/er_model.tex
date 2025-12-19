@@ -1,0 +1,479 @@
+\section{Μοντέλο Οντοτήτων/Συσχετίσεων}
+
+\subsection{Γενική Περιγραφή}
+Το υποκείμενο μοντέλο δεδομένων βασίζεται σε οντότητες που αναπαριστούν χρήστες, πορτοφόλια,
+τραπεζικούς λογαριασμούς, κρυπτονομίσματα, συναλλαγές, ιστορικά τιμών και ειδοποιήσεις. Κεντρική
+οντότητα αποτελεί ο \textbf{User}, καθώς συνδέεται άμεσα 
+ή έμμεσα με κάθε λειτουργικό μοντέλο της εφαρμογής.
+
+Κάθε χρήστης μπορεί να κατέχει πολλά πορτοφόλια
+(\textbf{Wallets}) ενώ, κάθε πορτοφόλι μπορεί να έχει πολλούς
+χρήστες με διαφορετικό ρόλο, διαχειριστές ή συνδικαιούχους και τον διαχειριστή συστήματος. Επιπλέον, οι χρήστες μπορούν να
+συνδέουν πολλούς τραπεζικούς λογαριασμούς (\textbf{BankAccounts}),
+από τους οποίους εκτελούνται τραπεζικές συναλλαγές προς τα πορτοφόλια.
+
+Ένα \textbf{Wallet} αντιστοιχίζεται σε πολλαπλά \textbf{crypto amounts}, καθένα εκ των οποίων αφορά \textit{ένα} \textit{συγκεκριμένο} \textbf{Cryptocurrency}. 
+Οι συναλλαγές συνδέονται πάντα με ένα 
+CryptoBalance και περιγράφουν την αγορά ή πώληση ενός κρυπτονομίσματος σε συγκεκριμένη τιμή και
+χρονική στιγμή.
+
+Το σύστημα καταγράφει αναλυτικά ιστορικά δεδομένα τιμών μέσω της οντότητας
+\textbf{CandleStick}, η οποία αποθηκεύει open/high/low/close τιμές για κάθε κρυπτονόμισμα ανά
+χρονική περίοδο. Παράλληλα, οι χρήστες μπορούν να ορίζουν όρια ενεργοποίησης
+που βασίζονται στις τιμές των κρυπτονομισμάτων.
+
+\subsubsection*{Υποθέσεις}
+\begin{itemize}
+    \item Δεν μπορεί ένας χρήστης να δημιουργήσει δύο διαφορετικούς λογαριασμούς με το ίδιο 
+    email.
+    \item Το σύμβολο του κάθε κρυπτονομίσματος είναι μοναδικό.
+    \item Ένα πορτοφόλι πρέπει να έχει \textbf{ακριβώς} έναν διαχειριστή (\textit{owner})
+    \item Κατά τη δημιουργία ενός νέου πορτοφολιού, ο χρήστης ορίζεται αυτόματα ως 
+    \textit{διαχειριστής} του πορτοφολιού.
+    \item Ένα νέο πορτοφόλι είναι αρχικά κενό. Για να πραγματοποιηθούν συναλλαγές κρυπτονομισμάτων, 
+    απαιτείται πρώτα η μεταφορά χρημάτων σε αυτό από έναν συνδεδεμένο τραπεζικό λογαριασμό του χρήστη.
+    \item Κάθε συναλλαγή συνδέεται υποχρεωτικά με ένα και μόνο ένα χρήστη, πορτοφόλι και κρυπτονόμισμα. 
+    \item Κάθε ειδοποίηση τιμών αφορά αποκλειστικά ένα κρυπτονόμισμα.
+    \item Δεν επιτρέπονται μεταφορές χρημάτων χωρίς συσχέτιση με έγκυρο τραπεζικό λογαριασμό.
+    \item Οι τιμές candlestick καταγράφονται ανά σταθερά 
+    χρονικά διαστήματα.
+    \item Κάθε candlestick αντιστοιχεί σε ένα μόνο κρυπτονόμισμα.
+    \item Όταν κάνουμε transfer χρηματικά ποσά (από/προς τον τραπεζικό λογαριασμό προς/από το πορτοφόλι), το πρόσημο των ποσών εκφράζει την κατεύθυνση της μεταφοράς. Για παράδειγμα, μια μεταφορά από τον τραπεζικό λογαριασμό προς το πορτοφόλι θα έχει θετικό πρόσημο στο πορτοφόλι και αρνητικό στο τραπεζικό λογαριασμό.
+\end{itemize}
+
+
+
+
+\subsection{Καθορισμός Οντοτήτων}
+
+% =============================
+% USER
+% =============================
+
+\noindent
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Όνομα Οντότητας} & User \\ \hline
+\textbf{Περιγραφή} & Αντιπροσωπεύει έναν εγγεγραμμένο χρήστη του συστήματος. \\ \hline
+\textbf{Ιδιότητες} & Ισχυρή Οντότητα \\ \hline
+\textbf{Γνωρίσματα} &
+\underline{user\_id}\\
+\cline{2-2}
+& \underline{email}\\
+\cline{2-2}
+& name\\
+\cline{2-2}
+& registered\_at\\
+\cline{2-2}
+& phone\\
+\cline{2-2}
+& password\_hash\\
+\hline
+\end{tabular}
+
+\vspace{1cm}
+
+% =============================
+% BANKACCOUNT
+% =============================
+\noindent
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Όνομα Οντότητας} & BankAccount \\ \hline
+\textbf{Περιγραφή} & Αντιπροσωπεύει έναν τραπεζικό λογαριασμό που συνδέεται με έναν χρήστη. \\ \hline
+\textbf{Ιδιότητες} & Ισχυρή Οντότητα \\ \hline
+\multirow{2}{4cm}{\textbf{Γνωρίσματα}} &
+\underline{iban} \\
+\cline{2-2}
+& holder\_name \\
+\cline{2-2}
+& bank\_name \\
+\cline{2-2}
+& provider\_token \\
+\hline
+\end{tabular}
+
+\vspace{1cm}
+
+% =============================
+% WALLET
+% =============================
+\noindent
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Όνομα Οντότητας} & Wallet \\ \hline
+\textbf{Περιγραφή} & Ένα ψηφιακό πορτοφόλι που ανήκει σε έναν ή περισσότερους χρήστες. \\ \hline
+\textbf{Ιδιότητες} & Ισχυρή Οντότητα \\ \hline
+\multirow{2}{4cm}{\textbf{Γνωρίσματα}} &
+\underline{wallet\_id} \\
+\cline{2-2}
+& cash\_balance \\
+\cline{2-2}
+& name \\
+\hline
+\end{tabular}
+
+\vspace{1cm}
+
+% =============================
+% CRYPTOCURRENCY
+% =============================
+\noindent
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Όνομα Οντότητας} & Cryptocurrency \\ \hline
+\textbf{Περιγραφή} & Αντιπροσωπεύει ένα κρυπτονόμισμα που παρακολουθεί το σύστημα. \\ \hline
+\textbf{Ιδιότητες} & Ισχυρή Οντότητα \\ \hline
+\multirow{2}{4cm}{\textbf{Γνωρίσματα}} &
+\underline{ticker\_symbol} \\
+\cline{2-2}
+& name \\
+\cline{2-2}
+& logo\_image \\
+\hline
+\end{tabular}
+
+\vspace{1cm}
+
+% =============================
+% CANDLESTICK
+% =============================
+\noindent
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Όνομα Οντότητας} & Candlestick \\ \hline
+\textbf{Περιγραφή} & Αναπαριστά candlestick δεδομένα 
+τιμών ενός κρυπτονομίσματος. \\ \hline
+\textbf{Ιδιότητες} & Ασθενής Οντότητα (για τον πλήρη ορισμό της χρειάζεται
+πέρα από το \dashuline{candle\_id} και το 
+\underline{ticker\_symbol})\\ \hline
+\multirow{2}{4cm}{\textbf{Γνωρίσματα}}
+& \underline{ticker\_symbol} \\
+\cline{2-2}
+& \dashuline{candle\_id} \\
+\cline{2-2}
+& open\_price \\
+\cline{2-2}
+& close\_price \\
+\cline{2-2}
+& low\_price \\
+\cline{2-2}
+& high\_price \\
+\cline{2-2}
+& volume \\
+\cline{2-2}
+& timestamp \\
+\hline
+\end{tabular}
+
+\vspace{1cm}
+
+% =============================
+% INVITATION
+% =============================
+\noindent
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Όνομα Οντότητας} & Invitation \\ \hline
+\textbf{Περιγραφή} & Πρόσκληση που αποστέλλεται από έναν χρήστη σε έναν άλλον, 
+ώστε να αποκτήσει δικαίωμα συνδικαιούχου σε ένα πορτοφόλι. \\ \hline
+\textbf{Ιδιότητες} & Ισχυρή Οντότητα \\ \hline
+\multirow{2}{4cm}{\textbf{Γνωρίσματα}} &
+\underline{invitation\_id} \\
+\cline{2-2}
+& status \\
+\cline{2-2}
+& expires\_at \\
+\cline{2-2}
+& created\_at \\
+\hline
+\end{tabular}
+
+\vspace{1cm}
+
+% =============================
+% CRYPTOHISTORY
+% =============================
+\noindent
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Όνομα Οντότητας} & CryptoHistory \\ \hline
+\textbf{Περιγραφή} & Ιστορικά δεδομένα τιμών και όγκων ενός κρυπτονομίσματος. \\ \hline
+\textbf{Ιδιότητες} & Ασθενής Οντότητα (για τον πλήρη ορισμό της χρειάζεται πέρα από το \dashuline{history\_id} και το 
+\underline{ticker\_symbol})\\ \hline
+\multirow{4}{4cm}{\textbf{Γνωρίσματα}} &
+\underline{ticker\_symbol} \\
+\cline{2-2}
+& \dashuline{history\_id} \\
+\cline{2-2}
+& current\_price\\
+\cline{2-2}
+& circulating\_supply\\
+\cline{2-2}
+& timestamp\\
+\hline
+\end{tabular}
+
+\vspace{1cm}
+
+% =============================
+% CRYPTOBALANCE
+% =============================
+\noindent
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Όνομα Οντότητας} & Transaction \\ \hline
+\textbf{Περιγραφή} & Αντιπροσωπεύει το ιστορικό όλων των συναλλαγών που πραγματοποιούνται στο σύστημα, από κάθε χρήστη ανά wallet για κάποιο κρυπτονόμισμα. \\ \hline
+\textbf{Ιδιότητες} & Ισχυρή Οντότητα \\ \hline
+\multirow{2}{4cm}{\textbf{Γνωρίσματα}} &
+\underline{transaction\_id} \\
+\cline{2-2}
+& amount \\
+\cline{2-2}
+& timestamp \\
+\cline{2-2}
+& price\_at\_timestamp \\
+\cline{2-2}
+& transaction\_type \\
+\hline
+\end{tabular}
+
+\newpage
+
+
+\subsection{Καθορισμός Συσχετίσεων}
+
+\noindent
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Όνομα Συσχέτισης} & User has Wallet \\ \hline
+\textbf{Περιγραφή} & Κάθε χρήστης διαθέτει ένα ή περισσότερα πορτοφόλια. Κάθε πορτοφόλι αντιστοιχεί σε έναν
+ή περισσότερους χρήστες. \\ \hline
+\textbf{Ιδιότητες} & Has-A \\ \hline
+\textbf{Λόγος Πληθικότητας} & M:N \\ \hline
+\multirow{2}{4cm}{\textbf{Συμμετοχή}} 
+& Ολική συμμετοχή του Wallet \\
+\cline{2-2}
+& Μερική συμμετοχή του User \\
+\hline
+\textbf{Γνωρίσματα} & role \\ \hline
+\end{tabular}
+
+\vspace{1cm}
+
+\noindent
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Όνομα Συσχέτισης} & User owns BankAccount \\ \hline
+\textbf{Περιγραφή} & Ένας χρήστης μπορεί να διαθέτει έναν ή περισσότερους τραπεζικούς λογαριασμούς. 
+Κάθε τραπεζικός λογαριασμός ανήκει σε έναν μόνο χρήστη. \\ \hline
+\textbf{Ιδιότητες} & Has-A \\ \hline
+\textbf{Λόγος Πληθικότητας} & 1:N \\ \hline
+\multirow{2}{4cm}{\textbf{Συμμετοχή}}
+& Ολική συμμετοχή του BankAccount \\ \cline{2-2}
+& Μερική συμμετοχή του User \\ \hline
+\textbf{Γνωρίσματα} & - \\ \hline
+\end{tabular}
+
+\vspace{1cm}
+
+\noindent
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Όνομα Συσχέτισης} & User receives Invitation \\ \hline
+\textbf{Περιγραφή} & Ένας χρήστης μπορεί να λάβει πολλές προσκλήσεις. Κάθε πρόσκληση στέλνεται σε 
+έναν μόνο χρήστη. \\ \hline
+\textbf{Ιδιότητες} & Has-A \\ \hline
+\textbf{Λόγος Πληθικότητας} & 1:N \\ \hline
+\multirow{2}{4cm}{\textbf{Συμμετοχή}}
+& Ολική συμμετοχή του Invitation \\ \cline{2-2}
+& Μερική συμμετοχή του User \\ \hline
+\textbf{Γνωρίσματα} & - \\ \hline
+\end{tabular}
+
+\vspace{1cm}
+
+\noindent
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Όνομα Συσχέτισης} & User sends Invitation \\ \hline
+\textbf{Περιγραφή} & Ένας χρήστης μπορεί να στείλει πολλές προσκλήσεις. Κάθε πρόσκληση στέλνεται από 
+έναν μόνο χρήστη. \\ \hline
+\textbf{Ιδιότητες} & Has-A \\ \hline
+\textbf{Λόγος Πληθικότητας} & 1:N \\ \hline
+\multirow{2}{4cm}{\textbf{Συμμετοχή}}
+& Ολική συμμετοχή του Invitation \\ \cline{2-2}
+& Μερική συμμετοχή του User \\ \hline
+\textbf{Γνωρίσματα} & - \\ \hline
+\end{tabular}
+
+\vspace{1cm}
+
+\noindent
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Όνομα Συσχέτισης} & Invitation refers\_to Wallet \\ \hline
+\textbf{Περιγραφή} & Κάθε πρόσκληση αφορά ένα συγκεκριμένο πορτοφόλι. Ένα πορτοφόλι μπορεί να αποτελεί αντικείμενο πολλών προσκλήσεων. \\ \hline
+\textbf{Ιδιότητες} & Has-A \\ \hline
+\textbf{Λόγος Πληθικότητας} & Ν:1 \\ \hline
+\multirow{2}{4cm}{\textbf{Συμμετοχή}} 
+& Ολική συμμετοχή του Invitation \\
+\cline{2-2}
+& Μερική συμμετοχή του Wallet \\
+\hline
+\textbf{Γνωρίσματα} & - \\ \hline
+\end{tabular}
+
+\vspace{1cm}
+
+\noindent
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Όνομα Συσχέτισης} & User gets\_alert\_for Cryptocurrency \\ \hline
+\textbf{Περιγραφή} & Κάθε χρήστης μπορεί να δέχεται alerts από πολλα 
+
+cryptocurrencys. Κάθε cryptocurrency στέλνει alert σε έναν ή περισσότερους χρήστες. \textit{Ένας χρήστης μπορεί να θέσει για το ίδιο κρύπτο πολλαπλά alerts}.\\ \hline
+\textbf{Ιδιότητες} & Has-A \\ \hline
+\textbf{Λόγος Πληθικότητας} & M:N \\ \hline
+\multirow{2}{4cm}{\textbf{Συμμετοχή}}
+& Ολική συμμετοχή του Cryptocurrency \\ \cline{2-2}
+& Ολική συμμετοχή του User \\ \hline
+\textbf{Γνωρίσματα} & alert\_id, threshold\_direction, threshold\_price, 
+
+triggered\_at \\ \hline
+\end{tabular}
+
+
+\vspace{1cm}
+
+\noindent
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Όνομα Συσχέτισης} & BankAccount transfers\_to Wallet \\ \hline
+\textbf{Περιγραφή} & Κάθε τραπεζικός λογαριασμός μεταφέρει χρήματα σε κάποιο πορτοφόλι. Κάθε πορτοφόλι δέχεται μεταφορές από κάποιον τραπεζικό λογαριασμό.\\ \hline
+\textbf{Ιδιότητες} & Has-A, Προσδιορίζουσα \\ \hline
+\textbf{Λόγος Πληθικότητας} & M:N \\ \hline
+\multirow{2}{4cm}{\textbf{Συμμετοχή}}
+& Ολική συμμετοχή του Candlestick \\ \cline{2-2}
+& Ολική συμμετοχή του Cryptocurrency \\ \hline
+\textbf{Γνωρίσματα} & amount, timestamp, direction \\ \hline
+\end{tabular}
+
+
+\vspace{1cm}
+
+\noindent
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Όνομα Συσχέτισης} & Wallet stores Cryptocurrency \\ \hline
+\textbf{Περιγραφή} & Ένα πορτοφόλι μπορεί να αποθηκεύει υπόλοιπα για πολλά κρυπτονομίσματα. Κάθε 
+Wallet περιλαμβάνει μόνο ένα υπόλοιπο (μόνο μια εγράφη crypto\_amount) για κάθε κρυπτονόμισμα. \\ \hline
+\textbf{Ιδιότητες} & Has-A \\ \hline
+\textbf{Λόγος Πληθικότητας} & M:N \\ \hline
+\multirow{2}{4cm}{\textbf{Συμμετοχή}} 
+& Ολική συμμετοχή του Cryptocurrency \\
+\cline{2-2}
+& Ολική συμμετοχή του Wallet \\
+\hline
+\textbf{Γνωρίσματα} & crypto\_amount \\ \hline
+\end{tabular}
+
+\vspace{1cm}
+
+
+\noindent
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Όνομα Συσχέτισης} & Cryptocurrency has Candlestick \\ \hline
+\textbf{Περιγραφή} & Κάθε κρυπτονόμισμα έχει πολλά candlesticks. 
+Κάθε candlestick αντιστοιχεί σε ένα μόνο κρυπτονόμισμα. \\ \hline
+\textbf{Ιδιότητες} & Has-A, Προσδιορίζουσα \\ \hline
+\textbf{Λόγος Πληθικότητας} & 1:N \\ \hline
+\multirow{2}{4cm}{\textbf{Συμμετοχή}}
+& Ολική συμμετοχή του Candlestick \\ \cline{2-2}
+& Μερική συμμετοχή του Cryptocurrency \\ \hline
+\textbf{Γνωρίσματα} & - \\ \hline
+\end{tabular}
+
+\vspace{1cm}
+
+\noindent
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Όνομα Συσχέτισης} & Cryptocurrency has CryptoHistory \\ \hline
+\textbf{Περιγραφή} & Ένα κρυπτονόμισμα έχει πολλά ιστορικά σημεία τιμών. Κάθε ιστορικό σημείο αντιστοιχεί σε ένα κρυπτονόμισμα. \\ \hline
+\textbf{Ιδιότητες} & Has-A, Προσδιορίζουσα \\ \hline
+\textbf{Λόγος Πληθικότητας} & 1:N \\ \hline
+\multirow{2}{4cm}{\textbf{Συμμετοχή}} 
+& Ολική συμμετοχή του CryptoHistory \\
+\cline{2-2}
+& Μερική συμμετοχή του Cryptocurrency \\
+\hline
+\textbf{Γνωρίσματα} & - \\ \hline
+\end{tabular}
+
+
+\vspace{1cm}
+
+\noindent
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Όνομα Συσχέτισης} & User makes Transaction \\ \hline
+\textbf{Περιγραφή} & Κάθε συναλλαγή από κάθε χρήστη καταγράφεται στον πίνακα συναλλαγών (και αναφέρεται σε ένα πορτοφόλι και ένα κρυπτονόμισμα). \\ \hline
+\textbf{Ιδιότητες} & Has-A \\ \hline
+\textbf{Λόγος Πληθικότητας} & 1:N \\ \hline
+\multirow{2}{4cm}{\textbf{Συμμετοχή}} 
+& Ολική συμμετοχή του Transaction \\
+\cline{2-2}
+& Μερική συμμετοχή του User \\
+\hline
+\textbf{Γνωρίσματα} & - \\ \hline
+\end{tabular}
+
+
+\vspace{1cm}
+
+\noindent
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Όνομα Συσχέτισης} & Transaction involves Wallet \\ \hline
+\textbf{Περιγραφή} & Κάθε συναλλαγή από κάθε χρήστη αναφέρεται σε ένα \textit{συγκεκριμένο} πορτοφόλι. \\ \hline
+\textbf{Ιδιότητες} & Has-A \\ \hline
+\textbf{Λόγος Πληθικότητας} & Ν:1 \\ \hline
+\multirow{2}{4cm}{\textbf{Συμμετοχή}} 
+& Ολική συμμετοχή του Transaction \\
+\cline{2-2}
+& Μερική συμμετοχή του Wallet \\
+\hline
+\textbf{Γνωρίσματα} & - \\ \hline
+\end{tabular}
+
+\vspace{1cm}
+
+\noindent
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Όνομα Συσχέτισης} & Transaction involves Cryptocurrency \\ \hline
+\textbf{Περιγραφή} & Κάθε συναλλαγή από κάθε χρήστη αφορά ένα \textit{συγκεκριμένο} κρυπτονόμισμα. \\ \hline
+\textbf{Ιδιότητες} & Has-A \\ \hline
+\textbf{Λόγος Πληθικότητας} & Ν:1 \\ \hline
+\multirow{2}{4cm}{\textbf{Συμμετοχή}} 
+& Ολική συμμετοχή του Transaction \\
+\cline{2-2}
+& Μερική συμμετοχή του Cryptocurrency \\
+\hline
+\textbf{Γνωρίσματα} & - \\ \hline
+\end{tabular}
+
+\newpage
+
+
+
+
+\subsection*{Διάγραμμα Οντοτήτων/Συσχετίσεων}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=1\linewidth]{figures/ER_diagram.png}
+    \label{fig:ER}
+\end{figure}

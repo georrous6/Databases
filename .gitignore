@@ -1,3 +1,40 @@
 lab/
 slides/
+Lecture - Assignment.pdf
 
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+*.lof
+*.lot
+*.nav
+*.snm
+*.vrb
+*.xdv
+
+# Intermediate DVI / PS
+*.dvi
+*.ps
+
+# Latexmk
+latexmk.out
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*.swo
+
+# Auto-generated figures (TikZ)
+*.tikz
+*.pgf
+
+*.zip
