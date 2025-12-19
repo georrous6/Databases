@@ -5,35 +5,32 @@
 
 \subsection{Παραδείγματα Πινάκων}
 
-\noindent $\circ$ Παράδειγμα για τον πίνακα \selectlanguage{english}\textbf{User}\selectlanguage{greek} της \selectlanguage{english}CryptofolioDB\selectlanguage{greek}
+\noindent $\circ$ Παράδειγμα για τον πίνακα \textbf{User} της CryptofolioDB
 
-\selectlanguage{english}
 \noindent
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
-\textbf{user\_id} & \textbf{name} & \textbf{email} & \textbf{registered\_at} & \textbf{phone} & \textbf{password\_hash} \\
+\textbf{\shortstack{user\\ \_id}} & \textbf{name} & \textbf{email} & \textbf{\shortstack{registered\\ \_at}} & \textbf{phone} & \textbf{\shortstack{password\\ \_hash}} \\
 \hline
-1 & Aris Dask & aris@example.com & 2022-10-25 09:30:00 & 3069... & \$2b\$12\$a1... \\
+1 & Nikos Ioan & nikos.ioan@example.com & \shortstack{2022-10-25\\ 09:30:00} & +306991... & \$2b\$12\$... \\
 \hline
-2 & Geo Rouso & rouso@example.com & 2023-11-25 09:35:00 & 3069... & \$2b\$12\$a2... \\
+2 & Dimitris Pap & dimitris.pap@example.com & \shortstack{2023-11-25\\ 09:35:00} & +306992... & \$2b\$12\$... \\
 \hline
-3 & Geo Lav & lav@example.com & 2024-06-10 08:30:00 & 3069... & \$2b\$12\$a3... \\
+3 & Kostas Alex & kostas.alex@example.com & \shortstack{2024-06-10\\ 08:30:00} & +306993... & \$2b\$12\$... \\
 \hline
-4 & Maria K & maria@example.com & 2025-01-14 12:10:00 & 3069... & \$2b\$12\$a4... \\
+4 & Maria K & maria.k@example.com & \shortstack{2025-01-14\\ 12:10:00} & +306994... & \$2b\$12\$... \\
 \hline
-5 & Nikos P & nikos@example.com & 2025-09-01 18:45:00 & 3069... & \$2b\$12\$a5... \\
+5 & Nikos P & nikos.p@example.com & \shortstack{2025-09-01\\ 18:45:00} & +306995... & \$2b\$12\$... \\
 \hline
 \end{tabular}
 
-\selectlanguage{greek}
 \begin{flushright}
 \textit{Εκτίμηση για τον αριθμό των εγγραφών}: $\sim0.5M$
 \end{flushright}
 
 \bigskip
-\noindent $\circ$ Παράδειγμα για τον πίνακα \selectlanguage{english}\textbf{Wallet}\selectlanguage{greek}
+\noindent $\circ$ Παράδειγμα για τον πίνακα \textbf{Wallet}
 
-\selectlanguage{english}
 \noindent
 \begin{tabular}{|l|l|l|}
 \hline
@@ -51,15 +48,13 @@
 \hline
 \end{tabular}
 
-\selectlanguage{greek}
 \begin{flushright}
 \textit{Εκτίμηση για τον αριθμό των εγγραφών}: $\sim1.5M$
 \end{flushright}
 
 \bigskip
-\noindent $\circ$ Παράδειγμα για τον πίνακα \selectlanguage{english}\textbf{User \textit{has} Wallet}\selectlanguage{greek}
+\noindent $\circ$ Παράδειγμα για τον πίνακα \textbf{User \textit{has} Wallet}
 
-\selectlanguage{english}
 \noindent
 \begin{tabular}{|l|l|l|}
 \hline
@@ -79,67 +74,61 @@
 \hline
 \end{tabular}
 
-\selectlanguage{greek}
 \begin{flushright}
 \textit{Εκτίμηση για τον αριθμό των εγγραφών}: $\sim2.5M$
 \end{flushright}
 
 \bigskip
-\noindent $\circ$ Παράδειγμα για τον πίνακα \selectlanguage{english}\textbf{BankAccount}\selectlanguage{greek}
+\noindent $\circ$ Παράδειγμα για τον πίνακα \textbf{BankAccount}
 
-\selectlanguage{english}
 \noindent
-\begin{tabular}{|l|l|l|l|l|l|}
+\begin{tabular}{|l|l|l|l|l|}
 \hline
-\textbf{account\_id} & \textbf{user\_id} & \textbf{\shortstack{encrypted\\ \_iban}} & \textbf{holder\_name} & \textbf{bank\_name} & \textbf{\shortstack{provider\\ \_token}} \\
+\textbf{user\_id} & \textbf{iban} & \textbf{holder\_name} & \textbf{bank\_name} & \textbf{\shortstack{provider\\ \_token}} \\
 \hline
-1 & 1 & 70S...19 & Aristeidis Daskalopoulos & Alpha Bank & tok\_1 \\
+1 & GR47123904586712039845678 & Nikos Ioannidis & Alpha Bank & tok\_1 \\
 \hline
-2 & 2 & 81...00 & Georgios Rousmanis & Eurobank & tok\_2 \\
+2 & GR22048765091234756019234 & Dimitris Papadopoulos & Eurobank & tok\_2 \\
 \hline
-3 & 2 & 98...13 & Georgios Rousmanis & Eurobank & tok\_3 \\
+2 & GR39105723846019284057612 & Dimitris Papadopoulos & Eurobank & tok\_3 \\
 \hline
-4 & 4 & A7...21 & Maria Kotsou & National Bank & tok\_4 \\
+4 & GR56091827364509182736450 & Maria Kotsou & National Bank & tok\_4 \\
 \hline
-5 & 5 & B0...03 & Nikos Papas & Piraeus Bank & NULL \\
+5 & GR10928374650192837465019 & Nikos Papas & Piraeus Bank & tok\_5 \\
 \hline
 \end{tabular}
 
-\selectlanguage{greek}
 \begin{flushright}
 \textit{Εκτίμηση για τον αριθμό των εγγραφών}: $\sim0.75M$
 \end{flushright}
 
 \bigskip
-\noindent $\circ$ Παράδειγμα για τον πίνακα \selectlanguage{english}\textbf{BankAccount \textit{transfers\_to} Wallet}\selectlanguage{greek}
+\noindent $\circ$ Παράδειγμα για τον πίνακα \textbf{BankAccount \textit{transfers\_to} Wallet}
 
-\selectlanguage{english}
 \noindent
-\begin{tabular}{|l|l|l|l|l|l|}
+\begin{tabular}{|l|l|l|l|l|}
 \hline
-\textbf{transfer\_id} & \textbf{direction} & \textbf{timestamp} & \textbf{amount} & \textbf{wallet\_id} & \textbf{account\_id} \\
+\textbf{transfer\_id} & \textbf{timestamp} & \textbf{amount} & \textbf{wallet\_id} & \textbf{iban} \\
 \hline
-1 & toWallet & 2025-11-20 09:30:00 & 1500.00 & 1 & 1 \\
+1 & 2025-11-20 09:30:00 & 1500.00 & 1 & GR47123904586712039845678 \\
 \hline
-2 & toWallet & 2025-11-22 14:15:00 & 2000.00 & 3 & 2 \\
+2 & 2025-11-22 14:15:00 & 2000.00 & 3 & GR22048765091234756019234 \\
 \hline
-3 & toBank & 2025-11-25 11:45:00 & 500.00 & 3 & 3 \\
+3 & 2025-11-25 11:45:00 & -500.00 & 3 & GR39105723846019284057612 \\
 \hline
-4 & toWallet & 2025-12-01 16:20:00 & 800.00 & 4 & 4 \\
+4 & 2025-12-01 16:20:00 & 800.00 & 4 & GR56091827364509182736450 \\
 \hline
-5 & toWallet & 2025-12-05 10:10:00 & 150.25 & 5 & 5 \\
+5 & 2025-12-05 10:10:00 & 150.25 & 5 & GR10928374650192837465019 \\
 \hline
 \end{tabular}
 
-\selectlanguage{greek}
 \begin{flushright}
 \textit{Εκτίμηση για τον αριθμό των εγγραφών}: $\sim1B$
 \end{flushright}
 
 \bigskip
-\noindent $\circ$ Παράδειγμα για τον πίνακα \selectlanguage{english}\textbf{Invitation}\selectlanguage{greek}
+\noindent $\circ$ Παράδειγμα για τον πίνακα \textbf{Invitation}
 
-\selectlanguage{english}
 \noindent
 \begin{tabular}{|l|l|l|l|l|l|l|}
 \hline
@@ -157,15 +146,13 @@
 \hline
 \end{tabular}
 
-\selectlanguage{greek}
 \begin{flushright}
 \textit{Εκτίμηση για τον αριθμό των εγγραφών}: $\sim3M$
 \end{flushright}
 
 \bigskip
-\noindent $\circ$ Παράδειγμα για τον πίνακα \selectlanguage{english}\textbf{Cryptocurrency}\selectlanguage{greek}
+\noindent $\circ$ Παράδειγμα για τον πίνακα \textbf{Cryptocurrency}
 
-\selectlanguage{english}
 \noindent
 \begin{tabular}{|l|l|l|}
 \hline
@@ -183,93 +170,85 @@ SOL & Solana & public/logos/SOL.svg \\
 \hline
 \end{tabular}
 
-\selectlanguage{greek}
 \begin{flushright}
 \textit{Εκτίμηση για τον αριθμό των εγγραφών}: $\sim10M$
 \end{flushright}
 
 \bigskip
-\noindent $\circ$ Παράδειγμα για τον πίνακα \selectlanguage{english}\textbf{Candlestick}\selectlanguage{greek}
+\noindent $\circ$ Παράδειγμα για τον πίνακα \textbf{Candlestick}
 
-\selectlanguage{english}
 \noindent
 \begin{tabular}{|l|l|l|l|l|l|l|l|}
 \hline
-\textbf{candle\_id} & \textbf{ticker\_symbol} & \textbf{open} & \textbf{close} & \textbf{high} & \textbf{low} & \textbf{volume} & \textbf{interval} \\
+\textbf{\shortstack{candle\\ \_id}} & \textbf{\shortstack{ticker\\ \_symbol}} & \textbf{\shortstack{open\\ \_price}} & \textbf{\shortstack{close\\ \_price}} & \textbf{\shortstack{high\\ \_price}} & \textbf{\shortstack{low\\ \_price}} & \textbf{volume} & \textbf{timestamp} \\
 \hline
-1 & BTC & 48500 & 48950 & 49200 & 48050 & 1320.5 & 1h \\
+1 & BTC & 48500 & 48950 & 49200 & 48050 & 1320.5 & \shortstack{2025-12-05\\ 09:00:00} \\
 \hline
-2 & BTC & 48950 & 49320 & 49500 & 48700 & 1410.2 & 1h \\
+2 & BTC & 48950 & 49320 & 49500 & 48700 & 1410.2 & \shortstack{2025-12-05\\ 10:00:00} \\
 \hline
-1 & ETH & 2550 & 2590 & 2620 & 2525 & 8420.0 & 1h \\
+1 & ETH & 2550 & 2590 & 2620 & 2525 & 8420.0 & \shortstack{2025-12-05\\ 09:00:00} \\
 \hline
-2 & ETH & 2590 & 2635 & 2650 & 2580 & 8010.3 & 1h \\
+2 & ETH & 2590 & 2635 & 2650 & 2580 & 8010.3 & \shortstack{2025-12-05\\ 10:00:00} \\
 \hline
-1 & SOL & 98.5 & 100.4 & 102.0 & 97.8 & 15200.8 & 1h \\
+1 & SOL & 98.5 & 100.4 & 102.0 & 97.8 & 15200.8 & \shortstack{2025-12-05\\ 09:00:00} \\
 \hline
 \end{tabular}
 
-\selectlanguage{greek}
 \begin{flushright}
 \textit{Εκτίμηση για τον αριθμό των εγγραφών}: $\sim7.5B$
 \end{flushright}
 
 \bigskip
-\noindent $\circ$ Παράδειγμα για τον πίνακα \selectlanguage{english}\textbf{CryptoHistory}\selectlanguage{greek}
+\noindent $\circ$ Παράδειγμα για τον πίνακα \textbf{CryptoHistory}
 
-\selectlanguage{english}
 \noindent
 \begin{tabular}{|l|l|l|l|l|}
 \hline
-\textbf{\shortstack{history\\ \_id}} & \textbf{\shortstack{ticker\\ \_symbol}} & \textbf{\shortstack{current\\ \_price}} & \textbf{\shortstack{circulating\\ \_supply}} & \textbf{timestamp} \\
+\textbf{ticker\_symbol} & \textbf{\shortstack{current\\ \_price}} & \textbf{\shortstack{circulating\\ \_supply}} & \textbf{timestamp} & \textbf{\shortstack{history\\ \_id}} \\
 \hline
-1 & BTC & 49320 & 19500000 & 2025-12-05 09:00:00 \\
+BTC & 49320 & 19500000 & 2025-12-05 09:00:00 & 1 \\
 \hline
-2 & BTC & 49510 & 19500000 & 2025-12-05 10:00:00 \\
+BTC & 49510 & 19500000 & 2025-12-05 10:00:00 & 2 \\
 \hline
-1 & ETH & 2635 & 120500000 & 2025-12-05 10:30:00 \\
+ETH & 2635 & 120500000 & 2025-12-05 10:30:00 & 1 \\
 \hline
-2 & ETH & 2650 & 120500000 & 2025-12-05 11:30:00 \\
+ETH & 2650 & 120500000 & 2025-12-05 11:30:00 & 2 \\
 \hline
-1 & SOL & 100.4 & 585000000 & 2025-12-05 12:00:00 \\
+SOL & 100.4 & 585000000 & 2025-12-05 12:00:00 & 1 \\
 \hline
 \end{tabular}
 
-\selectlanguage{greek}
 \begin{flushright}
 \textit{Εκτίμηση για τον αριθμό των εγγραφών}: $\sim40B$
 \end{flushright}
 
 \bigskip
-\noindent $\circ$ Παράδειγμα για τον πίνακα \selectlanguage{english}\textbf{User} \textbf{\textit{gets\_alert\_for}} \textbf{Cryptocurrency}\selectlanguage{greek}
+\noindent $\circ$ Παράδειγμα για τον πίνακα \textbf{User} \textbf{\textit{gets\_alert\_for}} \textbf{Cryptocurrency}
 
-\selectlanguage{english}
 \noindent
-\begin{tabular}{|l|l|l|l|l|l|l|}
+\begin{tabular}{|l|l|l|l|l|l|}
 \hline
-\textbf{\shortstack{alert\\ \_id}} & \textbf{\shortstack{user\\ \_id}} & \textbf{\shortstack{ticker\\ \_symbol}} & \textbf{\shortstack{threshold\\ \_price}} & \textbf{\shortstack{threshold\\ \_direction}} & \textbf{\shortstack{is\\ \_active}} & \textbf{triggered\_at} \\
+\textbf{\shortstack{alert\\ \_id}} & \textbf{\shortstack{user\\ \_id}} & \textbf{\shortstack{ticker\\ \_symbol}} & \textbf{\shortstack{threshold\\ \_price}} & \textbf{\shortstack{threshold\\ \_direction}} & \textbf{triggered\_at} \\
 \hline
-1 & 1 & BTC & 52000 & ABOVE & 0 & NULL \\
+1 & 1 & BTC & 52000 & above & NULL \\
 \hline
-2 & 3 & ETH & 2500 & BELOW & 1 & 2025-11-30 18:20:00 \\
+2 & 3 & ETH & 2500 & below & 2025-11-30 18:20:00 \\
 \hline
-3 & 1 & BTC & 95 & BELOW & 0 & NULL \\
+3 & 1 & BTC & 95 & below & NULL \\
 \hline
-4 & 4 & BTC & 48000 & BELOW & 0 & 2025-11-28 09:10:00 \\
+4 & 4 & BTC & 48000 & below & 2025-11-28 09:10:00 \\
 \hline
-5 & 5 & DOGE & 0.12 & ABOVE & 0 & NULL \\
+5 & 5 & DOGE & 0.12 & above & NULL \\
 \hline
 \end{tabular}
 
-\selectlanguage{greek}
 \begin{flushright}
 \textit{Εκτίμηση για τον αριθμό των εγγραφών}: $\sim15M$
 \end{flushright}
 
 \bigskip
-\noindent $\circ$ Παράδειγμα για τον πίνακα \selectlanguage{english}\textbf{Wallet} \textbf{\textit{stores}} \textbf{Cryptocurrency}\selectlanguage{greek}
+\noindent $\circ$ Παράδειγμα για τον πίνακα \textbf{Wallet} \textbf{\textit{stores}} \textbf{Cryptocurrency}
 
-\selectlanguage{english}
 \noindent
 \begin{tabular}{|l|l|l|}
 \hline
@@ -289,41 +268,33 @@ SOL & Solana & public/logos/SOL.svg \\
 \hline
 \end{tabular}
 
-\selectlanguage{greek}
 \begin{flushright}
 \textit{Εκτίμηση για τον αριθμό των εγγραφών}: $\sim7.5M$
 \end{flushright}
 
 \bigskip
-\noindent $\circ$ Παράδειγμα για τον πίνακα \selectlanguage{english}\textbf{Transaction}\selectlanguage{greek}
+\noindent $\circ$ Παράδειγμα για τον πίνακα \textbf{Transaction}
 
-\selectlanguage{english}
 \noindent
 \begin{tabular}{|l|l|l|l|l|l|l|l|}
 \hline
 \textbf{\shortstack{transaction\\ \_id}} & \textbf{\shortstack{user\\ \_id}} & \textbf{\shortstack{wallet\\ \_id}} & \textbf{\shortstack{ticker\\ \_symbol}} & \textbf{amount} & \textbf{\shortstack{price\\ \_at\\ \_timestamp}} & \textbf{timestamp} & \textbf{\shortstack{transaction\\ \_type}} \\
 \hline
-1 & 1 & 1 & BTC & 0.10 & 48000 & \shortstack{2025-11-28\\ 10:30:00} & BUY \\
+1 & 1 & 1 & BTC & 0.10 & 48000 & \shortstack{2025-11-28\\ 10:30:00} & buy \\
 \hline
-2 & 1 & 3 & ETH & 0.75 & 2500 & \shortstack{2025-11-29\\ 12:10:00} & SELL \\
+2 & 1 & 3 & ETH & 0.75 & 2500 & \shortstack{2025-11-29\\ 12:10:00} & sell \\
 \hline
-3 & 2 & 3 & BTC & 0.42 & 48500 & \shortstack{2025-12-01\\ 09:45:00} & BUY \\
+3 & 2 & 3 & BTC & 0.42 & 48500 & \shortstack{2025-12-01\\ 09:45:00} & buy \\
 \hline
-4 & 4 & 4 & SOL & 12.0 & 98.0 & \shortstack{2025-12-02\\ 16:00:00} & BUY \\
+4 & 4 & 4 & SOL & 12.0 & 98.0 & \shortstack{2025-12-02\\ 16:00:00} & buy \\
 \hline
-5 & 5 & 5 & USDT & 150.25 & 1.00 & \shortstack{2025-12-05\\ 10:10:00} & BUY \\
+5 & 5 & 5 & USDT & 150.25 & 1.00 & \shortstack{2025-12-05\\ 10:10:00} & buy \\
 \hline
 \end{tabular}
 
-\selectlanguage{greek}
 \begin{flushright}
 \textit{Εκτίμηση για τον αριθμό των εγγραφών}: $\sim10B$
 \end{flushright}
-
-
-
-
-
 
 \newpage
 
