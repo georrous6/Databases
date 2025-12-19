@@ -1,0 +1,6 @@
+ticker_symbol,name,logo_image
+BTC,Bitcoin,public/logos/BTC.svg
+ETH,Ethereum,public/logos/ETH.svg
+USDT,Tether,public/logos/USDT.svg
+DOGE,Dogecoin,public/logos/DOGE.svg
+SOL,Solana,public/logos/SOL.svg

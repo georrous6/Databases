@@ -1,0 +1,6 @@
+account_id,user_id,encrypted_iban,holder_name,bank_name,provider_token
+1,1,70S...19,"Aristeidis Daskalopoulos","Alpha Bank",tok_1
+2,2,81...00,"Georgios Rousmanis","Eurobank",tok_2
+3,2,98...13,"Georgios Rousmanis","Eurobank",tok_3
+4,4,A7...21,"Maria Kotsou","National Bank",tok_4
+5,5,B0...03,"Nikos Papas","Piraeus Bank",NULL
