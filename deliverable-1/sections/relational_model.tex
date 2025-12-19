@@ -4,16 +4,16 @@
 
 \begin{tabular}{|p{6cm}|p{6cm}|}
 \hline
-\textbf{Πεδίο Ορισμού} & \textbf{Τύπος} \\ \hline
+	\textbf{Πεδίο Ορισμού} & \textbf{Τύπος} \\ \hline
 
-Απλή Συμβολοσειρά & \selectlanguage{english}VARCHAR(64) \\ \hline
-Μεγάλη Συμβολοσειρά & \selectlanguage{english}VARCHAR(256) \\ \hline
-Ακέραιος & \selectlanguage{english}INT(64) \\ \hline
-Δεκαδικός & \selectlanguage{english}DECIMAL(30,2) \\ \hline
-Ημερομηνία και Ώρα & \selectlanguage{english}DATETIME \\ \hline
-Λογική Τιμή & \selectlanguage{english}TINYINT(1) \\ \hline
-Αρχείο Εικόνας & \selectlanguage{english}VARCHAR(128) \\ \hline
-Κατάσταση & \selectlanguage{english}ENUM \\ \hline
+Απλή Συμβολοσειρά & VARCHAR(64) \\ \hline
+Μεγάλη Συμβολοσειρά & VARCHAR(256) \\ \hline
+Ακέραιος & INT(64) \\ \hline
+Δεκαδικός & DECIMAL(30,2) \\ \hline
+Ημερομηνία και Ώρα & DATETIME \\ \hline
+Λογική Τιμή & TINYINT(1) \\ \hline
+Αρχείο Εικόνας & VARCHAR(128) \\ \hline
+Κατάσταση & ENUM \\ \hline
 
 \end{tabular}
 
@@ -21,20 +21,21 @@
 
 \subsection{Σχέσεις}
 
+\noindent
 \begin{tabular}{|p{6cm}|p{6cm}|}
 \hline
-\textbf{Όνομα Σχέσης} & \selectlanguage{english}User \\ \hline
+	\textbf{Όνομα Σχέσης} & User \\ \hline
 
 \multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
-\selectlanguage{english}user\_id & Ακέραιος \\ \hline
-\selectlanguage{english}name & Απλή Συμβολοσειρά \\ \hline
-\selectlanguage{english}email & Απλή Συμβολοσειρά \\ \hline
-\selectlanguage{english}registered\_at & Ημερομηνία και Ώρα \\ \hline
-\selectlanguage{english}phone & Απλή Συμβολοσειρά \\ \hline
-\selectlanguage{english}password\_hash & Μεγάλη Συμβολοσειρά \\ \hline
+user\_id & Ακέραιος \\ \hline
+name & Απλή Συμβολοσειρά \\ \hline
+email & Απλή Συμβολοσειρά \\ \hline
+registered\_at & Ημερομηνία και Ώρα \\ \hline
+phone & Απλή Συμβολοσειρά \\ \hline
+password\_hash & Μεγάλη Συμβολοσειρά \\ \hline
 
 \multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
-Πρωτεύον Κλειδί & \selectlanguage{english}user\_id, email \\ \hline
+Πρωτεύον Κλειδί & user\_id, email \\ \hline
 Ξένα Κλειδιά & - \\ \hline
 \end{tabular}
 
@@ -43,15 +44,15 @@
 \noindent
 \begin{tabular}{|p{6cm}|p{6cm}|}
 \hline
-\textbf{Όνομα Σχέσης} & \selectlanguage{english}Wallet \\ \hline
+	\textbf{Όνομα Σχέσης} & Wallet \\ \hline
 
 \multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
-\selectlanguage{english}wallet\_id & Ακέραιος \\ \hline
-\selectlanguage{english}cash\_balance & Δεκαδικός \\ \hline
-\selectlanguage{english}name & Απλή Συμβολοσειρά \\ \hline
+wallet\_id & Ακέραιος \\ \hline
+cash\_balance & Δεκαδικός \\ \hline
+name & Απλή Συμβολοσειρά \\ \hline
     
 \multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
-Πρωτεύον Κλειδί & \selectlanguage{english}wallet\_id \\ \hline
+Πρωτεύον Κλειδί & wallet\_id \\ \hline
 Ξένα Κλειδιά & - \\ \hline
 \end{tabular}
 
@@ -60,19 +61,19 @@
 \noindent
 \begin{tabular}{|p{6cm}|p{6cm}|}
 \hline
-\textbf{Όνομα Σχέσης} & \selectlanguage{english}BankAccount \\ \hline
+	\textbf{Όνομα Σχέσης} & BankAccount \\ \hline
 
 \multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
-\selectlanguage{english}account\_id & Ακέραιος \\ \hline
-\selectlanguage{english}encrypted\_iban & Μεγάλη Συμβολοσειρά \\ \hline
-\selectlanguage{english}holder\_name & Απλή Συμβολοσειρά \\ \hline
-\selectlanguage{english}bank\_name & Απλή Συμβολοσειρά \\ \hline
-\selectlanguage{english}provider\_token & Μεγάλη Συμβολοσειρά \\ \hline
-\selectlanguage{english}user\_id & Ακέραιος \\ \hline
+account\_id & Ακέραιος \\ \hline
+encrypted\_iban & Μεγάλη Συμβολοσειρά \\ \hline
+holder\_name & Απλή Συμβολοσειρά \\ \hline
+bank\_name & Απλή Συμβολοσειρά \\ \hline
+provider\_token & Μεγάλη Συμβολοσειρά \\ \hline
+user\_id & Ακέραιος \\ \hline
 
 \multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
-Πρωτεύον Κλειδί & \selectlanguage{english}account\_id \\ \hline
-Ξένα Κλειδιά & \selectlanguage{english}user\_id User to BankAccount \\ \hline
+Πρωτεύον Κλειδί & account\_id \\ \hline
+Ξένα Κλειδιά & user\_id User to BankAccount \\ \hline
 \end{tabular}
 
 \vspace{1cm}
@@ -80,24 +81,24 @@
 \noindent
 \begin{tabular}{|p{6cm}|p{6cm}|}
 \hline
-\textbf{Όνομα Σχέσης} & \selectlanguage{english}Invitation \\ \hline
+	\textbf{Όνομα Σχέσης} & Invitation \\ \hline
 
 \multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
-\selectlanguage{english}invitation\_id & Ακέραιος \\ \hline
-\selectlanguage{english}status & Κατάσταση \\ \hline
-\selectlanguage{english}created\_at & Ημερομηνία και Ώρα \\ \hline
-\selectlanguage{english}expires\_at & Ημερομηνία και Ώρα \\ \hline
-\selectlanguage{english}inviter\_id & Ακέραιος \\ \hline
-\selectlanguage{english}invitee\_id & Ακέραιος \\ \hline
-\selectlanguage{english}wallet\_id & Ακέραιος \\ \hline
+invitation\_id & Ακέραιος \\ \hline
+status & Κατάσταση \\ \hline
+created\_at & Ημερομηνία και Ώρα \\ \hline
+expires\_at & Ημερομηνία και Ώρα \\ \hline
+inviter\_id & Ακέραιος \\ \hline
+invitee\_id & Ακέραιος \\ \hline
+wallet\_id & Ακέραιος \\ \hline
 
 \multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
-Πρωτεύον Κλειδί & \selectlanguage{english}invitation\_id \\ \hline
-Ξένα Κλειδιά & \{\selectlanguage{english}inviter\_id User to Invitation, 
+Πρωτεύον Κλειδί & invitation\_id \\ \hline
+Ξένα Κλειδιά & {inviter\_id User to Invitation, 
 
 invitee\_id User to Invitation, 
 
-wallet\_id Wallet to Invitation\} \\ \hline
+wallet\_id Wallet to Invitation} \\ \hline
 \end{tabular}
 
 \vspace{1cm}
@@ -105,97 +106,15 @@ wallet\_id Wallet to Invitation\} \\ \hline
 \noindent
 \begin{tabular}{|p{6cm}|p{6cm}|}
 \hline
-\textbf{Όνομα Σχέσης} & \selectlanguage{english}Cryptocurrency \\ \hline
+	\textbf{Όνομα Σχέσης} & Cryptocurrency \\ \hline
 
 \multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
-\selectlanguage{english}ticker\_symbol & Απλή Συμβολοσειρά \\ \hline
-\selectlanguage{english}name & Απλή Συμβολοσειρά \\ \hline
-\selectlanguage{english}logo\_image & Αρχείο Εικόνας \\ \hline
+ticker\_symbol & Απλή Συμβολοσειρά \\ \hline
+name & Απλή Συμβολοσειρά \\ \hline
+logo\_image & Αρχείο Εικόνας \\ \hline
 
 \multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
-Πρωτεύον Κλειδί & \selectlanguage{english}ticker\_symbol \\ \hline
-Ξένα Κλειδιά & \selectlanguage{english} - \\ \hline
-\end{tabular}
-
-\vspace{1cm}
-
-\noindent
-\begin{tabular}{|p{6cm}|p{6cm}|}
-\hline
-\textbf{Όνομα Σχέσης} & \selectlanguage{english}Candlestick \\ \hline
-
-\multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
-\selectlanguage{english}candle\_id & Ακέραιος \\ \hline
-\selectlanguage{english}low\_price & Δεκαδικός  \\ \hline
-\selectlanguage{english}high\_price & Δεκαδικός  \\ \hline
-\selectlanguage{english}open\_price & Δεκαδικός \\ \hline
-\selectlanguage{english}close\_price & Δεκαδικός  \\ \hline
-\selectlanguage{english}volume & Δεκαδικός \\ \hline
-\selectlanguage{english}interval & Απλή Συμβολοσειρά \\ \hline
-\selectlanguage{english}ticker\_symbol & Απλή Συμβολοσειρά \\ \hline
-
-\multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
-Πρωτεύον Κλειδί & \{\selectlanguage{english}candle\_id, ticker\_symbol\} \\ \hline
-Ξένα Κλειδιά & \{\selectlanguage{english}ticker\_symbol Cryptocurrency to CryptoBalance\} ??? \\ \hline
-\end{tabular}
-
-\vspace{1cm}
-
-\noindent
-\begin{tabular}{|p{6cm}|p{6cm}|}
-\hline
-\textbf{Όνομα Σχέσης} & \selectlanguage{english}CryptoHistory \\ \hline
-
-\multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
-\selectlanguage{english}history\_id & Ακέραιος \\ \hline
-\selectlanguage{english}current\_price & Δεκαδικός \\ \hline
-\selectlanguage{english}circulating\_supply & Δεκαδικός \\ \hline
-\selectlanguage{english}timestamp & Ημερομηνία και ΄Ωρα \\ \hline
-\selectlanguage{english}ticker\_symbol & Απλή Συμβολοσειρά \\ \hline
-
-\multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
-Πρωτεύον Κλειδί & \selectlanguage{english}\{history\_id, ticker\_symbol\} \\ \hline
-Ξένα Κλειδιά & \selectlanguage{english} \{\selectlanguage{english}ticker\_symbol Cryptocurrency to CryptoBalance\} ??? \\ \hline
-\end{tabular}
-
-
-\vspace{1cm}
-
-\noindent
-\begin{tabular}{|p{6cm}|p{6cm}|}
-\hline
-\textbf{Όνομα Σχέσης} & \selectlanguage{english}Transaction \\ \hline
-
-\multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
-\selectlanguage{english}transaction\_id & Ακέραιος \\ \hline
-\selectlanguage{english}user\_id & Ακέραιος \\ \hline
-\selectlanguage{english}wallet\_id & Ακέραιος \\ \hline
-\selectlanguage{english}amount & Δεκαδικός \\ \hline
-\selectlanguage{english}transaction\_type & Απλή Συμβολοσειρά \\ \hline
-\selectlanguage{english}timestamp & Ημερομηνία και Ώρα \\ \hline
-\selectlanguage{english}price\_at\_timestamp & Δεκαδικός \\ \hline
-\selectlanguage{english}ticker\_symbol & Απλή Συμβολοσειρά \\ \hline
-
-\multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
-Πρωτεύον Κλειδί & \selectlanguage{english} transaction\_id \\ \hline
-Ξένα Κλειδιά & \selectlanguage{english} \{user\_id User, wallet\_id Wallet\} \\ \hline
-\end{tabular}
-
-
-\vspace{1cm}
-
-\noindent
-\begin{tabular}{|p{6cm}|p{6cm}|}
-\hline
-\textbf{Όνομα Σχέσης} & \selectlanguage{english}Wallet stores Cryptocurrency\\ \hline
-
-\multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
-\selectlanguage{english}wallet\_id & Ακέραιος \\ \hline
-\selectlanguage{english}ticker\_symbol & Απλή Συμβολοσειρά \\ \hline
-\selectlanguage{english}crypto\_amount & Δεκαδικός \\ \hline
-
-\multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
-Πρωτεύον Κλειδί & \{\selectlanguage{english}ticker\_symbol, wallet\_id \}\\ \hline
+Πρωτεύον Κλειδί & ticker\_symbol \\ \hline
 Ξένα Κλειδιά & - \\ \hline
 \end{tabular}
 
@@ -204,15 +123,80 @@ wallet\_id Wallet to Invitation\} \\ \hline
 \noindent
 \begin{tabular}{|p{6cm}|p{6cm}|}
 \hline
-\textbf{Όνομα Σχέσης} & \selectlanguage{english}User has Wallet\\ \hline
+	\textbf{Όνομα Σχέσης} & Candlestick \\ \hline
 
 \multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
-\selectlanguage{english}user\_id & Ακέραιος \\ \hline
-\selectlanguage{english}wallet\_id & Ακέραιος \\ \hline
-\selectlanguage{english}role & Κατάσταση \\ \hline
+candle\_id & Ακέραιος \\ \hline
+low\_price & Δεκαδικός  \\ \hline
+high\_price & Δεκαδικός  \\ \hline
+open\_price & Δεκαδικός \\ \hline
+close\_price & Δεκαδικός  \\ \hline
+volume & Δεκαδικός \\ \hline
+interval & Απλή Συμβολοσειρά \\ \hline
+ticker\_symbol & Απλή Συμβολοσειρά \\ \hline
 
 \multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
-Πρωτεύον Κλειδί & \selectlanguage{english}\{user\_id, wallet\_id\} \\ \hline
+Πρωτεύον Κλειδί & {candle\_id, ticker\_symbol} \\ \hline
+Ξένα Κλειδιά & {ticker\_symbol Cryptocurrency to CryptoBalance} ??? \\ \hline
+\end{tabular}
+
+\vspace{1cm}
+
+\noindent
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+	extbf{Όνομα Σχέσης} & CryptoHistory \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
+history\_id & Ακέραιος \\ \hline
+current\_price & Δεκαδικός \\ \hline
+circulating\_supply & Δεκαδικός \\ \hline
+timestamp & Ημερομηνία και ΄Ώρα \\ \hline
+ticker\_symbol & Απλή Συμβολοσειρά \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
+Πρωτεύον Κλειδί & {history\_id, ticker\_symbol} \\ \hline
+Ξένα Κλειδιά & {ticker\_symbol Cryptocurrency to CryptoBalance} ??? \\ \hline
+\end{tabular}
+
+
+\vspace{1cm}
+
+\noindent
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+	\textbf{Όνομα Σχέσης} & Transaction \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
+transaction\_id & Ακέραιος \\ \hline
+user\_id & Ακέραιος \\ \hline
+wallet\_id & Ακέραιος \\ \hline
+amount & Δεκαδικός \\ \hline
+transaction\_type & Απλή Συμβολοσειρά \\ \hline
+timestamp & Ημερομηνία και Ώρα \\ \hline
+price\_at\_timestamp & Δεκαδικός \\ \hline
+ticker\_symbol & Απλή Συμβολοσειρά \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
+Πρωτεύον Κλειδί & transaction\_id \\ \hline
+Ξένα Κλειδιά & {user\_id User, wallet\_id Wallet} \\ \hline
+\end{tabular}
+
+
+\vspace{1cm}
+
+\noindent
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+	\textbf{Όνομα Σχέσης} & Wallet stores Cryptocurrency\\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
+wallet\_id & Ακέραιος \\ \hline
+ticker\_symbol & Απλή Συμβολοσειρά \\ \hline
+crypto\_amount & Δεκαδικός \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
+Πρωτεύον Κλειδί & {ticker\_symbol, wallet\_id }\\ \hline
 Ξένα Κλειδιά & - \\ \hline
 \end{tabular}
 
@@ -221,19 +205,16 @@ wallet\_id Wallet to Invitation\} \\ \hline
 \noindent
 \begin{tabular}{|p{6cm}|p{6cm}|}
 \hline
-\textbf{Όνομα Σχέσης} & \selectlanguage{english}BankAccount transfers\_to Wallet \\ \hline
+	\textbf{Όνομα Σχέσης} & User has Wallet\\ \hline
 
 \multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
-\selectlanguage{english}transfer\_id & Ακέραιος \\ \hline
-\selectlanguage{english}account\_id & Ακέραιος \\ \hline
-\selectlanguage{english}wallet\_id & Ακέραιος \\ \hline
-\selectlanguage{english}amount & Δεκαδικός \\ \hline
-\selectlanguage{english}timestamp & Ημερομηνία και Ώρα \\ \hline
-\selectlanguage{english}direction & Απλή Συμβολοσειρά \\ \hline
+user\_id & Ακέραιος \\ \hline
+wallet\_id & Ακέραιος \\ \hline
+role & Κατάσταση \\ \hline
 
 \multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
-Πρωτεύον Κλειδί & \selectlanguage{english} transfer\_id \\ \hline
-Ξένα Κλειδιά & \selectlanguage{english}\{account\_id, wallet\_id\} \\ \hline
+Πρωτεύον Κλειδί & {user\_id, wallet\_id} \\ \hline
+Ξένα Κλειδιά & - \\ \hline
 \end{tabular}
 
 \vspace{1cm}
@@ -241,20 +222,40 @@ wallet\_id Wallet to Invitation\} \\ \hline
 \noindent
 \begin{tabular}{|p{6cm}|p{6cm}|}
 \hline
-\textbf{Όνομα Σχέσης} & \selectlanguage{english}User gets\_alert\_for Cryptocurrency \\ \hline
+	\textbf{Όνομα Σχέσης} & BankAccount transfers\_to Wallet \\ \hline
 
 \multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
-\selectlanguage{english}alert\_id & Ακέραιος \\ \hline
-\selectlanguage{english}ticker\_symbol & Απλή Συμβολοσειρά \\ \hline
-\selectlanguage{english}user\_id & Ακέραιος \\ \hline
-\selectlanguage{english}threshold\_direction & Απλή Συμβολοσειρά \\ \hline
-\selectlanguage{english}threshold\_price & Δεκαδικός \\ \hline
-\selectlanguage{english}triggred\_at & Ημερομηνία και΄Ωρα \\ \hline
-\selectlanguage{english}is\_active &  Λογική Τιμή \\ \hline
+transfer\_id & Ακέραιος \\ \hline
+account\_id & Ακέραιος \\ \hline
+wallet\_id & Ακέραιος \\ \hline
+amount & Δεκαδικός \\ \hline
+timestamp & Ημερομηνία και Ώρα \\ \hline
+direction & Απλή Συμβολοσειρά \\ \hline
 
 \multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
-Πρωτεύον Κλειδί & \selectlanguage{english} alert\_id \\ \hline
-Ξένα Κλειδιά & \selectlanguage{english}ticker\_symbol, user\_id \\ \hline
+Πρωτεύον Κλειδί & transfer\_id \\ \hline
+Ξένα Κλειδιά & {account\_id, wallet\_id} \\ \hline
+\end{tabular}
+
+\vspace{1cm}
+
+\noindent
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+	\textbf{Όνομα Σχέσης} & User gets\_alert\_for Cryptocurrency \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
+alert\_id & Ακέραιος \\ \hline
+ticker\_symbol & Απλή Συμβολοσειρά \\ \hline
+user\_id & Ακέραιος \\ \hline
+threshold\_direction & Απλή Συμβολοσειρά \\ \hline
+threshold\_price & Δεκαδικός \\ \hline
+triggred\_at & Ημερομηνία και΄Ωρα \\ \hline
+is\_active &  Λογική Τιμή \\ \hline
+
+\multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
+Πρωτεύον Κλειδί & alert\_id \\ \hline
+Ξένα Κλειδιά & ticker\_symbol, user\_id \\ \hline
 \end{tabular}
 
 
