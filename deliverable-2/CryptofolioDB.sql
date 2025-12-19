@@ -21,12 +21,12 @@ USE `CryptofolioDB` ;
 DROP TABLE IF EXISTS `CryptofolioDB`.`User` ;
 
 CREATE TABLE IF NOT EXISTS `CryptofolioDB`.`User` (
-  `user_id` INT NOT NULL,
-  `email` VARCHAR(45) NOT NULL,
-  `name` VARCHAR(45) NOT NULL,
-  `password_hash` VARCHAR(45) NOT NULL,
-  `phone` VARCHAR(45) NULL,
-  `registered_at` DATETIME(3) NULL,
+  `user_id` INT(64) NOT NULL,
+  `email` VARCHAR(64) NOT NULL,
+  `name` VARCHAR(64) NOT NULL,
+  `password_hash` VARCHAR(256) NOT NULL,
+  `phone` VARCHAR(64) NULL,
+  `registered_at` DATETIME(3) NOT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
 ENGINE = InnoDB;
@@ -38,8 +38,8 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `CryptofolioDB`.`Wallet` ;
 
 CREATE TABLE IF NOT EXISTS `CryptofolioDB`.`Wallet` (
-  `wallet_id` INT NOT NULL,
-  `name` VARCHAR(45) NOT NULL,
+  `wallet_id` INT(64) NOT NULL,
+  `name` VARCHAR(64) NOT NULL,
   `cash_balance` DECIMAL NOT NULL,
   PRIMARY KEY (`wallet_id`))
 ENGINE = InnoDB;
@@ -51,8 +51,8 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `CryptofolioDB`.`User_has_Wallet` ;
 
 CREATE TABLE IF NOT EXISTS `CryptofolioDB`.`User_has_Wallet` (
-  `user_id` INT NOT NULL,
-  `wallet_id` INT NOT NULL,
+  `user_id` INT(64) NOT NULL,
+  `wallet_id` INT(64) NOT NULL,
   `role` ENUM('owner', 'member') NULL,
   PRIMARY KEY (`user_id`, `wallet_id`),
   INDEX `fk_User_has_Wallet_Wallet1_idx` (`wallet_id` ASC) VISIBLE,
@@ -76,13 +76,13 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `CryptofolioDB`.`Invitation` ;
 
 CREATE TABLE IF NOT EXISTS `CryptofolioDB`.`Invitation` (
-  `invitation_id` INT NOT NULL,
+  `invitation_id` INT(64) NOT NULL,
   `created_at` DATETIME(3) NOT NULL,
   `expires_at` DATETIME(3) NOT NULL,
   `status` ENUM('pending', 'accepted', 'rejected') NOT NULL,
-  `inviter_id` INT NOT NULL,
-  `invitee_id` INT NOT NULL,
-  `wallet_id` INT NOT NULL,
+  `inviter_id` INT(64) NOT NULL,
+  `invitee_id` INT(64) NOT NULL,
+  `wallet_id` INT(64) NOT NULL,
   PRIMARY KEY (`invitation_id`),
   INDEX `fk_Invitation_User1_idx` (`inviter_id` ASC) VISIBLE,
   INDEX `fk_Invitation_User2_idx` (`invitee_id` ASC) VISIBLE,
@@ -111,12 +111,12 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `CryptofolioDB`.`BankAccount` ;
 
 CREATE TABLE IF NOT EXISTS `CryptofolioDB`.`BankAccount` (
-  `account_id` INT NOT NULL,
-  `encrypted_iban` VARCHAR(45) NOT NULL,
-  `holder_name` VARCHAR(45) NOT NULL,
-  `bank_name` VARCHAR(45) NOT NULL,
-  `provider_token` VARCHAR(45) NOT NULL,
-  `user_id` INT NOT NULL,
+  `account_id` INT(64) NOT NULL,
+  `user_id` INT(64) NOT NULL,
+  `encrypted_iban` VARCHAR(256) NOT NULL,
+  `holder_name` VARCHAR(64) NOT NULL,
+  `bank_name` VARCHAR(64) NOT NULL,
+  `provider_token` VARCHAR(256) NOT NULL,
   PRIMARY KEY (`account_id`),
   INDEX `fk_BankAccount_User1_idx` (`user_id` ASC) VISIBLE,
   CONSTRAINT `fk_BankAccount_User1`
@@ -133,12 +133,12 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `CryptofolioDB`.`BankAccount_transfers_to_Wallet` ;
 
 CREATE TABLE IF NOT EXISTS `CryptofolioDB`.`BankAccount_transfers_to_Wallet` (
-  `account_id` INT NOT NULL,
-  `wallet_id` INT NOT NULL,
+  `transfer_id` INT(64) NOT NULL,
+  `account_id` INT(64) NOT NULL,
+  `wallet_id` INT(64) NOT NULL,
   `amount` DECIMAL NOT NULL,
-  `direction` BIT(1) NOT NULL,
+  `direction` ENUM('toBank', 'toWallet') NOT NULL,
   `timestamp` TIMESTAMP(3) NOT NULL,
-  `transfer_id` INT NOT NULL,
   INDEX `fk_BankAccount_has_Wallet_Wallet1_idx` (`wallet_id` ASC) VISIBLE,
   INDEX `fk_BankAccount_has_Wallet_BankAccount1_idx` (`account_id` ASC) VISIBLE,
   PRIMARY KEY (`transfer_id`),
@@ -161,9 +161,9 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `CryptofolioDB`.`Cryptocurrency` ;
 
 CREATE TABLE IF NOT EXISTS `CryptofolioDB`.`Cryptocurrency` (
-  `ticker_symbol` INT NOT NULL,
-  `name` VARCHAR(45) NOT NULL,
-  `logo_image` VARCHAR(45) NULL,
+  `ticker_symbol` VARCHAR(64) NOT NULL,
+  `name` VARCHAR(64) NOT NULL,
+  `logo_image` VARCHAR(128) NULL,
   PRIMARY KEY (`ticker_symbol`))
 ENGINE = InnoDB;
 
@@ -174,14 +174,14 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `CryptofolioDB`.`Transaction` ;
 
 CREATE TABLE IF NOT EXISTS `CryptofolioDB`.`Transaction` (
-  `transaction_id` VARCHAR(45) NOT NULL,
-  `user_id` INT NOT NULL,
-  `amount` DECIMAL(3) NOT NULL,
+  `transaction_id` INT(64) NOT NULL,
+  `user_id` INT(64) NOT NULL,
+  `amount` DECIMAL NOT NULL,
   `timestamp` TIMESTAMP(3) NOT NULL,
-  `price_at_timestamp` DECIMAL(3) NOT NULL,
+  `price_at_timestamp` DECIMAL NOT NULL,
   `transaction_type` ENUM('buy', 'sell') NOT NULL,
-  `ticker_symbol` INT NOT NULL,
-  `wallet_id` INT NOT NULL,
+  `ticker_symbol` VARCHAR(64) NOT NULL,
+  `wallet_id` INT(64) NOT NULL,
   PRIMARY KEY (`transaction_id`),
   INDEX `fk_User_has_CryptoBalance_User1_idx` (`user_id` ASC) VISIBLE,
   INDEX `fk_Transaction_Cryptocurrency1_idx` (`ticker_symbol` ASC) VISIBLE,
@@ -210,12 +210,12 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `CryptofolioDB`.`CryptoHistory` ;
 
 CREATE TABLE IF NOT EXISTS `CryptofolioDB`.`CryptoHistory` (
-  `history_id` INT NOT NULL,
-  `current_price` DECIMAL(3) NOT NULL,
-  `circulating_supply` INT NOT NULL,
+  `ticker_symbol` VARCHAR(64) NOT NULL,
+  `history_id` INT(64) NOT NULL,
+  `current_price` DECIMAL NOT NULL,
+  `circulating_supply` DECIMAL NOT NULL,
   `timestamp` TIMESTAMP(3) NOT NULL,
-  `ticker_symbol` INT NOT NULL,
-  PRIMARY KEY (`history_id`, `ticker_symbol`),
+  PRIMARY KEY (`ticker_symbol`, `history_id`),
   INDEX `fk_CryptoHistory_Cryptocurrency1_idx` (`ticker_symbol` ASC) VISIBLE,
   CONSTRAINT `fk_CryptoHistory_Cryptocurrency1`
     FOREIGN KEY (`ticker_symbol`)
@@ -231,15 +231,15 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `CryptofolioDB`.`Candlestick` ;
 
 CREATE TABLE IF NOT EXISTS `CryptofolioDB`.`Candlestick` (
-  `candle_id` INT NOT NULL,
-  `high_price` DECIMAL(3) NOT NULL,
-  `low_price` DECIMAL(3) NOT NULL,
-  `open_price` DECIMAL(3) NOT NULL,
-  `close_price` DECIMAL(3) NOT NULL,
-  `interval` TIMESTAMP(3) NOT NULL,
-  `volume` INT NOT NULL,
-  `ticker_symbol` INT NOT NULL,
-  PRIMARY KEY (`candle_id`, `ticker_symbol`),
+  `ticker_symbol` VARCHAR(64) NOT NULL,
+  `candle_id` INT(64) NOT NULL,
+  `high_price` DECIMAL NOT NULL,
+  `low_price` DECIMAL NOT NULL,
+  `open_price` DECIMAL NOT NULL,
+  `close_price` DECIMAL NOT NULL,
+  `interval` TIMESTAMP NOT NULL,
+  `volume` DECIMAL NOT NULL,
+  PRIMARY KEY (`ticker_symbol`, `candle_id`),
   INDEX `fk_Candlestick_Cryptocurrency1_idx` (`ticker_symbol` ASC) VISIBLE,
   CONSTRAINT `fk_Candlestick_Cryptocurrency1`
     FOREIGN KEY (`ticker_symbol`)
@@ -255,13 +255,13 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `CryptofolioDB`.`User_gets_alert_for_Cryptocurrency` ;
 
 CREATE TABLE IF NOT EXISTS `CryptofolioDB`.`User_gets_alert_for_Cryptocurrency` (
-  `user_id` INT NOT NULL,
-  `ticker_symbol` INT NOT NULL,
-  `threshold_price` DECIMAL(3) NOT NULL,
-  `threshold_direction` BIT(1) NOT NULL,
+  `alert_id` INT(64) NOT NULL,
+  `user_id` INT(64) NOT NULL,
+  `ticker_symbol` VARCHAR(64) NOT NULL,
+  `threshold_price` DECIMAL NOT NULL,
+  `threshold_direction` ENUM('above', 'below') NOT NULL,
   `is_active` TINYINT NOT NULL,
   `triggered_at` DATETIME(3) NULL,
-  `alert_id` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`alert_id`),
   INDEX `fk_User_has_Cryptocurrency_Cryptocurrency1_idx` (`ticker_symbol` ASC) VISIBLE,
   INDEX `fk_User_has_Cryptocurrency_User1_idx` (`user_id` ASC) VISIBLE,
@@ -284,9 +284,9 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `CryptofolioDB`.`Wallet_stores_Cryptocurrency` ;
 
 CREATE TABLE IF NOT EXISTS `CryptofolioDB`.`Wallet_stores_Cryptocurrency` (
-  `wallet_id` INT NOT NULL,
-  `ticker_symbol` INT NOT NULL,
-  `crypto_amount` INT NOT NULL,
+  `wallet_id` INT(64) NOT NULL,
+  `ticker_symbol` VARCHAR(64) NOT NULL,
+  `crypto_amount` DECIMAL NOT NULL,
   PRIMARY KEY (`wallet_id`, `ticker_symbol`),
   INDEX `fk_Wallet_has_Cryptocurrency_Cryptocurrency1_idx` (`ticker_symbol` ASC) VISIBLE,
   INDEX `fk_Wallet_has_Cryptocurrency_Wallet1_idx` (`wallet_id` ASC) VISIBLE,

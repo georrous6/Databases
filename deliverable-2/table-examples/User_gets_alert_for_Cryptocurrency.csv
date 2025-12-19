@@ -1,6 +1,0 @@
-alert_id,user_id,ticker_symbol,threshold_price,threshold_direction,is_active,triggered_at
-1,1,BTC,52000,ABOVE,0,NULL
-2,3,ETH,2500,BELOW,1,2025-11-30 18:20:00
-3,1,BTC,95,BELOW,0,NULL
-4,4,BTC,48000,BELOW,0,2025-11-28 09:10:00
-5,5,DOGE,0.12,ABOVE,0,NULL
