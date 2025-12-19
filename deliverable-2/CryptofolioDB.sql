@@ -5,6 +5,9 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+-- -----------------------------------------------------
 -- Schema CryptofolioDB
 -- -----------------------------------------------------
 DROP SCHEMA IF EXISTS `CryptofolioDB` ;
@@ -12,7 +15,7 @@ DROP SCHEMA IF EXISTS `CryptofolioDB` ;
 -- -----------------------------------------------------
 -- Schema CryptofolioDB
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `CryptofolioDB` ;
+CREATE SCHEMA IF NOT EXISTS `CryptofolioDB` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
 USE `CryptofolioDB` ;
 
 -- -----------------------------------------------------
@@ -21,88 +24,17 @@ USE `CryptofolioDB` ;
 DROP TABLE IF EXISTS `CryptofolioDB`.`User` ;
 
 CREATE TABLE IF NOT EXISTS `CryptofolioDB`.`User` (
-  `user_id` INT(64) NOT NULL,
+  `user_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(64) NOT NULL,
   `name` VARCHAR(64) NOT NULL,
   `password_hash` VARCHAR(256) NOT NULL,
-  `phone` VARCHAR(64) NULL,
+  `phone` VARCHAR(64) NULL DEFAULT NULL,
   `registered_at` DATETIME(3) NOT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `CryptofolioDB`.`Wallet`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `CryptofolioDB`.`Wallet` ;
-
-CREATE TABLE IF NOT EXISTS `CryptofolioDB`.`Wallet` (
-  `wallet_id` INT(64) NOT NULL,
-  `name` VARCHAR(64) NOT NULL,
-  `cash_balance` DECIMAL(20,8) NOT NULL,
-  PRIMARY KEY (`wallet_id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `CryptofolioDB`.`User_has_Wallet`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `CryptofolioDB`.`User_has_Wallet` ;
-
-CREATE TABLE IF NOT EXISTS `CryptofolioDB`.`User_has_Wallet` (
-  `user_id` INT(64) NOT NULL,
-  `wallet_id` INT(64) NOT NULL,
-  `role` ENUM('owner', 'member') NULL,
-  PRIMARY KEY (`user_id`, `wallet_id`),
-  INDEX `fk_User_has_Wallet_Wallet1_idx` (`wallet_id` ASC) VISIBLE,
-  INDEX `fk_User_has_Wallet_User_idx` (`user_id` ASC) VISIBLE,
-  CONSTRAINT `fk_User_has_Wallet_User`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `CryptofolioDB`.`User` (`user_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_User_has_Wallet_Wallet1`
-    FOREIGN KEY (`wallet_id`)
-    REFERENCES `CryptofolioDB`.`Wallet` (`wallet_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `CryptofolioDB`.`Invitation`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `CryptofolioDB`.`Invitation` ;
-
-CREATE TABLE IF NOT EXISTS `CryptofolioDB`.`Invitation` (
-  `invitation_id` INT(64) NOT NULL,
-  `created_at` DATETIME(3) NOT NULL,
-  `expires_at` DATETIME(3) NOT NULL,
-  `status` ENUM('pending', 'accepted', 'rejected') NOT NULL,
-  `inviter_id` INT(64) NOT NULL,
-  `invitee_id` INT(64) NOT NULL,
-  `wallet_id` INT(64) NOT NULL,
-  PRIMARY KEY (`invitation_id`),
-  INDEX `fk_Invitation_User1_idx` (`inviter_id` ASC) VISIBLE,
-  INDEX `fk_Invitation_User2_idx` (`invitee_id` ASC) VISIBLE,
-  INDEX `fk_Invitation_Wallet1_idx` (`wallet_id` ASC) VISIBLE,
-  CONSTRAINT `fk_Invitation_User1`
-    FOREIGN KEY (`inviter_id`)
-    REFERENCES `CryptofolioDB`.`User` (`user_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Invitation_User2`
-    FOREIGN KEY (`invitee_id`)
-    REFERENCES `CryptofolioDB`.`User` (`user_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Invitation_Wallet1`
-    FOREIGN KEY (`wallet_id`)
-    REFERENCES `CryptofolioDB`.`Wallet` (`wallet_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
@@ -111,48 +43,19 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `CryptofolioDB`.`BankAccount` ;
 
 CREATE TABLE IF NOT EXISTS `CryptofolioDB`.`BankAccount` (
-  `account_id` INT(64) NOT NULL,
-  `user_id` INT(64) NOT NULL,
-  `encrypted_iban` VARCHAR(256) NOT NULL,
+  `iban` VARCHAR(256) NOT NULL,
+  `user_id` INT UNSIGNED NOT NULL,
   `holder_name` VARCHAR(64) NOT NULL,
   `bank_name` VARCHAR(64) NOT NULL,
   `provider_token` VARCHAR(256) NOT NULL,
-  PRIMARY KEY (`account_id`),
+  PRIMARY KEY (`iban`),
   INDEX `fk_BankAccount_User1_idx` (`user_id` ASC) VISIBLE,
   CONSTRAINT `fk_BankAccount_User1`
     FOREIGN KEY (`user_id`)
-    REFERENCES `CryptofolioDB`.`User` (`user_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `CryptofolioDB`.`BankAccount_transfers_to_Wallet`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `CryptofolioDB`.`BankAccount_transfers_to_Wallet` ;
-
-CREATE TABLE IF NOT EXISTS `CryptofolioDB`.`BankAccount_transfers_to_Wallet` (
-  `transfer_id` INT(64) NOT NULL,
-  `account_id` INT(64) NOT NULL,
-  `wallet_id` INT(64) NOT NULL,
-  `amount` DECIMAL(20,8) NOT NULL,
-  `direction` ENUM('toBank', 'toWallet') NOT NULL,
-  `timestamp` TIMESTAMP(3) NOT NULL,
-  INDEX `fk_BankAccount_has_Wallet_Wallet1_idx` (`wallet_id` ASC) VISIBLE,
-  INDEX `fk_BankAccount_has_Wallet_BankAccount1_idx` (`account_id` ASC) VISIBLE,
-  PRIMARY KEY (`transfer_id`),
-  CONSTRAINT `fk_BankAccount_transfers_to_Wallet_BankAccount1`
-    FOREIGN KEY (`account_id`)
-    REFERENCES `CryptofolioDB`.`BankAccount` (`account_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_BankAccount_transfers_to_Wallet_Wallet1`
-    FOREIGN KEY (`wallet_id`)
-    REFERENCES `CryptofolioDB`.`Wallet` (`wallet_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+    REFERENCES `CryptofolioDB`.`User` (`user_id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
@@ -163,66 +66,11 @@ DROP TABLE IF EXISTS `CryptofolioDB`.`Cryptocurrency` ;
 CREATE TABLE IF NOT EXISTS `CryptofolioDB`.`Cryptocurrency` (
   `ticker_symbol` VARCHAR(64) NOT NULL,
   `name` VARCHAR(64) NOT NULL,
-  `logo_image` VARCHAR(128) NULL,
+  `logo_image` VARCHAR(512) NULL DEFAULT NULL,
   PRIMARY KEY (`ticker_symbol`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `CryptofolioDB`.`Transaction`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `CryptofolioDB`.`Transaction` ;
-
-CREATE TABLE IF NOT EXISTS `CryptofolioDB`.`Transaction` (
-  `transaction_id` INT(64) NOT NULL,
-  `user_id` INT(64) NOT NULL,
-  `amount` DECIMAL(20,8) NOT NULL,
-  `timestamp` TIMESTAMP(3) NOT NULL,
-  `price_at_timestamp` DECIMAL(20,8) NOT NULL,
-  `transaction_type` ENUM('buy', 'sell') NOT NULL,
-  `ticker_symbol` VARCHAR(64) NOT NULL,
-  `wallet_id` INT(64) NOT NULL,
-  PRIMARY KEY (`transaction_id`),
-  INDEX `fk_User_has_CryptoBalance_User1_idx` (`user_id` ASC) VISIBLE,
-  INDEX `fk_Transaction_Cryptocurrency1_idx` (`ticker_symbol` ASC) VISIBLE,
-  INDEX `fk_Transaction_Wallet1_idx` (`wallet_id` ASC) VISIBLE,
-  CONSTRAINT `fk_User_updates_CryptoBalance_User1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `CryptofolioDB`.`User` (`user_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Transaction_Cryptocurrency1`
-    FOREIGN KEY (`ticker_symbol`)
-    REFERENCES `CryptofolioDB`.`Cryptocurrency` (`ticker_symbol`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Transaction_Wallet1`
-    FOREIGN KEY (`wallet_id`)
-    REFERENCES `CryptofolioDB`.`Wallet` (`wallet_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `CryptofolioDB`.`CryptoHistory`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `CryptofolioDB`.`CryptoHistory` ;
-
-CREATE TABLE IF NOT EXISTS `CryptofolioDB`.`CryptoHistory` (
-  `ticker_symbol` VARCHAR(64) NOT NULL,
-  `history_id` INT(64) NOT NULL,
-  `current_price` DECIMAL(20,8) NOT NULL,
-  `circulating_supply` DECIMAL(20,8) NOT NULL,
-  `timestamp` TIMESTAMP(3) NOT NULL,
-  PRIMARY KEY (`ticker_symbol`, `history_id`),
-  INDEX `fk_CryptoHistory_Cryptocurrency1_idx` (`ticker_symbol` ASC) VISIBLE,
-  CONSTRAINT `fk_CryptoHistory_Cryptocurrency1`
-    FOREIGN KEY (`ticker_symbol`)
-    REFERENCES `CryptofolioDB`.`Cryptocurrency` (`ticker_symbol`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
@@ -232,21 +80,120 @@ DROP TABLE IF EXISTS `CryptofolioDB`.`Candlestick` ;
 
 CREATE TABLE IF NOT EXISTS `CryptofolioDB`.`Candlestick` (
   `ticker_symbol` VARCHAR(64) NOT NULL,
-  `candle_id` INT(64) NOT NULL,
-  `high_price` DECIMAL(20,8) NOT NULL,
-  `low_price` DECIMAL(20,8) NOT NULL,
-  `open_price` DECIMAL(20,8) NOT NULL,
-  `close_price` DECIMAL(20,8) NOT NULL,
-  `interval` TIMESTAMP NOT NULL,
-  `volume` DECIMAL(20,8) NOT NULL,
+  `candle_id` INT UNSIGNED NOT NULL,
+  `high_price` DECIMAL(20,8) UNSIGNED NOT NULL,
+  `low_price` DECIMAL(20,8) UNSIGNED NOT NULL,
+  `open_price` DECIMAL(20,8) UNSIGNED NOT NULL,
+  `close_price` DECIMAL(20,8) UNSIGNED NOT NULL,
+  `timestamp` DATETIME NOT NULL,
+  `volume` DECIMAL(20,8) UNSIGNED NOT NULL,
   PRIMARY KEY (`ticker_symbol`, `candle_id`),
   INDEX `fk_Candlestick_Cryptocurrency1_idx` (`ticker_symbol` ASC) VISIBLE,
   CONSTRAINT `fk_Candlestick_Cryptocurrency1`
     FOREIGN KEY (`ticker_symbol`)
-    REFERENCES `CryptofolioDB`.`Cryptocurrency` (`ticker_symbol`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+    REFERENCES `CryptofolioDB`.`Cryptocurrency` (`ticker_symbol`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `CryptofolioDB`.`CryptoHistory`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `CryptofolioDB`.`CryptoHistory` ;
+
+CREATE TABLE IF NOT EXISTS `CryptofolioDB`.`CryptoHistory` (
+  `ticker_symbol` VARCHAR(64) NOT NULL,
+  `history_id` INT UNSIGNED NOT NULL,
+  `current_price` DECIMAL(20,8) NOT NULL,
+  `circulating_supply` DECIMAL(20,8) NOT NULL,
+  `timestamp` DATETIME NOT NULL,
+  PRIMARY KEY (`ticker_symbol`, `history_id`),
+  INDEX `fk_CryptoHistory_Cryptocurrency1_idx` (`ticker_symbol` ASC) VISIBLE,
+  CONSTRAINT `fk_CryptoHistory_Cryptocurrency1`
+    FOREIGN KEY (`ticker_symbol`)
+    REFERENCES `CryptofolioDB`.`Cryptocurrency` (`ticker_symbol`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `CryptofolioDB`.`Wallet`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `CryptofolioDB`.`Wallet` ;
+
+CREATE TABLE IF NOT EXISTS `CryptofolioDB`.`Wallet` (
+  `wallet_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(64) NOT NULL,
+  `cash_balance` DECIMAL(20,8) UNSIGNED NOT NULL,
+  PRIMARY KEY (`wallet_id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `CryptofolioDB`.`Invitation`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `CryptofolioDB`.`Invitation` ;
+
+CREATE TABLE IF NOT EXISTS `CryptofolioDB`.`Invitation` (
+  `invitation_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `created_at` DATETIME(3) NOT NULL,
+  `expires_at` DATETIME(3) NOT NULL,
+  `status` ENUM('pending', 'accepted', 'rejected') NOT NULL,
+  `inviter_id` INT UNSIGNED NOT NULL,
+  `invitee_id` INT UNSIGNED NOT NULL,
+  `wallet_id` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`invitation_id`),
+  INDEX `fk_Invitation_User1_idx` (`inviter_id` ASC) VISIBLE,
+  INDEX `fk_Invitation_User2_idx` (`invitee_id` ASC) VISIBLE,
+  INDEX `fk_Invitation_Wallet1_idx` (`wallet_id` ASC) VISIBLE,
+  CONSTRAINT `fk_Invitation_User1`
+    FOREIGN KEY (`inviter_id`)
+    REFERENCES `CryptofolioDB`.`User` (`user_id`),
+  CONSTRAINT `fk_Invitation_User2`
+    FOREIGN KEY (`invitee_id`)
+    REFERENCES `CryptofolioDB`.`User` (`user_id`),
+  CONSTRAINT `fk_Invitation_Wallet1`
+    FOREIGN KEY (`wallet_id`)
+    REFERENCES `CryptofolioDB`.`Wallet` (`wallet_id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `CryptofolioDB`.`Transaction`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `CryptofolioDB`.`Transaction` ;
+
+CREATE TABLE IF NOT EXISTS `CryptofolioDB`.`Transaction` (
+  `transaction_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id` INT UNSIGNED NOT NULL,
+  `amount` DECIMAL(20,8) NOT NULL,
+  `timestamp` DATETIME NOT NULL,
+  `price_at_timestamp` DECIMAL(20,8) NOT NULL,
+  `transaction_type` ENUM('buy', 'sell') NOT NULL,
+  `ticker_symbol` VARCHAR(64) NOT NULL,
+  `wallet_id` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`transaction_id`),
+  INDEX `fk_User_has_CryptoBalance_User1_idx` (`user_id` ASC) VISIBLE,
+  INDEX `fk_Transaction_Cryptocurrency1_idx` (`ticker_symbol` ASC) VISIBLE,
+  INDEX `fk_Transaction_Wallet1_idx` (`wallet_id` ASC) VISIBLE,
+  CONSTRAINT `fk_Transaction_Cryptocurrency1`
+    FOREIGN KEY (`ticker_symbol`)
+    REFERENCES `CryptofolioDB`.`Cryptocurrency` (`ticker_symbol`),
+  CONSTRAINT `fk_Transaction_Wallet1`
+    FOREIGN KEY (`wallet_id`)
+    REFERENCES `CryptofolioDB`.`Wallet` (`wallet_id`),
+  CONSTRAINT `fk_User_updates_CryptoBalance_User1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `CryptofolioDB`.`User` (`user_id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
@@ -255,27 +202,47 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `CryptofolioDB`.`User_gets_alert_for_Cryptocurrency` ;
 
 CREATE TABLE IF NOT EXISTS `CryptofolioDB`.`User_gets_alert_for_Cryptocurrency` (
-  `alert_id` INT(64) NOT NULL,
-  `user_id` INT(64) NOT NULL,
+  `alert_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id` INT UNSIGNED NOT NULL,
   `ticker_symbol` VARCHAR(64) NOT NULL,
-  `threshold_price` DECIMAL(20,8) NOT NULL,
+  `threshold_price` DECIMAL(20,8) UNSIGNED NOT NULL,
   `threshold_direction` ENUM('above', 'below') NOT NULL,
-  `is_active` TINYINT NOT NULL,
-  `triggered_at` DATETIME(3) NULL,
+  `triggered_at` DATETIME(3) NULL DEFAULT NULL,
   PRIMARY KEY (`alert_id`),
   INDEX `fk_User_has_Cryptocurrency_Cryptocurrency1_idx` (`ticker_symbol` ASC) VISIBLE,
   INDEX `fk_User_has_Cryptocurrency_User1_idx` (`user_id` ASC) VISIBLE,
-  CONSTRAINT `fk_User_gets_alert_for_Cryptocurrency_User1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `CryptofolioDB`.`User` (`user_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT `fk_User_gets_alert_for_Cryptocurrency_Cryptocurrency1`
     FOREIGN KEY (`ticker_symbol`)
-    REFERENCES `CryptofolioDB`.`Cryptocurrency` (`ticker_symbol`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+    REFERENCES `CryptofolioDB`.`Cryptocurrency` (`ticker_symbol`),
+  CONSTRAINT `fk_User_gets_alert_for_Cryptocurrency_User1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `CryptofolioDB`.`User` (`user_id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `CryptofolioDB`.`User_has_Wallet`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `CryptofolioDB`.`User_has_Wallet` ;
+
+CREATE TABLE IF NOT EXISTS `CryptofolioDB`.`User_has_Wallet` (
+  `user_id` INT UNSIGNED NOT NULL,
+  `wallet_id` INT UNSIGNED NOT NULL,
+  `role` ENUM('owner', 'member') NOT NULL,
+  PRIMARY KEY (`user_id`, `wallet_id`),
+  INDEX `fk_User_has_Wallet_Wallet1_idx` (`wallet_id` ASC) VISIBLE,
+  INDEX `fk_User_has_Wallet_User_idx` (`user_id` ASC) VISIBLE,
+  CONSTRAINT `fk_User_has_Wallet_User`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `CryptofolioDB`.`User` (`user_id`),
+  CONSTRAINT `fk_User_has_Wallet_Wallet1`
+    FOREIGN KEY (`wallet_id`)
+    REFERENCES `CryptofolioDB`.`Wallet` (`wallet_id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
@@ -284,20 +251,45 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `CryptofolioDB`.`Wallet_stores_Cryptocurrency` ;
 
 CREATE TABLE IF NOT EXISTS `CryptofolioDB`.`Wallet_stores_Cryptocurrency` (
-  `wallet_id` INT(64) NOT NULL,
+  `wallet_id` INT UNSIGNED NOT NULL,
   `ticker_symbol` VARCHAR(64) NOT NULL,
-  `crypto_amount` DECIMAL(20,8) NOT NULL,
+  `crypto_amount` DECIMAL(20,8) UNSIGNED NOT NULL,
   PRIMARY KEY (`wallet_id`, `ticker_symbol`),
   INDEX `fk_Wallet_has_Cryptocurrency_Cryptocurrency1_idx` (`ticker_symbol` ASC) VISIBLE,
   INDEX `fk_Wallet_has_Cryptocurrency_Wallet1_idx` (`wallet_id` ASC) VISIBLE,
-  CONSTRAINT `fk_Wallet_has_Cryptocurrency_Wallet1`
-    FOREIGN KEY (`wallet_id`)
-    REFERENCES `CryptofolioDB`.`Wallet` (`wallet_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT `fk_Wallet_has_Cryptocurrency_Cryptocurrency1`
     FOREIGN KEY (`ticker_symbol`)
-    REFERENCES `CryptofolioDB`.`Cryptocurrency` (`ticker_symbol`)
+    REFERENCES `CryptofolioDB`.`Cryptocurrency` (`ticker_symbol`),
+  CONSTRAINT `fk_Wallet_has_Cryptocurrency_Wallet1`
+    FOREIGN KEY (`wallet_id`)
+    REFERENCES `CryptofolioDB`.`Wallet` (`wallet_id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `CryptofolioDB`.`BankAccount_transfers_to_Wallet`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `CryptofolioDB`.`BankAccount_transfers_to_Wallet` ;
+
+CREATE TABLE IF NOT EXISTS `CryptofolioDB`.`BankAccount_transfers_to_Wallet` (
+  `transfer_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `amount` DECIMAL(20,8) NOT NULL,
+  `timestamp` DATETIME NOT NULL,
+  `iban` VARCHAR(256) NOT NULL,
+  `wallet_id` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`transfer_id`),
+  INDEX `fk_BankAccount_transfers_to_Wallet_BankAccount1_idx` (`iban` ASC) VISIBLE,
+  INDEX `fk_BankAccount_transfers_to_Wallet_Wallet1_idx` (`wallet_id` ASC) VISIBLE,
+  CONSTRAINT `fk_BankAccount_transfers_to_Wallet_BankAccount1`
+    FOREIGN KEY (`iban`)
+    REFERENCES `CryptofolioDB`.`BankAccount` (`iban`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_BankAccount_transfers_to_Wallet_Wallet1`
+    FOREIGN KEY (`wallet_id`)
+    REFERENCES `CryptofolioDB`.`Wallet` (`wallet_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -312,12 +304,12 @@ CREATE TABLE IF NOT EXISTS `CryptofolioDB`.`UserCryptoBalances` (`user_id` INT, 
 -- -----------------------------------------------------
 -- Placeholder table for view `CryptofolioDB`.`UserBankTransactions`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `CryptofolioDB`.`UserBankTransactions` (`user_id` INT, `account_id` INT, `encrypted_iban` INT, `wallet_id` INT, `direction` INT, `timestamp` INT, `amount` INT);
+CREATE TABLE IF NOT EXISTS `CryptofolioDB`.`UserBankTransactions` (`user_id` INT, `iban` INT, `wallet_id` INT, `timestamp` INT, `amount` INT);
 
 -- -----------------------------------------------------
 -- Placeholder table for view `CryptofolioDB`.`CryptoCandlestick`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `CryptofolioDB`.`CryptoCandlestick` (`ticker_symbol` INT, `name` INT, `candle_id` INT, `interval` INT, `open_price` INT, `high_price` INT, `low_price` INT, `close_price` INT, `volume` INT);
+CREATE TABLE IF NOT EXISTS `CryptofolioDB`.`CryptoCandlestick` (`ticker_symbol` INT, `name` INT, `candle_id` INT, `timestamp` INT, `open_price` INT, `high_price` INT, `low_price` INT, `close_price` INT, `volume` INT);
 
 -- -----------------------------------------------------
 -- View `CryptofolioDB`.`UserCryptoBalances`
@@ -325,14 +317,10 @@ CREATE TABLE IF NOT EXISTS `CryptofolioDB`.`CryptoCandlestick` (`ticker_symbol` 
 DROP TABLE IF EXISTS `CryptofolioDB`.`UserCryptoBalances`;
 DROP VIEW IF EXISTS `CryptofolioDB`.`UserCryptoBalances` ;
 USE `CryptofolioDB`;
-CREATE OR REPLACE VIEW UserCryptoBalances AS
-SELECT uh.user_id,
-       ws.wallet_id,
-       ws.ticker_symbol,
-       ws.crypto_amount
-FROM User_has_Wallet AS uh
-JOIN Wallet_stores_Cryptocurrency AS ws
-  ON uh.wallet_id = ws.wallet_id;
+CREATE OR REPLACE ALGORITHM=UNDEFINED DEFINER=`admin`@`localhost` SQL SECURITY DEFINER VIEW `CryptofolioDB`.`UserCryptoBalances` AS 
+SELECT `user_id`, `wallet_id`, `ticker_symbol`, `crypto_amount`
+FROM `CryptofolioDB`.`User_has_Wallet`
+NATURAL JOIN `CryptofolioDB`.`Wallet_stores_Cryptocurrency`;
 
 -- -----------------------------------------------------
 -- View `CryptofolioDB`.`UserBankTransactions`
@@ -340,20 +328,11 @@ JOIN Wallet_stores_Cryptocurrency AS ws
 DROP TABLE IF EXISTS `CryptofolioDB`.`UserBankTransactions`;
 DROP VIEW IF EXISTS `CryptofolioDB`.`UserBankTransactions` ;
 USE `CryptofolioDB`;
-CREATE OR REPLACE VIEW UserBankTransactions AS
-SELECT u.user_id,
-       ba.account_id,
-       ba.encrypted_iban,
-       bt.wallet_id,
-       bt.direction,
-       bt.timestamp,
-       bt.amount
-FROM User AS u
-JOIN BankAccount AS ba
-  ON u.user_id = ba.user_id
-JOIN BankAccount_transfers_to_Wallet AS bt
-  ON ba.account_id = bt.account_id
-;
+CREATE OR REPLACE ALGORITHM=UNDEFINED DEFINER=`admin`@`localhost` SQL SECURITY DEFINER VIEW `CryptofolioDB`.`UserBankTransactions` AS 
+SELECT `user_id`, `iban`, `wallet_id`, `timestamp`, `amount`
+FROM `CryptofolioDB`.`User`
+NATURAL JOIN `CryptofolioDB`.`BankAccount`
+NATURAL JOIN `CryptofolioDB`.`BankAccount_transfers_to_Wallet`;
 
 -- -----------------------------------------------------
 -- View `CryptofolioDB`.`CryptoCandlestick`
@@ -361,20 +340,10 @@ JOIN BankAccount_transfers_to_Wallet AS bt
 DROP TABLE IF EXISTS `CryptofolioDB`.`CryptoCandlestick`;
 DROP VIEW IF EXISTS `CryptofolioDB`.`CryptoCandlestick` ;
 USE `CryptofolioDB`;
-CREATE OR REPLACE VIEW CryptoCandlestick AS
-SELECT c.ticker_symbol,
-       c.name,
-       cs.candle_id,
-       cs.interval,
-       cs.open_price,
-       cs.high_price,
-       cs.low_price,
-       cs.close_price,
-       cs.volume
-FROM Cryptocurrency AS c
-JOIN Candlestick AS cs
-  ON c.ticker_symbol = cs.ticker_symbol
-;
+CREATE OR REPLACE ALGORITHM=UNDEFINED DEFINER=`admin`@`localhost` SQL SECURITY DEFINER VIEW `CryptofolioDB`.`CryptoCandlestick` AS 
+SELECT `ticker_symbol`, `name`, `candle_id`, `timestamp`, `open_price`, `high_price`, `low_price`, `close_price`, `volume`
+FROM `CryptofolioDB`.`Cryptocurrency`
+NATURAL JOIN `CryptofolioDB`.`Candlestick`;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
@@ -400,14 +369,6 @@ INSERT INTO `CryptofolioDB`.`Wallet` (wallet_id, cash_balance, name) VALUES
 (4, 800.00, 'Maria Savings Wallet'),
 (5, 150.25, 'Nikos Starter Wallet');
 
--- Insert Cryptocurrency data
-INSERT INTO `CryptofolioDB`.`Cryptocurrency` (ticker_symbol, name, logo_image) VALUES
-('BTC', 'Bitcoin', 'public/logos/BTC.svg'),
-('ETH', 'Ethereum', 'public/logos/ETH.svg'),
-('USDT', 'Tether', 'public/logos/USDT.svg'),
-('DOGE', 'Dogecoin', 'public/logos/DOGE.svg'),
-('SOL', 'Solana', 'public/logos/SOL.svg');
-
 -- Insert User_has_Wallet data
 INSERT INTO `CryptofolioDB`.`User_has_Wallet` (user_id, wallet_id, role) VALUES
 (1, 1, 'owner'),
@@ -418,12 +379,20 @@ INSERT INTO `CryptofolioDB`.`User_has_Wallet` (user_id, wallet_id, role) VALUES
 (5, 5, 'owner');
 
 -- Insert BankAccount data
-INSERT INTO `CryptofolioDB`.`BankAccount` (account_id, user_id, encrypted_iban, holder_name, bank_name, provider_token) VALUES
-(1, 1, 'GR47123904586712039845678', 'Nikos Ioannidis', 'Alpha Bank', 'tok_1'),
-(2, 2, 'GR22048765091234756019234', 'Dimitris Papadopoulos', 'Eurobank', 'tok_2'),
-(3, 2, 'GR39105723846019284057612', 'Dimitris Papadopoulos', 'Eurobank', 'tok_3'),
-(4, 4, 'GR56091827364509182736450', 'Maria Kotsou', 'National Bank', 'tok_4'),
-(5, 5, 'GR10928374650192837465019', 'Nikos Papas', 'Piraeus Bank', NULL);
+INSERT INTO `CryptofolioDB`.`BankAccount` (user_id, iban, holder_name, bank_name, provider_token) VALUES
+(1, 'GR47123904586712039845678', 'Nikos Ioannidis', 'Alpha Bank', 'tok_1'),
+(2, 'GR22048765091234756019234', 'Dimitris Papadopoulos', 'Eurobank', 'tok_2'),
+(2, 'GR39105723846019284057612', 'Dimitris Papadopoulos', 'Eurobank', 'tok_3'),
+(4, 'GR56091827364509182736450', 'Maria Kotsou', 'National Bank', 'tok_4'),
+(5, 'GR10928374650192837465019', 'Nikos Papas', 'Piraeus Bank', 'tok_5');
+
+-- Insert BankAccount_transfers_to_Wallet data
+INSERT INTO `CryptofolioDB`.`BankAccount_transfers_to_Wallet` (transfer_id, timestamp, amount, wallet_id, iban) VALUES
+(1, '2025-11-20 09:30:00', 1500.00, 1, 'GR47123904586712039845678'),
+(2, '2025-11-22 14:15:00', 2000.00, 3, 'GR22048765091234756019234'),
+(3, '2025-11-25 11:45:00', -500.00, 3, 'GR39105723846019284057612'),
+(4, '2025-12-01 16:20:00', 800.00, 4, 'GR56091827364509182736450'),
+(5, '2025-12-05 10:10:00', 150.25, 5, 'GR10928374650192837465019');
 
 -- Insert Invitation data
 INSERT INTO `CryptofolioDB`.`Invitation` (invitation_id, invitee_id, inviter_id, wallet_id, status, expires_at, created_at) VALUES
@@ -433,13 +402,37 @@ INSERT INTO `CryptofolioDB`.`Invitation` (invitation_id, invitee_id, inviter_id,
 (4, 3, 2, 3, 'rejected', '2025-11-28 23:59:00', '2025-11-18 18:40:00'),
 (5, 2, 1, 1, 'pending', '2025-12-25 23:59:00', '2025-12-05 12:00:00');
 
--- Insert BankAccount_transfers_to_Wallet data
-INSERT INTO `CryptofolioDB`.`BankAccount_transfers_to_Wallet` (transfer_id, direction, timestamp, amount, wallet_id, account_id) VALUES
-(1, 'toWallet', '2025-11-20 09:30:00', 1500.00, 1, 1),
-(2, 'toWallet', '2025-11-22 14:15:00', 2000.00, 3, 2),
-(3, 'toBank', '2025-11-25 11:45:00', 500.00, 3, 3),
-(4, 'toWallet', '2025-12-01 16:20:00', 800.00, 4, 4),
-(5, 'toWallet', '2025-12-05 10:10:00', 150.25, 5, 5);
+-- Insert Cryptocurrency data
+INSERT INTO `CryptofolioDB`.`Cryptocurrency` (ticker_symbol, name, logo_image) VALUES
+('BTC', 'Bitcoin', 'public/logos/BTC.svg'),
+('ETH', 'Ethereum', 'public/logos/ETH.svg'),
+('USDT', 'Tether', 'public/logos/USDT.svg'),
+('DOGE', 'Dogecoin', 'public/logos/DOGE.svg'),
+('SOL', 'Solana', 'public/logos/SOL.svg');
+
+-- Insert Candlestick data
+INSERT INTO `CryptofolioDB`.`Candlestick` (candle_id, ticker_symbol, open_price, close_price, high_price, low_price, volume, timestamp) VALUES
+(1, 'BTC', 48500, 48950, 49200, 48050, 1320.5, '2025-12-05 09:00:00'),
+(2, 'BTC', 48950, 49320, 49500, 48700, 1410.2, '2025-12-05 10:00:00'),
+(1, 'ETH', 2550, 2590, 2620, 2525, 8420.0, '2025-12-05 09:00:00'),
+(2, 'ETH', 2590, 2635, 2650, 2580, 8010.3, '2025-12-05 10:00:00'),
+(1, 'SOL', 98.5, 100.4, 102.0, 97.8, 15200.8, '2025-12-05 09:00:00');
+
+-- Insert CryptoHistory data
+INSERT INTO `CryptofolioDB`.`CryptoHistory` (ticker_symbol, current_price, circulating_supply, timestamp, history_id) VALUES
+('BTC', 49320, 19500000, '2025-12-05 09:00:00', 1),
+('BTC', 49510, 19500000, '2025-12-05 10:00:00', 2),
+('ETH', 2635, 120500000, '2025-12-05 10:30:00', 1),
+('ETH', 2650, 120500000, '2025-12-05 11:30:00', 2),
+('SOL', 100.4, 585000000, '2025-12-05 12:00:00', 1);
+
+-- Insert User_gets_alert_for_Cryptocurrency data
+INSERT INTO `CryptofolioDB`.`User_gets_alert_for_Cryptocurrency` (alert_id, user_id, ticker_symbol, threshold_price, threshold_direction, triggered_at) VALUES
+(1, 1, 'BTC', 52000, 'above', NULL),
+(2, 3, 'ETH', 2500, 'below', '2025-11-30 18:20:00'),
+(3, 1, 'BTC', 95, 'below', NULL),
+(4, 4, 'BTC', 48000, 'below', '2025-11-28 09:10:00'),
+(5, 5, 'DOGE', 0.12, 'above', NULL);
 
 -- Insert Wallet_stores_Cryptocurrency data
 INSERT INTO `CryptofolioDB`.`Wallet_stores_Cryptocurrency` (wallet_id, ticker_symbol, crypto_amount) VALUES
@@ -457,27 +450,3 @@ INSERT INTO `CryptofolioDB`.`Transaction` (transaction_id, user_id, wallet_id, t
 (3, 2, 3, 'BTC', 0.42, 48500, '2025-12-01 09:45:00', 'buy'),
 (4, 4, 4, 'SOL', 12.0, 98.0, '2025-12-02 16:00:00', 'buy'),
 (5, 5, 5, 'USDT', 150.25, 1.00, '2025-12-05 10:10:00', 'buy');
-
--- Insert Candlestick data
-INSERT INTO `CryptofolioDB`.`Candlestick` (candle_id, ticker_symbol, open_price, close_price, high_price, low_price, volume, `interval`) VALUES
-(1, 'BTC', 48500, 48950, 49200, 48050, 1320.5, '2025-12-05 09:00:00'),
-(2, 'BTC', 48950, 49320, 49500, 48700, 1410.2, '2025-12-05 10:00:00'),
-(1, 'ETH', 2550, 2590, 2620, 2525, 8420.0, '2025-12-05 09:00:00'),
-(2, 'ETH', 2590, 2635, 2650, 2580, 8010.3, '2025-12-05 10:00:00'),
-(1, 'SOL', 98.5, 100.4, 102.0, 97.8, 15200.8, '2025-12-05 09:00:00');
-
--- Insert CryptoHistory data
-INSERT INTO `CryptofolioDB`.`CryptoHistory` (history_id, ticker_symbol, current_price, circulating_supply, timestamp) VALUES
-(1, 'BTC', 49320, 19500000, '2025-12-05 09:00:00'),
-(2, 'BTC', 49510, 19500000, '2025-12-05 10:00:00'),
-(1, 'ETH', 2635, 120500000, '2025-12-05 10:30:00'),
-(2, 'ETH', 2650, 120500000, '2025-12-05 11:30:00'),
-(1, 'SOL', 100.4, 585000000, '2025-12-05 12:00:00');
-
--- Insert User_gets_alert_for_Cryptocurrency data
-INSERT INTO `CryptofolioDB`.`User_gets_alert_for_Cryptocurrency` (alert_id, user_id, ticker_symbol, threshold_price, threshold_direction, is_active, triggered_at) VALUES
-(1, 1, 'BTC', 52000, 'above', 0, NULL),
-(2, 3, 'ETH', 2500, 'below', 1, '2025-11-30 18:20:00'),
-(3, 1, 'BTC', 95, 'below', 0, NULL),
-(4, 4, 'BTC', 48000, 'below', 0, '2025-11-28 09:10:00'),
-(5, 5, 'DOGE', 0.12, 'above', 0, NULL);

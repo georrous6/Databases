@@ -8,11 +8,11 @@
 
 Απλή Συμβολοσειρά & \selectlanguage{english}VARCHAR(64) \\ \hline
 Μεγάλη Συμβολοσειρά & \selectlanguage{english}VARCHAR(256) \\ \hline
-Ακέραιος & \selectlanguage{english}INT(64) \\ \hline
-Δεκαδικός & \selectlanguage{english}DECIMAL(30,2) \\ \hline
+Ακέραιος & \selectlanguage{english}INT \\ \hline
+Δεκαδικός & \selectlanguage{english}DECIMAL(20,8) \\ \hline
 Ημερομηνία και Ώρα & \selectlanguage{english}DATETIME \\ \hline
 Λογική Τιμή & \selectlanguage{english}TINYINT(1) \\ \hline
-Αρχείο Εικόνας & \selectlanguage{english}VARCHAR(128) \\ \hline
+Διαδρομή Αρχείου & \selectlanguage{english}VARCHAR(512) \\ \hline
 Κατάσταση & \selectlanguage{english}ENUM \\ \hline
 
 \end{tabular}
@@ -63,15 +63,14 @@
 \textbf{Όνομα Σχέσης} & \selectlanguage{english}BankAccount \\ \hline
 
 \multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
-\selectlanguage{english}account\_id & Ακέραιος \\ \hline
-\selectlanguage{english}encrypted\_iban & Μεγάλη Συμβολοσειρά \\ \hline
+\selectlanguage{english}iban & Απλή Συμβολοσειρά \\ \hline
 \selectlanguage{english}holder\_name & Απλή Συμβολοσειρά \\ \hline
 \selectlanguage{english}bank\_name & Απλή Συμβολοσειρά \\ \hline
 \selectlanguage{english}provider\_token & Μεγάλη Συμβολοσειρά \\ \hline
 \selectlanguage{english}user\_id & Ακέραιος \\ \hline
 
 \multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
-Πρωτεύον Κλειδί & \selectlanguage{english}account\_id \\ \hline
+Πρωτεύον Κλειδί & \selectlanguage{english}iban \\ \hline
 Ξένα Κλειδιά & \selectlanguage{english}user\_id User to BankAccount \\ \hline
 \end{tabular}
 
@@ -110,7 +109,7 @@ wallet\_id Wallet to Invitation\} \\ \hline
 \multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
 \selectlanguage{english}ticker\_symbol & Απλή Συμβολοσειρά \\ \hline
 \selectlanguage{english}name & Απλή Συμβολοσειρά \\ \hline
-\selectlanguage{english}logo\_image & Αρχείο Εικόνας \\ \hline
+\selectlanguage{english}logo\_image & Διαδρομή Αρχείου \\ \hline
 
 \multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
 Πρωτεύον Κλειδί & \selectlanguage{english}ticker\_symbol \\ \hline
@@ -131,12 +130,12 @@ wallet\_id Wallet to Invitation\} \\ \hline
 \selectlanguage{english}open\_price & Δεκαδικός \\ \hline
 \selectlanguage{english}close\_price & Δεκαδικός  \\ \hline
 \selectlanguage{english}volume & Δεκαδικός \\ \hline
-\selectlanguage{english}interval & Απλή Συμβολοσειρά \\ \hline
+\selectlanguage{english}timestamp & Ημερομηνία και Ώρα \\ \hline
 \selectlanguage{english}ticker\_symbol & Απλή Συμβολοσειρά \\ \hline
 
 \multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
 Πρωτεύον Κλειδί & \{\selectlanguage{english}candle\_id, ticker\_symbol\} \\ \hline
-Ξένα Κλειδιά & \{\selectlanguage{english}ticker\_symbol Cryptocurrency to CryptoBalance\} ??? \\ \hline
+Ξένα Κλειδιά & \{\selectlanguage{english}ticker\_symbol Cryptocurrency to Candlestick\} \\ \hline
 \end{tabular}
 
 \vspace{1cm}
@@ -150,12 +149,13 @@ wallet\_id Wallet to Invitation\} \\ \hline
 \selectlanguage{english}history\_id & Ακέραιος \\ \hline
 \selectlanguage{english}current\_price & Δεκαδικός \\ \hline
 \selectlanguage{english}circulating\_supply & Δεκαδικός \\ \hline
-\selectlanguage{english}timestamp & Ημερομηνία και ΄Ωρα \\ \hline
+\selectlanguage{english}timestamp & Ημερομηνία και Ώρα \\ \hline
 \selectlanguage{english}ticker\_symbol & Απλή Συμβολοσειρά \\ \hline
 
 \multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
 Πρωτεύον Κλειδί & \selectlanguage{english}\{history\_id, ticker\_symbol\} \\ \hline
-Ξένα Κλειδιά & \selectlanguage{english} \{\selectlanguage{english}ticker\_symbol Cryptocurrency to CryptoBalance\} ??? \\ \hline
+Ξένα Κλειδιά & \selectlanguage{english} \{\selectlanguage{english}ticker\_symbol Cryptocurrency 
+to CryptoHistory\} \\ \hline
 \end{tabular}
 
 
@@ -225,15 +225,14 @@ wallet\_id Wallet to Invitation\} \\ \hline
 
 \multicolumn{2}{|l|}{\textbf{Γνωρίσματα:}} \\ \hline
 \selectlanguage{english}transfer\_id & Ακέραιος \\ \hline
-\selectlanguage{english}account\_id & Ακέραιος \\ \hline
+\selectlanguage{english}iban & Ακέραιος \\ \hline
 \selectlanguage{english}wallet\_id & Ακέραιος \\ \hline
 \selectlanguage{english}amount & Δεκαδικός \\ \hline
 \selectlanguage{english}timestamp & Ημερομηνία και Ώρα \\ \hline
-\selectlanguage{english}direction & Απλή Συμβολοσειρά \\ \hline
 
 \multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
 Πρωτεύον Κλειδί & \selectlanguage{english} transfer\_id \\ \hline
-Ξένα Κλειδιά & \selectlanguage{english}\{account\_id, wallet\_id\} \\ \hline
+Ξένα Κλειδιά & \selectlanguage{english}\{iban, wallet\_id\} \\ \hline
 \end{tabular}
 
 \vspace{1cm}
@@ -249,7 +248,7 @@ wallet\_id Wallet to Invitation\} \\ \hline
 \selectlanguage{english}user\_id & Ακέραιος \\ \hline
 \selectlanguage{english}threshold\_direction & Απλή Συμβολοσειρά \\ \hline
 \selectlanguage{english}threshold\_price & Δεκαδικός \\ \hline
-\selectlanguage{english}triggred\_at & Ημερομηνία και΄Ωρα \\ \hline
+\selectlanguage{english}triggered\_at & Ημερομηνία και΄Ωρα \\ \hline
 \selectlanguage{english}is\_active &  Λογική Τιμή \\ \hline
 
 \multicolumn{2}{|l|}{\textbf{Περιορισμοί Ακεραιότητας:}} \\ \hline
@@ -297,11 +296,11 @@ wallet\_id Wallet to Invitation\} \\ \hline
 &A \leftarrow 
 \bigl(
   \text{User} \bowtie_{\text{user\_id}}
-  \text{BankAccount} \bowtie_{\text{account\_id}}
-  \text{transfers\_to}
+  \text{BankAccount} \bowtie_{\text{iban}}
+  \text{BankAccount\_transfers\_to\_Wallet}
 \bigr) \\
 &\textbf{UserBankTransactions} = \\
-&\pi_{\text{user\_id, account\_id, encrypted\_iban, wallet\_id, direction, 
+&\pi_{\text{user\_id, iban, wallet\_id, 
 timestamp, amount}}\bigl(A\bigr) \\
 \end{aligned}
 \]
@@ -311,7 +310,7 @@ timestamp, amount}}\bigl(A\bigr) \\
 \begin{aligned}
 & A \leftarrow \text{Cryptocurrency} \bowtie_{\text{ticker\_symbol}} \text{Candlestick} \\
 & \textbf{CryptoCandlestick} = \\
-& \pi_{\text{ticker\_symbol, name, candle\_id, interval, open\_price,
+& \pi_{\text{ticker\_symbol, name, candle\_id, timestamp, open\_price,
 high\_price, low\_price, close\_price, volume}}
 \bigl(A\bigr)
 \end{aligned}

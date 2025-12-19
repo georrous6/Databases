@@ -1,6 +1,0 @@
-account_id,user_id,encrypted_iban,holder_name,bank_name,provider_token
-1,1,GR47123904586712039845678,"Nikos Ioannidis","Alpha Bank",tok_1
-2,2,GR22048765091234756019234,"Dimitris Papadopoulos","Eurobank",tok_2
-3,2,GR39105723846019284057612,"Dimitris Papadopoulos","Eurobank",tok_3
-4,4,GR56091827364509182736450,"Maria Kotsou","National Bank",tok_4
-5,5,GR10928374650192837465019,"Nikos Papas","Piraeus Bank",NULL

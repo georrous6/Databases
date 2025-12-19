@@ -1,7 +1,0 @@
-user_id,wallet_id,role
-1,1,owner
-1,2,owner
-2,3,owner
-1,3,member
-4,4,owner
-5,5,owner
