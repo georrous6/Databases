@@ -40,7 +40,7 @@ DROP TABLE IF EXISTS `CryptofolioDB`.`Wallet` ;
 CREATE TABLE IF NOT EXISTS `CryptofolioDB`.`Wallet` (
   `wallet_id` INT(64) NOT NULL,
   `name` VARCHAR(64) NOT NULL,
-  `cash_balance` DECIMAL NOT NULL,
+  `cash_balance` DECIMAL(20,8) NOT NULL,
   PRIMARY KEY (`wallet_id`))
 ENGINE = InnoDB;
 
@@ -136,7 +136,7 @@ CREATE TABLE IF NOT EXISTS `CryptofolioDB`.`BankAccount_transfers_to_Wallet` (
   `transfer_id` INT(64) NOT NULL,
   `account_id` INT(64) NOT NULL,
   `wallet_id` INT(64) NOT NULL,
-  `amount` DECIMAL NOT NULL,
+  `amount` DECIMAL(20,8) NOT NULL,
   `direction` ENUM('toBank', 'toWallet') NOT NULL,
   `timestamp` TIMESTAMP(3) NOT NULL,
   INDEX `fk_BankAccount_has_Wallet_Wallet1_idx` (`wallet_id` ASC) VISIBLE,
@@ -176,9 +176,9 @@ DROP TABLE IF EXISTS `CryptofolioDB`.`Transaction` ;
 CREATE TABLE IF NOT EXISTS `CryptofolioDB`.`Transaction` (
   `transaction_id` INT(64) NOT NULL,
   `user_id` INT(64) NOT NULL,
-  `amount` DECIMAL NOT NULL,
+  `amount` DECIMAL(20,8) NOT NULL,
   `timestamp` TIMESTAMP(3) NOT NULL,
-  `price_at_timestamp` DECIMAL NOT NULL,
+  `price_at_timestamp` DECIMAL(20,8) NOT NULL,
   `transaction_type` ENUM('buy', 'sell') NOT NULL,
   `ticker_symbol` VARCHAR(64) NOT NULL,
   `wallet_id` INT(64) NOT NULL,
@@ -212,8 +212,8 @@ DROP TABLE IF EXISTS `CryptofolioDB`.`CryptoHistory` ;
 CREATE TABLE IF NOT EXISTS `CryptofolioDB`.`CryptoHistory` (
   `ticker_symbol` VARCHAR(64) NOT NULL,
   `history_id` INT(64) NOT NULL,
-  `current_price` DECIMAL NOT NULL,
-  `circulating_supply` DECIMAL NOT NULL,
+  `current_price` DECIMAL(20,8) NOT NULL,
+  `circulating_supply` DECIMAL(20,8) NOT NULL,
   `timestamp` TIMESTAMP(3) NOT NULL,
   PRIMARY KEY (`ticker_symbol`, `history_id`),
   INDEX `fk_CryptoHistory_Cryptocurrency1_idx` (`ticker_symbol` ASC) VISIBLE,
@@ -233,12 +233,12 @@ DROP TABLE IF EXISTS `CryptofolioDB`.`Candlestick` ;
 CREATE TABLE IF NOT EXISTS `CryptofolioDB`.`Candlestick` (
   `ticker_symbol` VARCHAR(64) NOT NULL,
   `candle_id` INT(64) NOT NULL,
-  `high_price` DECIMAL NOT NULL,
-  `low_price` DECIMAL NOT NULL,
-  `open_price` DECIMAL NOT NULL,
-  `close_price` DECIMAL NOT NULL,
+  `high_price` DECIMAL(20,8) NOT NULL,
+  `low_price` DECIMAL(20,8) NOT NULL,
+  `open_price` DECIMAL(20,8) NOT NULL,
+  `close_price` DECIMAL(20,8) NOT NULL,
   `interval` TIMESTAMP NOT NULL,
-  `volume` DECIMAL NOT NULL,
+  `volume` DECIMAL(20,8) NOT NULL,
   PRIMARY KEY (`ticker_symbol`, `candle_id`),
   INDEX `fk_Candlestick_Cryptocurrency1_idx` (`ticker_symbol` ASC) VISIBLE,
   CONSTRAINT `fk_Candlestick_Cryptocurrency1`
@@ -258,7 +258,7 @@ CREATE TABLE IF NOT EXISTS `CryptofolioDB`.`User_gets_alert_for_Cryptocurrency` 
   `alert_id` INT(64) NOT NULL,
   `user_id` INT(64) NOT NULL,
   `ticker_symbol` VARCHAR(64) NOT NULL,
-  `threshold_price` DECIMAL NOT NULL,
+  `threshold_price` DECIMAL(20,8) NOT NULL,
   `threshold_direction` ENUM('above', 'below') NOT NULL,
   `is_active` TINYINT NOT NULL,
   `triggered_at` DATETIME(3) NULL,
@@ -286,7 +286,7 @@ DROP TABLE IF EXISTS `CryptofolioDB`.`Wallet_stores_Cryptocurrency` ;
 CREATE TABLE IF NOT EXISTS `CryptofolioDB`.`Wallet_stores_Cryptocurrency` (
   `wallet_id` INT(64) NOT NULL,
   `ticker_symbol` VARCHAR(64) NOT NULL,
-  `crypto_amount` DECIMAL NOT NULL,
+  `crypto_amount` DECIMAL(20,8) NOT NULL,
   PRIMARY KEY (`wallet_id`, `ticker_symbol`),
   INDEX `fk_Wallet_has_Cryptocurrency_Cryptocurrency1_idx` (`ticker_symbol` ASC) VISIBLE,
   INDEX `fk_Wallet_has_Cryptocurrency_Wallet1_idx` (`wallet_id` ASC) VISIBLE,
@@ -379,3 +379,105 @@ JOIN Candlestick AS cs
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+-- -----------------------------------------------------
+-- Insert sample data
+-- -----------------------------------------------------
+
+-- Insert User data
+INSERT INTO `CryptofolioDB`.`User` (user_id, name, email, registered_at, phone, password_hash) VALUES
+(1, 'Nikos Ioan', 'nikos.ioan@example.com', '2022-10-25 09:30:00', '+306991000001', '$2b$12$X9pTq3vR6sZ8uWf2GhJkLmNoPqRsTuVwXyZ0a1B2C3D4E5F6G7H8'),
+(2, 'Dimitris Pap', 'dimitris.pap@example.com', '2023-11-25 09:35:00', '+306992000002', '$2b$12$A1bC3dE5fG7hI9jK2lM4nO6pQ8rS0tU2vW4xY6zZ8aB0cD2eF4'),
+(3, 'Kostas Alex', 'kostas.alex@example.com', '2024-06-10 08:30:00', '+306993000003', '$2b$12$M7nP4qR1sT6uV9wX2yZ5aB8cD0eF3gH6iJ9kL2mN5oP8qR1sT4'),
+(4, 'Maria K', 'maria.k@example.com', '2025-01-14 12:10:00', '+306994000004', '$2b$12$Z3yX6wV9uT2sR5qP8oN1mL4kJ7iH0gF3eD6cB9aY2xW5vU8tS1'),
+(5, 'Nikos P', 'nikos.p@example.com', '2025-09-01 18:45:00', '+306995000005', '$2b$12$C5dE8fG1hI4jK7lM0nO3pQ6rS9tU2vW5xY8zA1bC4dE7fG0hI3');
+
+-- Insert Wallet data
+INSERT INTO `CryptofolioDB`.`Wallet` (wallet_id, cash_balance, name) VALUES
+(1, 2500.00, 'Aris Main Wallet'),
+(2, 1200.50, 'Aris Trading Wallet'),
+(3, 5400.75, 'Shared Investment Wallet'),
+(4, 800.00, 'Maria Savings Wallet'),
+(5, 150.25, 'Nikos Starter Wallet');
+
+-- Insert Cryptocurrency data
+INSERT INTO `CryptofolioDB`.`Cryptocurrency` (ticker_symbol, name, logo_image) VALUES
+('BTC', 'Bitcoin', 'public/logos/BTC.svg'),
+('ETH', 'Ethereum', 'public/logos/ETH.svg'),
+('USDT', 'Tether', 'public/logos/USDT.svg'),
+('DOGE', 'Dogecoin', 'public/logos/DOGE.svg'),
+('SOL', 'Solana', 'public/logos/SOL.svg');
+
+-- Insert User_has_Wallet data
+INSERT INTO `CryptofolioDB`.`User_has_Wallet` (user_id, wallet_id, role) VALUES
+(1, 1, 'owner'),
+(1, 2, 'owner'),
+(2, 3, 'owner'),
+(1, 3, 'member'),
+(4, 4, 'owner'),
+(5, 5, 'owner');
+
+-- Insert BankAccount data
+INSERT INTO `CryptofolioDB`.`BankAccount` (account_id, user_id, encrypted_iban, holder_name, bank_name, provider_token) VALUES
+(1, 1, 'GR47123904586712039845678', 'Nikos Ioannidis', 'Alpha Bank', 'tok_1'),
+(2, 2, 'GR22048765091234756019234', 'Dimitris Papadopoulos', 'Eurobank', 'tok_2'),
+(3, 2, 'GR39105723846019284057612', 'Dimitris Papadopoulos', 'Eurobank', 'tok_3'),
+(4, 4, 'GR56091827364509182736450', 'Maria Kotsou', 'National Bank', 'tok_4'),
+(5, 5, 'GR10928374650192837465019', 'Nikos Papas', 'Piraeus Bank', NULL);
+
+-- Insert Invitation data
+INSERT INTO `CryptofolioDB`.`Invitation` (invitation_id, invitee_id, inviter_id, wallet_id, status, expires_at, created_at) VALUES
+(1, 1, 2, 3, 'accepted', '2025-11-30 23:59:00', '2025-11-20 10:30:00'),
+(2, 4, 1, 2, 'pending', '2025-12-21 23:59:00', '2025-12-01 14:15:00'),
+(3, 5, 4, 4, 'rejected', '2025-12-08 23:59:00', '2025-11-28 09:00:00'),
+(4, 3, 2, 3, 'rejected', '2025-11-28 23:59:00', '2025-11-18 18:40:00'),
+(5, 2, 1, 1, 'pending', '2025-12-25 23:59:00', '2025-12-05 12:00:00');
+
+-- Insert BankAccount_transfers_to_Wallet data
+INSERT INTO `CryptofolioDB`.`BankAccount_transfers_to_Wallet` (transfer_id, direction, timestamp, amount, wallet_id, account_id) VALUES
+(1, 'toWallet', '2025-11-20 09:30:00', 1500.00, 1, 1),
+(2, 'toWallet', '2025-11-22 14:15:00', 2000.00, 3, 2),
+(3, 'toBank', '2025-11-25 11:45:00', 500.00, 3, 3),
+(4, 'toWallet', '2025-12-01 16:20:00', 800.00, 4, 4),
+(5, 'toWallet', '2025-12-05 10:10:00', 150.25, 5, 5);
+
+-- Insert Wallet_stores_Cryptocurrency data
+INSERT INTO `CryptofolioDB`.`Wallet_stores_Cryptocurrency` (wallet_id, ticker_symbol, crypto_amount) VALUES
+(1, 'BTC', 0.120000),
+(1, 'ETH', 1.500000),
+(2, 'ETH', 0.750000),
+(3, 'BTC', 0.420000),
+(4, 'SOL', 12.000000),
+(5, 'USDT', 150.250000);
+
+-- Insert Transaction data
+INSERT INTO `CryptofolioDB`.`Transaction` (transaction_id, user_id, wallet_id, ticker_symbol, amount, price_at_timestamp, timestamp, transaction_type) VALUES
+(1, 1, 1, 'BTC', 0.10, 48000, '2025-11-28 10:30:00', 'buy'),
+(2, 1, 3, 'ETH', 0.75, 2500, '2025-11-29 12:10:00', 'sell'),
+(3, 2, 3, 'BTC', 0.42, 48500, '2025-12-01 09:45:00', 'buy'),
+(4, 4, 4, 'SOL', 12.0, 98.0, '2025-12-02 16:00:00', 'buy'),
+(5, 5, 5, 'USDT', 150.25, 1.00, '2025-12-05 10:10:00', 'buy');
+
+-- Insert Candlestick data
+INSERT INTO `CryptofolioDB`.`Candlestick` (candle_id, ticker_symbol, open_price, close_price, high_price, low_price, volume, `interval`) VALUES
+(1, 'BTC', 48500, 48950, 49200, 48050, 1320.5, '2025-12-05 09:00:00'),
+(2, 'BTC', 48950, 49320, 49500, 48700, 1410.2, '2025-12-05 10:00:00'),
+(1, 'ETH', 2550, 2590, 2620, 2525, 8420.0, '2025-12-05 09:00:00'),
+(2, 'ETH', 2590, 2635, 2650, 2580, 8010.3, '2025-12-05 10:00:00'),
+(1, 'SOL', 98.5, 100.4, 102.0, 97.8, 15200.8, '2025-12-05 09:00:00');
+
+-- Insert CryptoHistory data
+INSERT INTO `CryptofolioDB`.`CryptoHistory` (history_id, ticker_symbol, current_price, circulating_supply, timestamp) VALUES
+(1, 'BTC', 49320, 19500000, '2025-12-05 09:00:00'),
+(2, 'BTC', 49510, 19500000, '2025-12-05 10:00:00'),
+(1, 'ETH', 2635, 120500000, '2025-12-05 10:30:00'),
+(2, 'ETH', 2650, 120500000, '2025-12-05 11:30:00'),
+(1, 'SOL', 100.4, 585000000, '2025-12-05 12:00:00');
+
+-- Insert User_gets_alert_for_Cryptocurrency data
+INSERT INTO `CryptofolioDB`.`User_gets_alert_for_Cryptocurrency` (alert_id, user_id, ticker_symbol, threshold_price, threshold_direction, is_active, triggered_at) VALUES
+(1, 1, 'BTC', 52000, 'above', 0, NULL),
+(2, 3, 'ETH', 2500, 'below', 1, '2025-11-30 18:20:00'),
+(3, 1, 'BTC', 95, 'below', 0, NULL),
+(4, 4, 'BTC', 48000, 'below', 0, '2025-11-28 09:10:00'),
+(5, 5, 'DOGE', 0.12, 'above', 0, NULL);
