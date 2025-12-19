@@ -15,6 +15,7 @@
 Αρχείο Εικόνας & VARCHAR(128) \\ \hline
 Κατάσταση & ENUM \\ \hline
 
+
 \end{tabular}
 
 \newpage
@@ -298,11 +299,11 @@ is\_active &  Λογική Τιμή \\ \hline
 &A \leftarrow 
 \bigl(
   \text{User} \bowtie_{\text{user\_id}}
-  \text{BankAccount} \bowtie_{\text{account\_id}}
-  \text{transfers\_to}
+  \text{BankAccount} \bowtie_{\text{iban}}
+  \text{BankAccount\_transfers\_to\_Wallet}
 \bigr) \\
 &\textbf{UserBankTransactions} = \\
-&\pi_{\text{user\_id, account\_id, encrypted\_iban, wallet\_id, direction, 
+&\pi_{\text{user\_id, iban, wallet\_id, 
 timestamp, amount}}\bigl(A\bigr) \\
 \end{aligned}
 \]
@@ -312,7 +313,7 @@ timestamp, amount}}\bigl(A\bigr) \\
 \begin{aligned}
 & A \leftarrow \text{Cryptocurrency} \bowtie_{\text{ticker\_symbol}} \text{Candlestick} \\
 & \textbf{CryptoCandlestick} = \\
-& \pi_{\text{ticker\_symbol, name, candle\_id, interval, open\_price,
+& \pi_{\text{ticker\_symbol, name, candle\_id, timestamp, open\_price,
 high\_price, low\_price, close\_price, volume}}
 \bigl(A\bigr)
 \end{aligned}
