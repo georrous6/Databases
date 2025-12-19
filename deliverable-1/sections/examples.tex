@@ -63,15 +63,15 @@
 \noindent
 \begin{tabular}{|l|l|l|}
 \hline
-\textbf{wallet\_id} & \textbf{user\_id} & \textbf{role} \\
+\textbf{user\_id} & \textbf{wallet\_id} & \textbf{role} \\
 \hline
 1 & 1 & owner \\
 \hline
-2 & 1 & owner \\
+1 & 2 & owner \\
 \hline
-3 & 2 & owner \\
+2 & 3 & owner \\
 \hline
-3 & 1 & member \\
+1 & 3 & member \\
 \hline
 4 & 4 & owner \\
 \hline
@@ -91,17 +91,17 @@
 \noindent
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
-\textbf{account\_id} & \textbf{user\_id} & \textbf{encrypted\_iban} & \textbf{holder\_name} & \textbf{bank\_name} & \textbf{provider\_token} \\
+\textbf{account\_id} & \textbf{user\_id} & \textbf{\shortstack{encrypted\\ \_iban}} & \textbf{holder\_name} & \textbf{bank\_name} & \textbf{\shortstack{provider\\ \_token}} \\
 \hline
-1 & 1 & GR70...19 & Aristeidis Daskalopoulos & Alpha Bank & tok\_1 \\
+1 & 1 & 70S...19 & Aristeidis Daskalopoulos & Alpha Bank & tok\_1 \\
 \hline
-2 & 2 & GR81...00 & Georgios Rousmanis & Eurobank & tok\_2 \\
+2 & 2 & 81...00 & Georgios Rousmanis & Eurobank & tok\_2 \\
 \hline
-3 & 2 & GR98...13 & Georgios Rousmanis & Eurobank & tok\_3 \\
+3 & 2 & 98...13 & Georgios Rousmanis & Eurobank & tok\_3 \\
 \hline
-4 & 4 & GR55...44 & Maria Kotsou & National Bank & tok\_4 \\
+4 & 4 & A7...21 & Maria Kotsou & National Bank & tok\_4 \\
 \hline
-5 & 5 & GR66...88 & Nikos Papas & Piraeus Bank & NULL \\
+5 & 5 & B0...03 & Nikos Papas & Piraeus Bank & NULL \\
 \hline
 \end{tabular}
 
@@ -143,17 +143,17 @@
 \noindent
 \begin{tabular}{|l|l|l|l|l|l|l|}
 \hline
-\textbf{invitation\_id} & \textbf{invitee\_id} & \textbf{inviter\_id} & \textbf{wallet\_id} & \textbf{status} & \textbf{expires\_at} & \textbf{created\_at} \\
+\textbf{\shortstack{invitation\\ \_id}} & \textbf{\shortstack{invitee\\ \_id}} & \textbf{\shortstack{inviter\\ \_id}} & \textbf{\shortstack{wallet\\ \_id}} & \textbf{status} & \textbf{expires\_at} & \textbf{created\_at} \\
 \hline
 1 & 1 & 2 & 3 & accepted & 2025-11-30 23:59:00 & 2025-11-20 10:30:00 \\
 \hline
-2 & 4 & 1 & 2 & pending & 2025-12-20 23:59:00 & 2025-12-01 14:15:00 \\
+2 & 4 & 1 & 2 & pending & 2025-12-21 23:59:00 & 2025-12-01 14:15:00 \\
 \hline
-3 & 5 & 4 & 4 & accepted & 2025-12-10 23:59:00 & 2025-11-28 09:00:00 \\
+3 & 5 & 4 & 4 & rejected & 2025-12-08 23:59:00 & 2025-11-28 09:00:00 \\
 \hline
-4 & 3 & 2 & 3 & rejected & 2025-11-25 23:59:00 & 2025-11-18 18:40:00 \\
+4 & 3 & 2 & 3 & rejected & 2025-11-28 23:59:00 & 2025-11-18 18:40:00 \\
 \hline
-5 & 2 & 1 & 1 & accepted & 2025-12-15 23:59:00 & 2025-12-05 12:00:00 \\
+5 & 2 & 1 & 1 & pending & 2025-12-25 23:59:00 & 2025-12-05 12:00:00 \\
 \hline
 \end{tabular}
 
@@ -195,17 +195,17 @@ SOL & Solana & public/logos/SOL.svg \\
 \noindent
 \begin{tabular}{|l|l|l|l|l|l|l|l|}
 \hline
-\textbf{candle\_id} & \textbf{ticker\_symbol} & \textbf{open} & \textbf{high} & \textbf{low} & \textbf{close} & \textbf{volume} & \textbf{interval} \\
+\textbf{candle\_id} & \textbf{ticker\_symbol} & \textbf{open} & \textbf{close} & \textbf{high} & \textbf{low} & \textbf{volume} & \textbf{interval} \\
 \hline
-1 & BTC & 48500 & 49200 & 48050 & 48950 & 1320.5 & 1h \\
+1 & BTC & 48500 & 48950 & 49200 & 48050 & 1320.5 & 1h \\
 \hline
-2 & BTC & 48950 & 49500 & 48700 & 49320 & 1410.2 & 1h \\
+2 & BTC & 48950 & 49320 & 49500 & 48700 & 1410.2 & 1h \\
 \hline
-3 & ETH & 2550 & 2620 & 2525 & 2590 & 8420.0 & 1h \\
+3 & ETH & 2550 & 2590 & 2620 & 2525 & 8420.0 & 1h \\
 \hline
-4 & ETH & 2590 & 2650 & 2580 & 2635 & 8010.3 & 1h \\
+4 & ETH & 2590 & 2635 & 2650 & 2580 & 8010.3 & 1h \\
 \hline
-5 & SOL & 98.5 & 102.0 & 97.8 & 100.4 & 15200.8 & 1h \\
+5 & SOL & 98.5 & 100.4 & 102.0 & 97.8 & 15200.8 & 1h \\
 \hline
 \end{tabular}
 
@@ -221,17 +221,17 @@ SOL & Solana & public/logos/SOL.svg \\
 \noindent
 \begin{tabular}{|l|l|l|l|l|}
 \hline
-\textbf{history\_id} & \textbf{ticker\_symbol} & \textbf{current\_price} & \textbf{circulating\_supply} & \textbf{timestamp} \\
+\textbf{\shortstack{history\\ \_id}} & \textbf{\shortstack{ticker\\ \_symbol}} & \textbf{\shortstack{current\\ \_price}} & \textbf{\shortstack{circulating\\ \_supply}} & \textbf{timestamp} \\
 \hline
-1 & BTC & 49320 & 19500000 & 2025-12-05 10:00:00 \\
+1 & BTC & 49320 & 19500000 & 2025-12-05 09:00:00 \\
 \hline
-2 & BTC & 49510 & 19500000 & 2025-12-05 11:00:00 \\
+2 & BTC & 49510 & 19500000 & 2025-12-05 10:00:00 \\
 \hline
-3 & ETH & 2635 & 120500000 & 2025-12-05 10:00:00 \\
+3 & ETH & 2635 & 120500000 & 2025-12-05 10:30:00 \\
 \hline
-4 & ETH & 2650 & 120500000 & 2025-12-05 11:00:00 \\
+4 & ETH & 2650 & 120500000 & 2025-12-05 11:30:00 \\
 \hline
-5 & SOL & 100.4 & 585000000 & 2025-12-05 10:30:00 \\
+5 & SOL & 100.4 & 585000000 & 2025-12-05 12:00:00 \\
 \hline
 \end{tabular}
 
@@ -241,23 +241,23 @@ SOL & Solana & public/logos/SOL.svg \\
 \end{flushright}
 
 \bigskip
-\noindent $\circ$ Παράδειγμα για τον πίνακα \selectlanguage{english}\textbf{gets\_alert\_for}\selectlanguage{greek}
+\noindent $\circ$ Παράδειγμα για τον πίνακα \selectlanguage{english}\textbf{User} \textbf{\textit{gets\_alert\_for}} \textbf{Cryptocurrency}\selectlanguage{greek}
 
 \selectlanguage{english}
 \noindent
-\begin{tabular}{|l|l|l|l|l|l|l|l|}
+\begin{tabular}{|l|l|l|l|l|l|l|}
 \hline
-\textbf{alert\_id} & \textbf{user\_email} & \textbf{ticker} & \textbf{threshold} & \textbf{direction} & \textbf{description} & \textbf{is\_active} & \textbf{triggered\_at} \\
+\textbf{\shortstack{alert\\ \_id}} & \textbf{user\_email} & \textbf{\shortstack{ticker\\ \_symbol}} & \textbf{\shortstack{threshold\\ \_price}} & \textbf{\shortstack{threshold\\ \_direction}} & \textbf{\shortstack{is\\ \_active}} & \textbf{triggered\_at} \\
 \hline
-1 & aris@example.com & BTC & 52000 & ABOVE & SELL & 1 & NULL \\
+1 & \shortstack{aris@ \\ example.com} & BTC & 52000 & ABOVE & 0 & NULL \\
 \hline
-2 & rouso@example.com & ETH & 2500 & BELOW & BUY & 0 & 2025-11-30 18:20:00 \\
+2 & \shortstack{rouso@ \\ example.com} & ETH & 2500 & BELOW & 1 & 2025-11-30 18:20:00 \\
 \hline
-3 & lav@example.com & SOL & 95 & BELOW & BUY & 1 & NULL \\
+3 & \shortstack{aris@\\ example.com} & SOL & 95 & BELOW & 0 & NULL \\
 \hline
-4 & maria@example.com & BTC & 48000 & BELOW & BUY & 0 & 2025-11-28 09:10:00 \\
+4 & \shortstack{maria@\\ example.com} & BTC & 48000 & BELOW & 0 & 2025-11-28 09:10:00 \\
 \hline
-5 & nikos@example.com & DOGE & 0.12 & ABOVE & SELL & 1 & NULL \\
+5 & \shortstack{nikos@\\ example.com} & DOGE & 0.12 & ABOVE & 0 & NULL \\
 \hline
 \end{tabular}
 
@@ -267,7 +267,7 @@ SOL & Solana & public/logos/SOL.svg \\
 \end{flushright}
 
 \bigskip
-\noindent $\circ$ Παράδειγμα για τον πίνακα \selectlanguage{english}\textbf{stores}\selectlanguage{greek}
+\noindent $\circ$ Παράδειγμα για τον πίνακα \selectlanguage{english}\textbf{Wallet} \textbf{\textit{stores}} \textbf{Cryptocurrency}\selectlanguage{greek}
 
 \selectlanguage{english}
 \noindent
@@ -301,17 +301,17 @@ SOL & Solana & public/logos/SOL.svg \\
 \noindent
 \begin{tabular}{|l|l|l|l|l|l|l|l|}
 \hline
-\textbf{transaction\_id} & \textbf{user\_id} & \textbf{wallet\_id} & \textbf{ticker} & \textbf{amount} & \textbf{price\_at\_timestamp} & \textbf{timestamp} & \textbf{type} \\
+\textbf{\shortstack{transaction\\ \_id}} & \textbf{\shortstack{user\\ \_id}} & \textbf{\shortstack{wallet\\ \_id}} & \textbf{\shortstack{ticker\\ \_symbol}} & \textbf{amount} & \textbf{\shortstack{price\\ \_at\\ \_timestamp}} & \textbf{timestamp} & \textbf{\shortstack{transaction\\ \_type}} \\
 \hline
-1 & 1 & 1 & BTC & 0.10 & 48000 & 2025-11-28 10:30:00 & BUY \\
+1 & 1 & 1 & BTC & 0.10 & 48000 & \shortstack{2025-11-28\\ 10:30:00} & BUY \\
 \hline
-2 & 1 & 2 & ETH & 0.75 & 2500 & 2025-11-29 12:10:00 & BUY \\
+2 & 1 & 3 & ETH & 0.75 & 2500 & \shortstack{2025-11-29\\ 12:10:00} & SELL \\
 \hline
-3 & 2 & 3 & BTC & 0.42 & 48500 & 2025-12-01 09:45:00 & BUY \\
+3 & 2 & 3 & BTC & 0.42 & 48500 & \shortstack{2025-12-01\\ 09:45:00} & BUY \\
 \hline
-4 & 4 & 4 & SOL & 12.0 & 98.0 & 2025-12-02 16:00:00 & BUY \\
+4 & 4 & 4 & SOL & 12.0 & 98.0 & \shortstack{2025-12-02\\ 16:00:00} & BUY \\
 \hline
-5 & 5 & 5 & USDT & 150.25 & 1.00 & 2025-12-05 10:10:00 & BUY \\
+5 & 5 & 5 & USDT & 150.25 & 1.00 & \shortstack{2025-12-05\\ 10:10:00} & BUY \\
 \hline
 \end{tabular}
 
@@ -319,6 +319,8 @@ SOL & Solana & public/logos/SOL.svg \\
 \begin{flushright}
 \textit{Εκτίμηση για τον αριθμό των εγγραφών}: $\sim10B$
 \end{flushright}
+
+
 
 
 
