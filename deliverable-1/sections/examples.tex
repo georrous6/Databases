@@ -344,20 +344,21 @@ SOL & Solana & public/logos/SOL.svg \\
 \end{aligned}
 \]
 
-\item Όλα τα πορτοφόλια του χρήστη με user\_id = 1 που έχουν λάβει μέρος σε τραπεζικές συναλλαγές
+\item Όλα τα πορτοφόλια του χρήστη με user\_id = 1 (κάτοχος ή μέλος) που έχουν λάβει μέρος σε τραπεζικές συναλλαγές
 \[
 \begin{aligned}
 &A \leftarrow 
 \bigl(
-  \text{User} \bowtie_{\text{user\_id}}
-  \text{BankAccount} \bowtie_{\text{account\_id}}
-  \text{transfers\_to}
+  \text{User\_has\_Wallet} \bowtie_{\text{wallet\_id}}
+  \text{Wallet} \bowtie_{\text{wallet\_id}}
+  \text{BankAccount\_transfers\_to\_Wallet}
 \bigr) \\
-&B \leftarrow \sigma_{\text{user\_id=1}} \Bigl(\pi_{\text{user\_id, wallet\_id}}\bigl(A\bigr)\Bigr) \\
+&B \leftarrow \sigma_{\text{user\_id=1}} \Bigl(\pi_{\text{user\_id, wallet\_id, Wallet.name}}
+\bigl(A\bigr)\Bigr) \\
 \end{aligned}
 \]
 
-\item Όλα τα invitations με παραλήπτη ή αποστολέα που δεν είναι ο χρήστης με user\_id = 1
+\item Όλες οι προσκλήσεις με παραλήπτη ή αποστολέα που δεν είναι ο χρήστης με user\_id = 1
 \[
 \text{Invitation} - \sigma_{\text{inviter\_id=1} \lor \text{invitee\_id=1}}\bigl(\text{Invitation}\bigr)
 \]
