@@ -19,12 +19,12 @@
 -- System Administrator
 -- ------------------------------------------------------------
 
-CREATE USER IF NOT EXISTS 'db_admin'@'localhost'
+CREATE USER IF NOT EXISTS 'admin'@'localhost'
 IDENTIFIED BY 'JJ2YqpLU5+gXcfTK';
 
 GRANT ALL PRIVILEGES
 ON CryptofolioDB.*
-TO 'db_admin'@'localhost';
+TO 'admin'@'localhost';
 
 
 -- ------------------------------------------------------------
@@ -32,7 +32,7 @@ TO 'db_admin'@'localhost';
 -- ------------------------------------------------------------
 
 CREATE USER IF NOT EXISTS 'app_user'@'localhost'
-IDENTIFIED BY '2kSRg3qKoIAtHiCv';
+IDENTIFIED BY '2kSRg3qKoIAtH!iCv';
 
 
 -- ------------------------------------------------------------
